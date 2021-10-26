@@ -36,4 +36,26 @@ module.exports = {
       return res.status(500).json({ status: 500, msg: error });
     }
   },
+
+  create: async (req, res) => {
+    try {
+      let rol = await db.Role.findOne({ where: { name: req.body.name } });
+      if (!rol) {
+        await db.Role.create({
+          name: req.body.name,
+          description: req.body.description,
+        });
+
+        return res.status(201).json({ status: 201, msg: "Rol creado" });
+      }
+
+      return res.status(401).json({
+        status: 404,
+        msg: `El rol con nombre: ${req.body.name}. ya existe!`,
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ status: 500, msg: error });
+    }
+  },
 };
