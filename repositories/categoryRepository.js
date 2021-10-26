@@ -7,6 +7,8 @@ const getAll = async () => {
             exclude: ['description', 'deletedAt', 'createdAt', 'updatedAt'],
         }
     });
+
+    return response;
 }
 
 module.exports = {
