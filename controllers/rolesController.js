@@ -92,4 +92,21 @@ module.exports = {
       return res.status(500).json({ status: 500, msg: error });
     }
   },
+  delete: async (req, res) => {
+    try {
+      let rol = await db.Role.findByPk(req.params.id);
+      if (rol) {
+        await db.Role.destroy({ where: { id: rol.id } });
+
+        res.status(201).json({ status: 201, msg: "Rol eliminado!" });
+      }
+      res.status(401).json({
+        status: 401,
+        msg: `No existe el Rol con ID: ${req.params.id}`,
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ status: 500, msg: error });
+    }
+  },
 };
