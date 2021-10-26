@@ -58,4 +58,38 @@ module.exports = {
       return res.status(500).json({ status: 500, msg: error });
     }
   },
+  update: async (req, res) => {
+    try {
+      let rol = await db.Role.findByPk(req.params.id);
+
+      const { name, description } = req.body;
+
+      let rolExist = await db.Role.findOne({ where: { name: name } });
+
+      if (rol) {
+        if (!rolExist) {
+          db.Role.update(
+            {
+              name: name,
+              description: description,
+            },
+            { where: { id: req.params.id } }
+          );
+          return res.status(201).json({ status: 201, msg: "Rol actualizado!" });
+        }
+        return res.status(401).json({
+          status: 401,
+          msg: `El rol con nombre: ${name}. Ya existe!.`,
+        });
+      }
+
+      return res.status(401).json({
+        status: 401,
+        msg: `No se ha encontrado el rol con ID: ${req.params.id}`,
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ status: 500, msg: error });
+    }
+  },
 };
