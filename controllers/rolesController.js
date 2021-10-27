@@ -4,6 +4,7 @@ const {
   getById,
   getByName,
   create,
+  update,
 } = require("../repositories/rolRepository");
 
 module.exports = {
@@ -64,21 +65,16 @@ module.exports = {
   },
   update: async (req, res) => {
     try {
-      let rol = await db.Role.findByPk(req.params.id);
+      let rol = await getById(req.params.id);
 
       const { name, description } = req.body;
 
-      let rolExist = await db.Role.findOne({ where: { name: name } });
+      let rolExist = await getByName(name);
 
       if (rol) {
         if (!rolExist) {
-          db.Role.update(
-            {
-              name: name,
-              description: description,
-            },
-            { where: { id: req.params.id } }
-          );
+          update(name, description, req.params.id);
+
           return res.status(201).json({ status: 201, msg: "Rol actualizado!" });
         }
         return res.status(401).json({
