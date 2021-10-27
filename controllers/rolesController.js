@@ -1,10 +1,12 @@
 const db = require("../models");
+const { getAll } = require("../repositories/rolRepository");
 
 module.exports = {
   getAll: async (req, res) => {
     try {
-      let all = await db.Role.findAll();
-      if (data.length == 0) {
+      let all = await getAll();
+
+      if (all.length == 0) {
         return res.status(404).json({
           status: 404,
           msg: `No existe el rol con ID: ${req.params.id}`,
@@ -97,7 +99,7 @@ module.exports = {
   delete: async (req, res) => {
     try {
       let rol = await db.Role.findByPk(req.params.id);
- 
+
       if (rol) {
         await db.Role.destroy({ where: { id: rol.id } });
 
