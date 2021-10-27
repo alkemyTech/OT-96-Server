@@ -1,5 +1,5 @@
 const db = require("../models");
-const { getAll } = require("../repositories/rolRepository");
+const { getAll, getById } = require("../repositories/rolRepository");
 
 module.exports = {
   getAll: async (req, res) => {
@@ -22,9 +22,8 @@ module.exports = {
   },
   getById: async (req, res) => {
     try {
-      let one = await db.Role.findByPk(req.params.id, {
-        include: [{ association: "users" }],
-      });
+      
+      let one = await getById(req.params.id);
 
       if (!one) {
         return res.status(404).json({
