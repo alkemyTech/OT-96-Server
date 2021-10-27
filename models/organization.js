@@ -20,10 +20,12 @@ module.exports = (sequelize, DataTypes) => {
       email: { type: DataTypes.STRING, allowNull: false },
       welcomeText: { type: DataTypes.TEXT, allowNull: false },
       aboutUsText: { type: DataTypes.TEXT, allowNull: true },
+      deletedAt: { type: DataTypes.DATE, allowNull: true },
     },
     {
       sequelize,
       modelName: 'organization',
+      paranoid: true,
     }
   );
   return organization;
