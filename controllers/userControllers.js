@@ -3,45 +3,45 @@ const User = require('../repositories/user');
 const getAllUser = async (req, res) => {
   try {
     const response = await User.getAll();
-    res.send(response);
+    return res.status(200).json(response)
   } catch (error) {
-    res.send('error');
+    res.status(500).json({ error: 'Internal Server Error' })
   }
 }
 
 const getUser = async (req, res) => {
   try {
     const response = await User.getById(req.params.id);
-    res.send(response);
+    return res.status(200).json(response)
   } catch (error) {
-    res.send('error');
+    res.status(500).json({ error: 'Internal Server Error' })
   }
 }
 
 const createUser = async (req, res) => {
   try {
     const response = await User.getById(req.params.id);
-    res.send(response);
+    return res.status(200).json(response)
   } catch (error) {
-    res.send('error');
+    res.status(500).json({ error: 'Internal Server Error' })
   }
 }
 
 const updateUser = async (req, res) => {
   try {
     const response = await User.update(req.params.id, req.body);
-    res.send(response);
+    return res.status(200).json(response)
   } catch (error) {
-    res.send('error');
+    res.status(500).json({ error: 'Internal Server Error' })
   }
 }
 
 const deleteUser = async (req, res) => {
   try {
     const response = await User.softDelete(req.params.id)
-    res.send(response);
+    return res.status(200).json(response)
   } catch (error) {
-    res.send('error');
+    res.status(500).json({ error: 'Internal Server Error' })
   }
 }
 
