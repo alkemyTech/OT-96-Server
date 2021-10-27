@@ -19,7 +19,7 @@ module.exports = {
     return rol;
   },
   create: async (name, description) => {
-    return await db.Role.create({
+     await db.Role.create({
       name: name,
       description: description,
     });
@@ -33,4 +33,7 @@ module.exports = {
       { where: { id: id } }
     );
   },
+  destroy: async (id)=>{
+    await db.Role.destroy({ where: { id: id } });
+  }
 };
