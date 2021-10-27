@@ -1,9 +1,8 @@
-const User = require('../models').user;
-
+const { User } = require('../models')
 //repository organization
 
 async function getAll() {
-  const response = await User.findAll();
+  const response = await User.findAll()
   return response;
 }
 
