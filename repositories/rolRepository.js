@@ -13,4 +13,15 @@ module.exports = {
 
     return one;
   },
+  getByName: async (name) => {
+    let rol = await db.Role.findOne({ where: { name: name } });
+
+    return rol;
+  },
+  create: async (name, description) => {
+    return await db.Role.create({
+      name: name,
+      description: description,
+    });
+  },
 };
