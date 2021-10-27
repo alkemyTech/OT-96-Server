@@ -24,4 +24,13 @@ module.exports = {
       description: description,
     });
   },
+  update: async (name, description, id) => {
+    await db.Role.update(
+      {
+        name: name,
+        description: description,
+      },
+      { where: { id: id } }
+    );
+  },
 };
