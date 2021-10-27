@@ -1,5 +1,10 @@
 const db = require("../models");
-const { getAll, getById } = require("../repositories/rolRepository");
+const {
+  getAll,
+  getById,
+  getByName,
+  create,
+} = require("../repositories/rolRepository");
 
 module.exports = {
   getAll: async (req, res) => {
@@ -22,7 +27,6 @@ module.exports = {
   },
   getById: async (req, res) => {
     try {
-      
       let one = await getById(req.params.id);
 
       if (!one) {
@@ -41,13 +45,10 @@ module.exports = {
   create: async (req, res) => {
     try {
       const { name, description } = req.body;
-      let rol = await db.Role.findOne({ where: { name: name } });
+      let rol = await getByName(name);
 
       if (!rol) {
-        await db.Role.create({
-          name: name,
-          description: description,
-        });
+        await create(name, description);
 
         return res.status(201).json({ status: 201, msg: "Rol creado" });
       }
