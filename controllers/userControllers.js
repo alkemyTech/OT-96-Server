@@ -20,7 +20,7 @@ const getUser = async (req, res) => {
 
 const createUser = async (req, res) => {
   try {
-    const response = await User.getById(req.params.id);
+    const response = await User.create(req.body);
     return res.status(200).json(response)
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' })
