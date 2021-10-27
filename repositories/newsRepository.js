@@ -1,5 +1,9 @@
 const db = require('../models');
 
+module.exports.getAll = async ( ) => {
+    
+};
+
 module.exports.getById = async ( id ) => {
     
 };
