@@ -5,6 +5,7 @@ const {
   getByName,
   create,
   update,
+  destroy,
 } = require("../repositories/rolRepository");
 
 module.exports = {
@@ -92,12 +93,12 @@ module.exports = {
       return res.status(500).json({ status: 500, msg: error });
     }
   },
-  delete: async (req, res) => {
+  destroy: async (req, res) => {
     try {
-      let rol = await db.Role.findByPk(req.params.id);
+      let rol = getById(req.params.id)
 
       if (rol) {
-        await db.Role.destroy({ where: { id: rol.id } });
+        await destroy(req.params.id)
 
         res.status(201).json({ status: 201, msg: "Rol eliminado!" });
       }
