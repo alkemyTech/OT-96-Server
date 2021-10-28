@@ -1,6 +1,4 @@
-const jwt = require('jsonwebtoken');
-
-require('dotenv').config();
+const authService = require('./services/auth');
 
 // checks if a correct token was given
 async function verifyToken(req, res, next) {
@@ -12,20 +10,21 @@ async function verifyToken(req, res, next) {
     const token = authHeader.split("")[1];
     if (!token) {
       return res.status(403).send({
-        message: "No token provided! Please enter your accessToken in HTTP headers"
+        message: "No token provided!"
       });
     };
-    // if token exists decrypt it and compare it to app's secret token key
-    jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
-      if (err) {
-        return res.status(401).send({
-          error: err,
-          message: "Unauthorized! Please enter a valid token provided at login"
-        });
-      }
+    // if token exists call authService
+    let userId = authService(token);
+    if (!userId){
+      return res.status(403).send({
+        error: err,
+        message: "Unauthorized! Please enter a valid token provided at login"
+      });
+    } else {
+      // if authService returns userId
       req.userId = decoded.id;
       next();
-    });
+    }
   };
 }
 
