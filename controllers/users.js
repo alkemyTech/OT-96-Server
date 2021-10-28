@@ -38,7 +38,7 @@ const updateUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   try {
-    const response = await User.softDelete(req.params.id)
+    const response = await User.remove(req.params.id)
     return res.status(200).json(response)
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' })
