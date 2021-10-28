@@ -1,5 +1,7 @@
 const testimonialsService = require('./services/testimonials');
 
+/* for future use
+
 // list all testimonials
 async function getAll(req, res, next) {
   try {
@@ -64,4 +66,4 @@ async function remove(req, res, next) {
   }
 }
 
-module.exports = { getAll, getById, create, update, remove };
+module.exports = { getAll, getById, create, update, remove };*/
