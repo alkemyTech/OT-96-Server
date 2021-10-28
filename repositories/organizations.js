@@ -1,4 +1,4 @@
-const organizationsModel = require('../models/organization');
+const organizationsModel = require('../models').organization;
 
 //repository organization
 
@@ -30,7 +30,6 @@ async function create(data) {
 }
 
 async function update(id, data) {
-  const options = { multi: true };
   const values = {
     name: data.name,
     image: data.image,
@@ -47,7 +46,6 @@ async function update(id, data) {
   };
   const organizationUpdated = await organizationsModel.update(values, {
     ...condition,
-    ...options,
   });
   return organizationUpdated;
 }

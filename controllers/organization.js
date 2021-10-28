@@ -33,7 +33,7 @@ async function create(req, res, next) {
       organization: newOrganization,
     });
   } catch (err) {
-    next(error);
+    next(err);
   }
 }
 
