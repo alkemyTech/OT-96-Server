@@ -1,6 +1,6 @@
 const User = require('../repositories/user');
 
-const getAllUser = async (req, res) => {
+const getAll = async (req, res) => {
   try {
     const response = await User.getAll();
     return res.status(200).json(response)
@@ -9,7 +9,7 @@ const getAllUser = async (req, res) => {
   }
 }
 
-const getUser = async (req, res) => {
+const getOne = async (req, res) => {
   try {
     const response = await User.getById(req.params.id);
     return res.status(200).json(response)
@@ -18,7 +18,7 @@ const getUser = async (req, res) => {
   }
 }
 
-const createUser = async (req, res) => {
+const create = async (req, res) => {
   try {
     const response = await User.create(req.body);
     return res.status(200).json(response)
@@ -27,7 +27,7 @@ const createUser = async (req, res) => {
   }
 }
 
-const updateUser = async (req, res) => {
+const update = async (req, res) => {
   try {
     const response = await User.update(req.params.id, req.body);
     return res.status(200).json(response)
@@ -36,7 +36,7 @@ const updateUser = async (req, res) => {
   }
 }
 
-const deleteUser = async (req, res) => {
+const remove = async (req, res) => {
   try {
     const response = await User.remove(req.params.id)
     return res.status(200).json(response)
@@ -46,5 +46,5 @@ const deleteUser = async (req, res) => {
 }
 
 module.exports = {
-  getAllUser, getUser, createUser, updateUser, deleteUser
+  getAll, getOne, create, update, remove
 }

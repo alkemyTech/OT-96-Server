@@ -3,10 +3,10 @@ const userRouter = Router();
 const usersController = require('../controllers/users')
 
 /* GET users listing. */
-userRouter.get('/', usersController.getAllUser);
-userRouter.get('/:id', usersController.getUser);
-userRouter.post('/', usersController.createUser);
-userRouter.put('/:id', usersController.updateUser);
-userRouter.delete('/:id', usersController.deleteUser);
+userRouter.get('/', usersController.getAll);
+userRouter.get('/:id', usersController.getOne);
+userRouter.post('/', usersController.create);
+userRouter.put('/:id', usersController.update);
+userRouter.delete('/:id', usersController.remove);
 
 module.exports = userRouter;
