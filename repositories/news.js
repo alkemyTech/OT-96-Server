@@ -1,7 +1,7 @@
-const db = require('../models');
+const newsModel = require('../models/news');
 
 module.exports.getAll = async ( ) => {
-    const response = await db.News.findAll({
+    const response = await newsModel.findAll({
         include: [
             {
                 model: db.Category,
@@ -12,15 +12,15 @@ module.exports.getAll = async ( ) => {
 };
 
 module.exports.getById = async ( id ) => {
-    const response = await db.News.findOne({
-        where: { id }, include: [{ model: db.Category }],
+    const response = await newsModel.findOne({
+        where: { id }, include: [{ model: newsModel.Category }],
     });
 
     return response;
 };
 
 module.exports.create = async ( data ) => {
-    const response = await db.News.create({
+    const response = await newsModel.create({
         name: data.name,
         content: data.content,
         image: data.image,
@@ -31,7 +31,7 @@ module.exports.create = async ( data ) => {
 }
 
 module.exports.update = async ( id, data ) => {
-    const response = await db.News.update({
+    const response = await newsModel.update({
         name: data.name,
         content: data.content,
         image: data.image,
@@ -42,7 +42,7 @@ module.exports.update = async ( id, data ) => {
     return response;
 }
 
-module.exports.delete = async ( id ) => {
-    const response = db.News.destroy({ where: { id } });
+module.exports.remove = async ( id ) => {
+    const response = newsModel.destroy({ where: { id } });
     return response;
 }
