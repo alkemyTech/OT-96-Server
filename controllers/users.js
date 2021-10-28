@@ -13,4 +13,4 @@ async function create(req, res, next) {
   }
 }
 
-modules.exports = { create };
+module.exports = { create };
