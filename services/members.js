@@ -1,17 +1,10 @@
-
-var express = require('express');
-var router = express.Router();
-const db = require("../models");
-const Member = db.members;
-
-
-/* method members. */
-
+ const membersRepository = require('./repositories/members');
+//  Example: const getAllMembers = membersRepository.getById(id);
 
 
 
 
 
 module.exports = {
-
+    // getAllMembers
 }
