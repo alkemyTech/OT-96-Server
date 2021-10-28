@@ -19,21 +19,19 @@ const getAll = async (req, res, next) => {
 const getById = async (req, res) => {
   try {
     let one = await rolesService.getById(req.params.id);
-    console.log(one);
     if (one == null) {
-      return res.status(404).json({
-        status: 404,
-        msg: `No existe el rol con ID: ${req.params.id}`,
-      });
+      const error = new Error(`No exite el rol con id ${req.params.id}`);
+      error.status = 404;
+      throw error;
     }
     return res.status(200).json({ status: 200, data: one });
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ status: 500, msg: error });
+    next(error);
   }
 };
 
-const create = async (req, res) => {
+const create = async (req, res, next) => {
   try {
     const { name } = req.body;
     let rol = await rolesService.getByName(name);
@@ -44,17 +42,16 @@ const create = async (req, res) => {
       return res.status(201).json({ status: 201, msg: "Rol creado" });
     }
 
-    return res.status(401).json({
-      status: 404,
-      msg: `El rol con nombre: ${name}. ya existe!`,
-    });
+    const error = new Error(`El rol con nombre: ${name} ya existe!`);
+    error.status = 409;
+    throw error;
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ status: 500, msg: error });
+    next(error);
   }
 };
 
-const update = async (req, res) => {
+const update = async (req, res, next) => {
   try {
     let rol = await rolesService.getById(req.params.id);
 
@@ -66,38 +63,36 @@ const update = async (req, res) => {
 
         return res.status(201).json({ status: 201, msg: "Rol actualizado!" });
       }
-      return res.status(401).json({
-        status: 401,
-        msg: `El rol con nombre: ${name}. Ya existe!.`,
-      });
+      const error = new Error(`El rol con nombre: ${req.body.name} ya existe!`);
+      error.status = 409;
+      throw error;
     }
 
-    return res.status(401).json({
-      status: 401,
-      msg: `No se ha encontrado el rol con ID: ${req.params.id}`,
-    });
+    const error = new Error(
+      `No se ha encontrado el rol con ID: ${req.params.id}`
+    );
+    error.status = 404;
+    throw error;
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ status: 500, msg: error });
+    next(error);
   }
 };
 
-const remove = async (req, res) => {
+const remove = async (req, res, next) => {
   try {
-    let rol = rolesService.getById(req.params.id);
+    const rol = await rolesService.getById(req.params.id);
 
-    if (rol) {
-      await rolesService.remove(req.params.id);
-
-      res.status(201).json({ status: 201, msg: "Rol eliminado!" });
+    if (rol == null) {
+      const error = new Error(`No existe el rol con ID: ${req.params.id}!`);
+      error.status = 404;
+      throw error;
     }
-    res.status(401).json({
-      status: 401,
-      msg: `No existe el Rol con ID: ${req.params.id}`,
-    });
+    await rolesService.remove(req.params.id);
+
+    res.status(201).json({ status: 201, msg: "Rol eliminado!" });
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({ status: 500, msg: error });
+    next(error);
   }
 };
 
