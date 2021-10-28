@@ -1,8 +1,8 @@
-const User = require('../repositories/user');
+const usersService = require('../services/users');
 
 const getAll = async (req, res) => {
   try {
-    const response = await User.getAll();
+    const response = await usersService.getAll();
     return res.status(200).json(response)
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' })
@@ -11,7 +11,7 @@ const getAll = async (req, res) => {
 
 const getOne = async (req, res) => {
   try {
-    const response = await User.getById(req.params.id);
+    const response = await usersService.getById(req.params.id);
     return res.status(200).json(response)
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' })
@@ -20,7 +20,7 @@ const getOne = async (req, res) => {
 
 const create = async (req, res) => {
   try {
-    const response = await User.create(req.body);
+    const response = await usersService.create(req.body);
     return res.status(200).json(response)
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' })
@@ -29,7 +29,7 @@ const create = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const response = await User.update(req.params.id, req.body);
+    const response = await usersService.update(req.params.id, req.body);
     return res.status(200).json(response)
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' })
@@ -38,7 +38,7 @@ const update = async (req, res) => {
 
 const remove = async (req, res) => {
   try {
-    const response = await User.remove(req.params.id)
+    const response = await usersService.remove(req.params.id)
     return res.status(200).json(response)
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' })
