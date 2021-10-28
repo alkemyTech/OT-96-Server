@@ -33,11 +33,11 @@ async function update(id, data) {
 }
 
 // delete testimonial
-async function deleteById(id) {
+async function remove(id) {
   const response = await Testimonial.destroy({
     where: { id: id }
   });
   return response;
 }
 
-module.exports = { getAll, getById, create, update, deleteById };
+module.exports = { getAll, getById, create, update, remove };

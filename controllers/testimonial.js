@@ -50,11 +50,11 @@ async function update(req, res) {
 }
 
 // soft delete specific testimonial by id
-async function deleteById(req, res) {
+async function remove(req, res) {
   try {
     const testimonial = await Testimonial.getById(req.params.id);
     if (testimonial) {
-      await Testimonial.deleteById(req.params.id);
+      await Testimonial.remove(req.params.id);
       res.status(201).send("Testimonial deleted");
     } else {
       res.status(404).send("Testimonial Not Found");
@@ -64,4 +64,4 @@ async function deleteById(req, res) {
   }
 }
 
-module.exports = { getAll, getById, create, update, deleteById };
+module.exports = { getAll, getById, create, update, remove };
