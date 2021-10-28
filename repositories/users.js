@@ -29,7 +29,7 @@ async function update(id, data) {
   return userUpdated;
 }
 
-async function softDelete(id) {
+async function remove(id) {
   const userDeleted = await User.destroy({
     where: {
       id
@@ -38,4 +38,4 @@ async function softDelete(id) {
   return userDeleted;
 }
 
-module.exports = { getAll, getById, create, update, softDelete };
+module.exports = { getAll, getById, create, update, remove };
