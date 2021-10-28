@@ -7,11 +7,7 @@ async function getAll() {
 }
 
 async function getById(id) {
-  const response = await User.findOne({
-    where: {
-      id: id
-    }
-  });
+  const response = await User.findByPk(id);
   return response;
 }
 
