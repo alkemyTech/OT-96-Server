@@ -1,4 +1,3 @@
-const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 
 const usersRepository = require('../repositories/users');
