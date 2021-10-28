@@ -36,8 +36,8 @@ const update = async (id, data) => {
     return response;
 }
 
-// Delete one category by id
-const deleteById = async (id) => {
+// Remove one category by id
+const remove = async (id) => {
     const response = await Category.destroy({
         where: {
             id: id
@@ -52,5 +52,5 @@ module.exports = {
     getById,
     create,
     update,
-    deleteById
+    remove
 }
