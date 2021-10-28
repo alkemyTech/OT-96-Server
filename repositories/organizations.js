@@ -1,14 +1,14 @@
-const organization = require('../models').organization;
+const organizationsModel = require('../models/organization');
 
 //repository organization
 
 async function getAll() {
-  const response = await organization.findAll();
+  const response = await organizationsModel.findAll();
   return response;
 }
 
 async function getById(id) {
-  const response = await organization.findOne({
+  const response = await organizationsModel.findOne({
     where: {
       id: id,
     },
@@ -17,7 +17,7 @@ async function getById(id) {
 }
 
 async function create(data) {
-  const response = await organization.create({
+  const response = await organizationsModel.create({
     name: data.name,
     image: data.image,
     address: data.address,
@@ -45,15 +45,15 @@ async function update(id, data) {
       id: id,
     },
   };
-  const organizationUpdated = await organization.update(values, {
+  const organizationUpdated = await organizationsModel.update(values, {
     ...condition,
     ...options,
   });
   return organizationUpdated;
 }
 
-async function softDelete(id) {
-  const organizationDeleted = await organization.destroy({
+async function remove(id) {
+  const organizationDeleted = await organizationsModel.destroy({
     where: {
       id: id,
     },
@@ -61,4 +61,4 @@ async function softDelete(id) {
   return organizationDeleted;
 }
 
-module.exports = { getAll, getById, create, update, softDelete };
+module.exports = { getAll, getById, create, update, remove };
