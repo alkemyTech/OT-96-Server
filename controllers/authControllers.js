@@ -3,10 +3,10 @@ const { validateLoginDetails, comparePasswords, existEmailUser, createToken } = 
 const loginUser = async (req, res) => {
   try {
     const { error } = validateLoginDetails(req.body)
-    if (error) return res.status(400).json({ ok:false, mes:'validation false'})
+    if (error) return res.status(400).json({ ok:false, message:'validation false'})
     const { email, password } = req.body
     const existingUser = await existEmailUser(email)
-    if (!existingUser) return res.status(400).json({ ok:false , mes:'email dont exist'})
+    if (!existingUser) return res.status(400).json({ ok:false , message:'email dont exist'})
     
     const match = comparePasswords(password, existingUser.dataValues.password)
 
@@ -21,7 +21,7 @@ const loginUser = async (req, res) => {
         expires_in: '24h'
       })
     } else {
-      res.status(400).json({ok:false, mes:'no hubo match'})
+      res.status(400).json({ok:false, message:'no hubo match'})
     }
     
   } catch (error) {
