@@ -5,7 +5,7 @@ const organizationsService = require('./services/organizations');
 
 // Send a welcome mail to an email given
 export function sendWelcomeEmail(email, organizationId) {
-  const organization = organizationsController.getById(organizationId);
+  const organization = organizationsService.getById(organizationId);
   let subject = "Welcome to " + organization.name;
   let text = subject;
   let html = ejs.render('welcomeEmail', {organization: this.organization});
