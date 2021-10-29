@@ -1,8 +1,8 @@
 const sendgridMail = require("@sendgrid/mail");
 sendgridMail.setApiKey(process.env.SENDGRID_API_KEY);
-const emailSender = (user, subject, text, html) => {
+const emailSender = (email, subject, text, html) => {
   const msg = {
-    to: user.email,
+    to: email,
     from: "somosfundacionmas@gmail.com",
     subject: subject,
     text: text,
