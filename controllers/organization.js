@@ -1,5 +1,20 @@
 const organizationsService = require('../services/organizations');
 
+//AND GET ONE ORGANIZATION BY ID
+async function getOrganizationPublic(req, res, next) {
+  try {
+    const id = req.params.id;
+    const requestOrganization = await organizationsService.getOrganizationPublic(id);
+    res.send(requestOrganization);
+  } catch (error) {
+    next(error);
+  }
+}
+
+
+
+//////////CRUD//////7
+
 // GET ALL ORGANIZATIONS
 async function getAll(req, res, next) {
   try {
@@ -70,4 +85,4 @@ async function remove(req, res, next) {
   }
 }
 
-module.exports = { getAll, getById, create, update, remove };
+module.exports = { getAll, getById, create, update, remove, getOrganizationPublic };
