@@ -1,5 +1,10 @@
 const usersRepository = require('../repositories/users')
 
+const existEmailUser = async () => {
+  const user = await usersRepository.getByEmail(email)
+  return user
+}
+
 const getAll = async () => {
   return await usersRepository.getAll()
 }
@@ -21,5 +26,5 @@ const remove = async (id) => {
 }
 
 module.exports = {
-  getAll, getById, create, update, remove
+  getAll, getById, create, update, remove, existEmailUser
 }

@@ -33,4 +33,12 @@ const remove = async (id) => {
   return respose;
 }
 
-module.exports = { getAll, getById, create, update, remove };
+const getByEmail = async (email) => {
+  const response = await User.findOne({
+    where: {
+      email
+    }
+  });
+  return response;
+}
+module.exports = { getAll, getById, create, update, remove, getByEmail};
