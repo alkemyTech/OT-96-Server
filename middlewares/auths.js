@@ -1,4 +1,4 @@
-const authsService = require('../services/auths');
+const securityService = require('../services/security');
 const usersService = require('../services/users')
 
 module.exports.isAdmin = async (req, res, next) => {
@@ -10,7 +10,7 @@ module.exports.isAdmin = async (req, res, next) => {
         return;
     }
     
-    const userId = authsService.verifyToken(token);
+    const userId = securityService.verifyToken(token).id;
     const user = usersService.getById(userId);
 
     if (user.roleId !== 1) {
