@@ -1,38 +1,23 @@
 const usersRepository = require('../repositories/users')
 
 const getAll = async () => {
-  let error, response
-  response = await usersRepository.getAll()
-  if(response) error = false
-  return {response, error}
+  return await usersRepository.getAll()
 }
 
 const getById = async (id) => {
-  let error, response
-  response = await usersRepository.getById(id)
-  if(response) error = false
-  return {response, error}
+  return await usersRepository.getById(id)
 }
 
 const create = async (data) => {
-  let error, response
-  response = await usersRepository.create(data)
-  if(response) error = false
-  return {response, error}
+  return await usersRepository.create(data)
 }
 
 const update = async (id, data) => {
-  let error, response
-  response = await usersRepository.update(id, data)
-  if(response) error = false
-  return {response, error}
+  return await usersRepository.update(id, data)
 }
 
 const remove = async (id) => {
-  let error, response
-  response = await usersRepository.remove(id)
-  if(response) error = false
-  return {response, error}
+  return await usersRepository.remove(id)
 }
 
 module.exports = {
