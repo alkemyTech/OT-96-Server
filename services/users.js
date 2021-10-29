@@ -1,7 +1,7 @@
 const usersRepository = require('../repositories/users')
 
 const existEmailUser = async () => {
-  const user = await usersRepository.findByEmail(email)
+  const user = await usersRepository.getByEmail(email)
   return user
 }
 
