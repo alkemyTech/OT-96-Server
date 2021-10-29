@@ -28,7 +28,7 @@ async function update(id, data) {
   return userUpdated;
 }
 
-async function softDelete(id) {
+async function remove(id) {
   const userDeleted = await User.destroy({
     where: {
       id
@@ -44,4 +44,4 @@ async function findByEmail(email) {
   return user
 }
 
-module.exports = { getAll, getById, create, update, softDelete, findByEmail };
+module.exports = { getAll, getById, create, update, remove, findByEmail };
