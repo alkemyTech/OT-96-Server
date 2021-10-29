@@ -16,7 +16,7 @@ async function isAdmin(req, res, next) {
   }
 
   const user = usersService.getById(userId);
-  if (!character) {
+  if (!user) {
     res.status(404).json({ message: 'no user found' });
     return;
   }
@@ -45,7 +45,7 @@ async function isOwnership(req, res, next) {
     }
 
     const user = await usersService.getById(userId);
-    if (!character) {
+    if (!user) {
       res.status(404).json({ message: 'no user found' });
       return;
     }
