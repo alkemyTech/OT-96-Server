@@ -1,5 +1,9 @@
 const usersService = require('../services/users');
 
+const getAll = async (req, res) => {};
+
+const getById = async (req, res) => {};
+
 async function create(req, res, next) {
   try {
     const newUser = await usersService.create(req.body);
@@ -13,4 +17,21 @@ async function create(req, res, next) {
   }
 }
 
-module.exports = { create };
+const update = async (req, res) => {};
+
+const remove = async (req, res) => {
+  try {
+    const response = await usersService.remove(req.params.id);
+    return res.status(200).json(response);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+module.exports = {
+  getAll,
+  getById,
+  create,
+  update,
+  remove,
+};

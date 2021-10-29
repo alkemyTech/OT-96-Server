@@ -1,6 +1,13 @@
 const bcrypt = require('bcryptjs');
-
 const usersRepository = require('../repositories/users');
+
+const getAll = async () => {
+  return await usersRepository.getAll();
+};
+
+const getById = async (id) => {
+  return await usersRepository.getById(id);
+};
 
 //register user
 async function create(userData) {
@@ -21,4 +28,18 @@ async function create(userData) {
   return await usersRepository.create(newUser);
 }
 
-module.exports = { create };
+const update = async (id, data) => {
+  return await usersRepository.update(id, data);
+};
+
+const remove = async (id) => {
+  return await usersRepository.remove(id);
+};
+
+module.exports = {
+  getAll,
+  getById,
+  create,
+  update,
+  remove,
+};

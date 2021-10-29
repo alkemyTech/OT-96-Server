@@ -1,8 +1,36 @@
-const { User } = require('../models.users');
+const { User } = require('../models');
+
+const getAll = async () => {
+  const response = await User.findAll();
+  return response;
+};
+
+const getById = async (id) => {
+  const response = await User.findByPk(id);
+  return response;
+};
 
 async function create(userData) {
   const user = await User.create(userData);
   return user;
 }
 
-module.exports = { create, getByEmail };
+const update = async (id, data) => {
+  const response = await User.update(data, {
+    where: {
+      id,
+    },
+  });
+  return response;
+};
+
+const remove = async (id) => {
+  const respose = await User.destroy({
+    where: {
+      id,
+    },
+  });
+  return respose;
+};
+
+module.exports = { getAll, getById, create, update, remove };
