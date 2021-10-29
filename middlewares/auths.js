@@ -3,15 +3,13 @@ const usersService = require('../services/users')
 
 module.exports.isAdmin = async (req, res, next) => {
 
-    const header = req.headers['authorization'];
+    const token = req.headers['authorization'];
 
-    if (typeof header === 'undefined') {
-        req.status(403).json({ message: 'header is undefined' });
+    if (!token) {
+        res.status(403).json({ message: 'No token provided' });
         return;
     }
-    const bearer = header.split(' ');
-    const token = bearer[1];
-
+    
     const userId = authsService.verifyToken(token);
     const user = usersService.getById(userId);
 
