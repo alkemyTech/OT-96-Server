@@ -1,37 +1,36 @@
 const { User } = require('../models')
-//repository organization
 
-async function getAll() {
+const getAll = async () => {
   const response = await User.findAll()
   return response;
 }
 
-async function getById(id) {
+const getById = async (id) => {
   const response = await User.findByPk(id);
   return response;
 }
 
-async function create(data) {
+const create = async (data) => {
   const response = await User.create(data);
   return response;
 }
 
-async function update(id, data) {
-  const userUpdated = await User.update(data, {
+const update = async (id, data) => {
+  const response = await User.update(data, {
     where:{
       id
     }
   });
-  return userUpdated;
+  return response;
 }
 
-async function remove(id) {
-  const userDeleted = await User.destroy({
+const remove = async (id) => {
+  const respose = await User.destroy({
     where: {
       id
     }
   });
-  return userDeleted;
+  return respose;
 }
 
 module.exports = { getAll, getById, create, update, remove };
