@@ -1,7 +1,7 @@
 const authenticationsService = require('../services/authentications')
 const usersServices = require('../services/users')
 
-const loginUser = async (req, res) => {
+const login = async (req, res) => {
   try {
     // const { error } = authenticationsService.validateLoginDetails(req.body)
     // if (error) return res.status(400).json({ ok:false, message:'validation false'})
@@ -9,8 +9,8 @@ const loginUser = async (req, res) => {
     const existingUser = await usersServices.existEmailUser(email)
     if (!existingUser) return res.status(400).json({ ok:false , message:'email dont exist'})
     
-    const match = authenticationsService.comparePasswords(password, existingUser.dataValues.password)
-
+    const match = await authenticationsService.comparePasswords(password, existingUser.dataValues.password)
+    
     if (match) {
       const { id, firstName, lastName, email, roleId } = existingUser.dataValues
       const user = { id, firstName, lastName, email, roleId }
@@ -30,4 +30,4 @@ const loginUser = async (req, res) => {
   }
 }
 
-module.exports = { loginUser }
+module.exports = { login }
