@@ -1,5 +1,5 @@
 // require sendEmail
-const emailSender = require('./services/emailSender');
+const { emailSender } = require('./services/emailSender');
 
 const organizationsService = require('./services/organizations');
 
@@ -7,6 +7,7 @@ const organizationsService = require('./services/organizations');
 export function sendWelcomeEmail(email, organizationId) {
   const organization = organizationsController.getById(organizationId);
   let subject = "Welcome to " + organization.name;
+  let text = subject;
   let html = ejs.render('welcomeEmail', {organization: this.organization});
-  emailSender(email, subject, html);
+  emailSender(email, subject, text, html);
 }
