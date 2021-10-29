@@ -5,12 +5,16 @@ module.exports = {
     await queryInterface.bulkInsert('testimonials', [{
       name: 'testimonio1',
       image: 'https://i.ytimg.com/vi/R-Oz2g3lo_E/maxresdefault.jpg',
-      content: 'Estoy muy agradecido'
+      content: 'Estoy muy agradecido',
+      createdAt: new Date,
+      updatedAt: new Date
     },
     {
       name: 'testimonio2',
       image: 'https://significado.net/wp-content/uploads/2015/03/Testimoniar-es-declarar-algo.jpg',
-      content: 'Esta ONG me sirvió mucho'
+      content: 'Esta ONG me sirvió mucho',
+      createdAt: new Date,
+      updatedAt: new Date
     }], {});
   },
 
