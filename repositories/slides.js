@@ -11,7 +11,7 @@ async function getAll() {
 async function getById(id) {
   const Slide = await Slide.findOne({
     where: {
-      id
+      id:id
     },
   });
   return Slide;
@@ -42,7 +42,7 @@ async function update(id, data) {
   };
   const condition = {
     where: {
-      id
+      id:id
     },
   };
   const Slide = await Slide.update(values, {
@@ -54,7 +54,7 @@ async function update(id, data) {
 async function remove(id) {
   const Slide = await Slide.destroy({
     where: {
-      id
+      id:id
     },
   });
   return Slide;
