@@ -32,6 +32,6 @@ const verifyToken = (token, next) => {
 };
 
 module.exports = {
-  genToken,
+  generateToken,
   verifyToken,
 };
