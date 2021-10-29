@@ -1,7 +1,12 @@
-const securityService = require('../services/security');
-const usersService = require('../services/users')
+const securityService = require('./services/security');
+const usersService = require('./services/users')
 
+<<<<<<< HEAD
 module.exports.isAdmin = async (req, res, next) => {
+=======
+async function isAdmin(req, res, next) {
+
+>>>>>>> main
     const token = req.headers['authorization'];
     if (!token) {
         res.status(403).json({ message: 'No token provided' });
@@ -26,7 +31,7 @@ module.exports.isAdmin = async (req, res, next) => {
     next();
 }
 
-module.exports.isOwnership = async (req, res, next) => {
+async function isOwnership(req, res, next) {
     try {
         const { id } = req.params;
         const token = req.headers['authorization'];
@@ -61,3 +66,39 @@ module.exports.isOwnership = async (req, res, next) => {
         next(error);
     }
 }
+
+// checks if a correct token was given
+async function verifyToken(req, res, next) {
+  try {
+    const authHeader = req.headers['authorization'];
+    // if authorization parameter exists at headers
+    if (authHeader) {
+      // get token from authHeader at position 1
+      const token = authHeader.split("")[1];
+      if (!token) {
+        const error = "No token provided!";
+        error.status = 401;
+        throw error;
+      };
+      // if token exists call securityService
+      const decodedUser = securityService.verifyToken(token);
+      if (!decodedUser) {
+        const error = "Unauthorized! Please enter a valid token provided at login";
+        error.status = 403;
+        throw error;
+      } else {
+        // if authService returns userId
+        req.userId = decodedUser.id;
+        next();
+      }
+    } else {
+      const error = "No token provided!";
+        error.status = 401;
+        throw error;
+    }
+  } catch (error) {
+    next(error);
+  }
+}
+
+module.exports = { isAdmin, isOwnership, verifyToken };
