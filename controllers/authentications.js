@@ -1,11 +1,12 @@
 const authenticationsService = require('../services/authentications')
+const usersServices = require('../services/users')
 
 const loginUser = async (req, res) => {
   try {
-    const { error } = authenticationsService.validateLoginDetails(req.body)
-    if (error) return res.status(400).json({ ok:false, message:'validation false'})
+    // const { error } = authenticationsService.validateLoginDetails(req.body)
+    // if (error) return res.status(400).json({ ok:false, message:'validation false'})
     const { email, password } = req.body
-    const existingUser = await authenticationsService.existEmailUser(email)
+    const existingUser = await usersServices.existEmailUser(email)
     if (!existingUser) return res.status(400).json({ ok:false , message:'email dont exist'})
     
     const match = authenticationsService.comparePasswords(password, existingUser.dataValues.password)
