@@ -1,4 +1,68 @@
 const securityService = require('./services/security');
+const usersService = require('./services/users')
+
+async function isAdmin(req, res, next) {
+
+    const token = req.headers['authorization'];
+
+    if (!token) {
+        res.status(403).json({ message: 'No token provided' });
+        return;
+    }
+    
+    const userId = securityService.verifyToken(token).id;
+    if(!userId) {
+        res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    const user = usersService.getById(userId);
+    if (!character) {
+        res.status(404).json({ message: 'no user found' });
+        return;
+      }
+
+    if (user.roleId !== 1) {
+        req.status(403).json({ message: 'Require Admin role' });
+        return;
+    }
+    next();
+}
+
+async function isOwnership(req, res, next) {
+    try {
+        const { id } = req.params;
+        const token = req.headers['authorization'];
+
+        if (!token) {
+            res.status(403).json({ message: 'No token provided' });
+            return;
+        }
+
+        const userId = securityService.verifyToken(token).id;
+        if(!userId) {
+            res.status(401).json({ message: 'Unauthorized' });
+            return;
+        }
+
+        const user = await usersService.getById(userId);
+        if (!character) {
+            res.status(404).json({ message: 'no user found' });
+            return;
+        }
+
+        if (user.roleId === 1) {
+            next();
+        }
+
+        if (id === user.id) {
+            next();
+        }
+
+        res.status(403).json({ message: 'Forbidden' });
+    } catch (error) {
+        next(error);
+    }
+}
 
 // checks if a correct token was given
 async function verifyToken(req, res, next) {
@@ -14,14 +78,14 @@ async function verifyToken(req, res, next) {
         throw error;
       };
       // if token exists call securityService
-      let userId = securityService.verifyToken(token).id;
-      if (!userId) {
+      const decodedUser = securityService.verifyToken(token);
+      if (!decodedUser) {
         const error = "Unauthorized! Please enter a valid token provided at login";
         error.status = 403;
         throw error;
       } else {
         // if authService returns userId
-        req.userId = userId;
+        req.userId = decodedUser.id;
         next();
       }
     } else {
@@ -34,4 +98,4 @@ async function verifyToken(req, res, next) {
   }
 }
 
-module.exports = { verifyToken };
+module.exports = { isAdmin, isOwnership, verifyToken };
