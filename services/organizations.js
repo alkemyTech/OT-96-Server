@@ -1,9 +1,14 @@
 const organizationsRepository = require('../repositories/organizations');
 
+
+async function getOrganizationPublic(id) {
+  return await organizationsRepository.getOrganizationPublic(id);
+}
+
+//CRUD
 async function getAll() {
   return await organizationsRepository.getAll();
 }
-
 async function getById(id) {
   return await organizationsRepository.getById(id);
 }
@@ -26,4 +31,5 @@ module.exports = {
   create,
   update,
   remove,
+  getOrganizationPublic,
 };
