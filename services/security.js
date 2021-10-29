@@ -18,11 +18,9 @@ const genToken = (user) => {
 const verifyToken = (token, next) => {
   try {
     const decodedToken = jwt.verify(token, config.development.SECRET_TOKEN);
-    
 
     if (!decodedToken) {
-      const error = `Invalid Token`;
-      error.status = 401;
+      const error = { status: 401, msg: `Invalid Token` };
       throw error;
     }
 
