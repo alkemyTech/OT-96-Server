@@ -2,9 +2,7 @@ const securityService = require('../services/security');
 const usersService = require('../services/users')
 
 module.exports.isAdmin = async (req, res, next) => {
-
     const token = req.headers['authorization'];
-
     if (!token) {
         res.status(403).json({ message: 'No token provided' });
         return;
