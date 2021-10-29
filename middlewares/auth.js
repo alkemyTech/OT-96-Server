@@ -1,31 +1,37 @@
-const authService = require('./services/auth');
+const securityService = require('./services/security');
 
 // checks if a correct token was given
 async function verifyToken(req, res, next) {
-  const authHeader = req.headers['authorization'];
-
-  // if authorization parameter exists at headers
-  if (authHeader) {
-    // get token from authHeader at position 1
-    const token = authHeader.split("")[1];
-    if (!token) {
-      return res.status(403).send({
-        message: "No token provided!"
-      });
-    };
-    // if token exists call authService
-    let userId = authService(token);
-    if (!userId){
-      return res.status(403).send({
-        error: err,
-        message: "Unauthorized! Please enter a valid token provided at login"
-      });
+  try {
+    const authHeader = req.headers['authorization'];
+    // if authorization parameter exists at headers
+    if (authHeader) {
+      // get token from authHeader at position 1
+      const token = authHeader.split("")[1];
+      if (!token) {
+        const error = "No token provided!";
+        error.status = 401;
+        throw error;
+      };
+      // if token exists call securityService
+      let userId = securityService.verifyToken(token).id;
+      if (!userId) {
+        const error = "Unauthorized! Please enter a valid token provided at login";
+        error.status = 403;
+        throw error;
+      } else {
+        // if authService returns userId
+        req.userId = userId;
+        next();
+      }
     } else {
-      // if authService returns userId
-      req.userId = decoded.id;
-      next();
+      const error = "No token provided!";
+        error.status = 401;
+        throw error;
     }
-  };
+  } catch (error) {
+    next(error);
+  }
 }
 
 module.exports = { verifyToken };
