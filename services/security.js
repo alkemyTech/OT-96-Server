@@ -4,7 +4,7 @@ const config = require("../config/config");
 
 const generateToken = (user) => {
   const userForToken = {
-    user: user.id,
+    id: user.id,
     firstName: user.firstName,
     lastName: user.lastName,
     roleId: user.roleId,

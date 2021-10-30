@@ -8,8 +8,8 @@ require('dotenv').config()
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const authRouter = require('./routes/authentications')
 const organizationRouter = require('./routes/organization.js');
-const authRouter = require('./routes/auth');
 
 const app = express();
 app.use(cors())

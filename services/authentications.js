@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken')
 
 module.exports = {
   
-  comparePasswords (password, userPassword) {
+  async comparePasswords (password, userPassword) {
     const match = await bcrypt.compare(password, userPassword)
     return match
   },
