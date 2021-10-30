@@ -1,4 +1,5 @@
-const usersRepository = require('../repositories/users')
+const bcrypt = require('bcryptjs');
+const usersRepository = require('../repositories/users');
 
 const existEmailUser = async (email) => {
   const user = await usersRepository.getByEmail(email)
@@ -6,25 +7,50 @@ const existEmailUser = async (email) => {
 }
 
 const getAll = async () => {
-  return await usersRepository.getAll()
-}
+  return await usersRepository.getAll();
+};
 
 const getById = async (id) => {
-  return await usersRepository.getById(id)
-}
+  return await usersRepository.getById(id);
+};
 
-const create = async (data) => {
-  return await usersRepository.create(data)
+//register user
+async function create(userData) {
+  //hash password
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(userData.password, salt);
+
+  //create user
+  const newUser = {
+    firstName: userData.firstName,
+    lastName: userData.lastName,
+    password: hashedPassword,
+    email: userData.email,
+    photo: userData.photo,
+    roleId: userData.roleID,
+  };
+
+  return await usersRepository.create(newUser);
 }
 
 const update = async (id, data) => {
-  return await usersRepository.update(id, data)
-}
+  return await usersRepository.update(id, data);
+};
 
 const remove = async (id) => {
-  return await usersRepository.remove(id)
-}
+  return await usersRepository.remove(id);
+};
 
 module.exports = {
-  getAll, getById, create, update, remove, existEmailUser
+
+  getAll,
+  getById,
+  create,
+  update,
+  remove,
+  existEmailUser
+};
+
+
 }
+
