@@ -1,12 +1,13 @@
-const { Organization } = require('../models/organization');
-
+const Organization = require('../models/organization');
 
 // Get one category by id
 const getOrganizationPublic = async (id) => {
-  const response = await Category.findByPk({id,  attributes:['name', 'image', 'phone', 'address']});
+  const response = await Organization.findByPk({
+    id,
+    attributes: ['name', 'image', 'phone', 'address'],
+  });
   return response;
-}
-
+};
 
 /////CRUD//////
 //repository organization
@@ -14,7 +15,6 @@ async function getAll() {
   const organization = await Organization.findAll();
   return organization;
 }
-
 
 async function getById(id) {
   const organization = await Organization.findOne({
@@ -68,4 +68,11 @@ async function remove(id) {
   return organization;
 }
 
-module.exports = { getAll, getById, create, update, remove, getOrganizationPublic };
+module.exports = {
+  getAll,
+  getById,
+  create,
+  update,
+  remove,
+  getOrganizationPublic,
+};
