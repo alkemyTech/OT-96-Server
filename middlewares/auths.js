@@ -1,8 +1,8 @@
 const securityService = require('./services/security');
 const usersService = require('./services/users')
 
-async function isAdmin(req, res, next) {
 
+async function isAdmin(req, res, next) {
   const token = req.headers['authorization'];
 
   if (!token) {
