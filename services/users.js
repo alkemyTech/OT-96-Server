@@ -1,6 +1,8 @@
 const bcrypt = require('bcryptjs');
 const usersRepository = require('../repositories/users');
 
+const sendWelcomeEmail = require('../helpers/sendWelcomeEmail');
+
 const existEmailUser = async (email) => {
   const user = await usersRepository.getByEmail(email)
   return user
@@ -30,7 +32,13 @@ async function create(userData) {
     roleId: userData.roleID,
   };
 
-  return await usersRepository.create(newUser);
+  const userCreated = await usersRepository.create(newUser);
+
+  // if user create is ok, sen welcome email
+  const organizationId = 1; // <- harcoded, maybe check this on future
+  await sendWelcomeEmail(user.email, organizationId);
+
+  return usersCreated;
 }
 
 const update = async (id, data) => {
@@ -50,7 +58,3 @@ module.exports = {
   remove,
   existEmailUser
 };
-
-
-}
-
