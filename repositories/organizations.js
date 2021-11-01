@@ -1,4 +1,5 @@
-const Organization = require('../models/organization');
+const Organization = require('../models').Organization;
+
 
 // Get one category by id
 const getOrganizationPublic = async (id) => {
@@ -17,6 +18,7 @@ async function getAll() {
 }
 
 async function getById(id) {
+  console.log(id);
   const organization = await Organization.findOne({
     where: {
       id: id,
