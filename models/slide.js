@@ -8,8 +8,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Slide.hasOne(models.Organization, {
-        foreignKey: 'organizationId',
+      Slide.belongsTo(models.Organization, {
+        as: 'organization',
       });
     }
   }
