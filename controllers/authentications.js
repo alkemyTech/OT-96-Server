@@ -4,8 +4,6 @@ const { generateToken } = require('../services/security');
 
 const login = async (req, res) => {
   try {
-    // const { error } = authenticationsService.validateLoginDetails(req.body)
-    // if (error) return res.status(400).json({ ok:false, message:'validation false'})
     const { email, password } = req.body;
     const existingUser = await usersServices.existEmailUser(email);
     if (!existingUser)
@@ -23,9 +21,8 @@ const login = async (req, res) => {
 
       const token = generateToken(existingUser.dataValues);
       res.status(200).json({
-        accessToken: `Bearer ${token}`,
+        accessToken: token,
         user,
-        expires_in: '24h',
       });
     } else {
       res.status(400).json({ ok: false, message: 'no hubo match' });
