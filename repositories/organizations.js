@@ -18,7 +18,6 @@ async function getAll() {
 }
 
 async function getById(id) {
-  console.log(id);
   const organization = await Organization.findOne({
     where: {
       id: id,
