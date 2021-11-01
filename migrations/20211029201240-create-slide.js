@@ -17,6 +17,15 @@ module.exports = {
       order: {
         type: Sequelize.STRING
       },
+      organizationId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'organizations',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
