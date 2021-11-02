@@ -9,7 +9,13 @@ const existEmailUser = async (email) => {
 };
 
 const getAll = async () => {
-  return await usersRepository.getAll();
+  const users = await usersRepository.getAll();
+  if (users.length > 0) {
+    return users;
+  }
+  const error = new Error("No existen usuarios!");
+  error.status = 404;
+  throw error;
 };
 
 const getById = async (id) => {
