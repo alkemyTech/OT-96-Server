@@ -1,12 +1,9 @@
 const categoriesRepository = require('../repositories/categories');
 
-//example:
-/**
- const getAll = async () => {
-        return  await categoriesRepository.getAll();
-    }
+const update = async (id, categoryBody) => {
+  return await categoriesRepository.update({ id, categoryBody });
+};
 
 module.exports = {
-    getAll
-    }
- */
+  update,
+};
