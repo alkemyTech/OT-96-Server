@@ -1,6 +1,14 @@
-const usersService = require('../services/users');
+const usersService = require("../services/users");
 
-const getAll = async (req, res) => {};
+const getAll = async (req, res, next) => {
+  try {
+    const users = await usersService.getAll();
+
+    return res.status(200).json({ data: users });
+  } catch (error) {
+    next(error);
+  }
+};
 
 const getById = async (req, res) => {};
 
@@ -13,7 +21,7 @@ async function create(req, res, next) {
       user: newUser,
     });
   } catch (err) {
-    console.log(err)
+    console.log(err);
     next(err);
   }
 }
@@ -25,7 +33,7 @@ const remove = async (req, res) => {
     const response = await usersService.remove(req.params.id);
     return res.status(200).json(response);
   } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
