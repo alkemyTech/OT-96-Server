@@ -1,18 +1,12 @@
 const categoriesService = require('../services/categories');
 
-//example:
-/**
-const getAll = async (req, res, next) => {
-    try {
-        const response = await categoriesService.getAll();
-
-        res.send(response);
-    } catch (error) {
-        next(error);
-    }
-} 
-
-module.exports = {
-    getAll
+const create = async (req, res) => {
+  try {
+    const response = await categoriesService.create(req.body);
+    return res.status(200).json(response);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 }
- */
+
+module.exports = { create }
