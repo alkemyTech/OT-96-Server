@@ -1,5 +1,5 @@
-const securityService = require('./services/security');
-const usersService = require('./services/users')
+const securityService = require('../services/security');
+const usersService = require('../services/users')
 
 
 async function isAdmin(req, res, next) {
