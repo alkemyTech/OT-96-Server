@@ -13,6 +13,7 @@ async function create(req, res, next) {
       user: newUser,
     });
   } catch (err) {
+    console.log(err)
     next(err);
   }
 }

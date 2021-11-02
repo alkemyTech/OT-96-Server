@@ -12,7 +12,6 @@ module.exports = {
       photo: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
       createdAt: new Date,
       updatedAt: new Date,
-      deletedAt: new Date
     }], {});
   },
 

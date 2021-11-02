@@ -1,12 +1,12 @@
-const bcrypt = require('bcryptjs');
-const usersRepository = require('../repositories/users');
+const bcrypt = require("bcryptjs");
+const usersRepository = require("../repositories/users");
 
-const sendWelcomeEmail = require('../helpers/sendWelcomeEmail');
+const { sendWelcomeEmail } = require("../helpers/sendWelcomeEmail");
 
 const existEmailUser = async (email) => {
-  const user = await usersRepository.getByEmail(email)
-  return user
-}
+  const user = await usersRepository.getByEmail(email);
+  return user;
+};
 
 const getAll = async () => {
   return await usersRepository.getAll();
@@ -19,6 +19,12 @@ const getById = async (id) => {
 //register user
 async function create(userData) {
   //hash password
+  let existingUser = await usersRepository.getByEmail(userData.email);
+  if (existingUser) {
+    const error = new Error("el mail ya existe");
+    error.status = 404;
+    throw error;
+  }
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(userData.password, salt);
 
@@ -32,11 +38,11 @@ async function create(userData) {
     roleId: userData.roleID,
   };
 
-  const userCreated = await usersRepository.create(newUser);
+  const usersCreated = await usersRepository.create(newUser);
 
-  // if user create is ok, sen welcome email
+  // if user create is ok, send welcome email
   const organizationId = 1; // <- harcoded, maybe check this on future
-  await sendWelcomeEmail(user.email, organizationId);
+  await sendWelcomeEmail(userData.email, organizationId);
 
   return usersCreated;
 }
@@ -50,11 +56,10 @@ const remove = async (id) => {
 };
 
 module.exports = {
-
   getAll,
   getById,
   create,
   update,
   remove,
-  existEmailUser
+  existEmailUser,
 };

@@ -4,7 +4,7 @@ const validateLoginDetails = (req, res, next) => {
     ok:false , message:'email y password tienen que ser string'
   })
   
-  if (password.length < 10) return res.status(400).json({
+  if (password.length < 7) return res.status(400).json({
     ok:false , message:'el password debe ser mayor a diez'
   })
   
