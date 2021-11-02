@@ -1,12 +1,7 @@
 const categoriesRepository = require('../repositories/categories');
 
-//example:
-/**
- const getAll = async () => {
-        return  await categoriesRepository.getAll();
-    }
+const create = async ({name}) => {
+  return await categoriesRepository.create({name})
+}
 
-module.exports = {
-    getAll
-    }
- */
+module.exports = { create }
