@@ -4,7 +4,7 @@ const emailSender = async (email, subject, text, html) => {
   try {
     const msg = {
       to: email,
-      from: "alexis10893123@hotmail.com",
+      from: "juancruzalmazan1994@gmail.com",
       subject: subject,
       text: text,
       html: html,
