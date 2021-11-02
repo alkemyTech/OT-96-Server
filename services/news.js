@@ -1,21 +1,31 @@
 const newsRepository = require('../repositories/news');
 
-module.exports.getAll = async () => {
-    
+const getAll = async () => {
+  return await newsRepository.getAll();
 }
 
-module.exports.getById = async (id) => {
-
+const getById = async (id) => {
+  return await newsRepository.getById(id);
 }
 
-module.exports.create = async (data) => {
-
+const create = async ({ name, content, image }) => {
+  return await newsRepository.create({ name, content, image });
 }
 
-module.exports.update = async (id, data) => {
-
+const update = async ({ name, content, image }, id) => {
+  const existNews = await newsRepository.getById(id)
+  if(!existNews) return { ok: false, message: 'la noticia no existe'}
+  return await newsRepository.update({ name, content, image }, id);
 }
 
-module.exports.remove = async (id) => {
+const remove = async (id) => {
+  return await newsRepository.remove(id);
+}
 
+module.exports = {
+  getAll,
+  getById,
+  create,
+  update,
+  remove,
 }
