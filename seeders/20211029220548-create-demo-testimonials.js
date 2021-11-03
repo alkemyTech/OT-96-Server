@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkInsert('testimonials', [{
+    await queryInterface.bulkInsert('Testimonials', [{
       name: 'testimonio1',
       image: 'https://i.ytimg.com/vi/R-Oz2g3lo_E/maxresdefault.jpg',
       content: 'Estoy muy agradecido',
