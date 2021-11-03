@@ -27,7 +27,7 @@ const isAdmin = async (req, res, next) => {
     return;
   }
   if (userFound.roleId !== role.id) {
-    req.status(403).json({ message: 'Require Admin role' });
+    res.status(403).json({ message: 'Require Admin role' });
     return;
   }
   next();
