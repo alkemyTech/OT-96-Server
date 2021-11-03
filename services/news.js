@@ -1,21 +1,35 @@
 const newsRepository = require('../repositories/news');
 
-module.exports.getAll = async () => {
+const getAll = async () => {
     
 }
 
-module.exports.getById = async (id) => {
+const getById = async (id) => {
+    const news = await newsRepository.getById(id);
+    if (!news) {
+        const error = new Error ('The request news was not found');
+        error.status = 404;
+        throw error;
+    }
+    return news;
+}
+
+const create = async (data) => {
 
 }
 
-module.exports.create = async (data) => {
+const update = async (id, data) => {
 
 }
 
-module.exports.update = async (id, data) => {
+const remove = async (id) => {
 
 }
 
-module.exports.remove = async (id) => {
-
+module.exports = {
+    getAll,
+    getById,
+    create,
+    update,
+    remove
 }

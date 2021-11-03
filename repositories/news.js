@@ -1,26 +1,29 @@
-const newsModel = require('../models/news');
+const { News, Category } = require('../models/');
 
-module.exports.getAll = async ( ) => {
-    const response = await newsModel.findAll({
+const getAll = async () => {
+    const response = await News.findAll({
         include: [
             {
-                model: db.Category,
+                model: Category,
             },
         ],
     });
     return response;
 };
 
-module.exports.getById = async ( id ) => {
-    const response = await newsModel.findOne({
-        where: { id }, include: [{ model: newsModel.Category }],
+const getById = async ( id ) => {
+    const response = await News.findByPk(id,{
+        include: [{ 
+          model: Category, as: "category"
+        }],
     });
 
     return response;
 };
 
-module.exports.create = async ( data ) => {
-    const response = await newsModel.create({
+
+const create = async ( data ) => {
+    const response = await News.create({
         name: data.name,
         content: data.content,
         image: data.image,
@@ -30,8 +33,8 @@ module.exports.create = async ( data ) => {
     return response;
 }
 
-module.exports.update = async ( id, data ) => {
-    const response = await newsModel.update({
+const update = async ( id, data ) => {
+    const response = await News.update({
         name: data.name,
         content: data.content,
         image: data.image,
@@ -42,7 +45,15 @@ module.exports.update = async ( id, data ) => {
     return response;
 }
 
-module.exports.remove = async ( id ) => {
-    const response = newsModel.destroy({ where: { id } });
+const remove = async ( id ) => {
+    const response = News.destroy({ where: { id } });
     return response;
+}
+
+module.exports = {
+    getAll,
+    getById,
+    create,
+    update,
+    remove
 }
