@@ -1,9 +1,11 @@
-var express = require('express');
-var router = express.Router();
+const { Router } = require('express');
+const userRouter = Router();
+const userController = require('../controllers/users')
+const usersValidation = require('../middlewares/userValidation');
 
-/* GET users listing. */
-router.get('/', function (req, res, next) {
-  res.send('respond with a resource');
-});
 
-module.exports = router;
+userRouter.put('/:id',usersValidation ,userController.update);
+
+
+module.exports = userRouter;
+
