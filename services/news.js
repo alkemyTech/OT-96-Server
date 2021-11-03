@@ -1,26 +1,26 @@
-const newsRepository = require('../repositories/news');
+const newsRepository = require("../repositories/news");
 
 const getAll = async () => {
   return await newsRepository.getAll();
-}
+};
 
 const getById = async (id) => {
   return await newsRepository.getById(id);
-}
+};
 
 const create = async ({ name, content, image }) => {
   return await newsRepository.create({ name, content, image });
-}
+};
 
 const update = async ({ name, content, image }, id) => {
-  const existNews = await newsRepository.getById(id)
-  if(!existNews) return { ok: false, message: 'la noticia no existe'}
+  const existNews = await newsRepository.getById(id);
+  if (!existNews) return { ok: false, message: "la noticia no existe" };
   return await newsRepository.update({ name, content, image }, id);
-}
+};
 
 const remove = async (id) => {
   return await newsRepository.remove(id);
-}
+};
 
 module.exports = {
   getAll,
@@ -28,4 +28,4 @@ module.exports = {
   create,
   update,
   remove,
-}
+};

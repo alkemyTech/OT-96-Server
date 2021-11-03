@@ -1,7 +1,7 @@
-const { Router } = require('express');
+const { Router } = require("express");
 const newsRouter = Router();
-const newsController = require('../controllers/news')
+const newsController = require("../controllers/news");
 
-newsRouter.put('/:id', newsController.update);
+newsRouter.put("/:id", newsController.update);
 
 module.exports = newsRouter;
