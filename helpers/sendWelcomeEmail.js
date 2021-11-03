@@ -11,7 +11,7 @@ async function sendWelcomeEmail(email, organizationId) {
   let subject = 'Welcome to ' + organization.name;
   let text = subject;
   let html = ejs.render('welcomeEmail', { organization: this.organization });
-  emailSender(email, subject, text, html);
+  await emailSender(email, subject, text, html);
 }
 
 module.exports = { sendWelcomeEmail };
