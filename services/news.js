@@ -11,7 +11,7 @@ const create = async (data) => {
       content: data.content,
       image: data.image,
       categoryId: data.categoryId,
-      type: data.type,
+      type: 'news',
     };
     const newsCreated = await newsRepository.create(newsBody);
     return newsCreated;
