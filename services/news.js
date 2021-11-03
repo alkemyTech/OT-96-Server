@@ -14,7 +14,7 @@ const create = async ({ name, content, image }) => {
 
 const update = async ({ name, content, image }, id) => {
   const existNews = await newsRepository.getById(id);
-  if (!existNews) return { ok: false, message: "la noticia no existe" };
+  if (!existNews) return false;
   return await newsRepository.update({ name, content, image }, id);
 };
 
