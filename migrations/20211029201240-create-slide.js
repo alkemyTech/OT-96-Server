@@ -20,7 +20,7 @@ module.exports = {
       organizationId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'organizations',
+          model: 'Organizations',
           key: 'id',
         },
         onUpdate: 'CASCADE',
