@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       name: DataTypes.STRING,
       content: DataTypes.STRING,
       image: DataTypes.STRING,
+      type: { type: DataTypes.STRING, defaultValue: "news" },
       categoryId: DataTypes.INTEGER,
       deletedAt: DataTypes.DATE,
     },
