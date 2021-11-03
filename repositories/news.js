@@ -1,7 +1,7 @@
-const newsModel = require('../models/news');
+const { News } = require('../models');
 
 const getAll = async () => {
-  const response = await newsModel.findAll({
+  const response = await News.findAll({
     include: [
       {
         model: db.Category,
@@ -12,21 +12,21 @@ const getAll = async () => {
 };
 
 const getById = async (id) => {
-  const response = await newsModel.findOne({
+  const response = await News.findOne({
     where: { id },
-    include: [{ model: newsModel.Category }],
+    include: [{ model: News.Category }],
   });
 
   return response;
 };
 
 const create = async (data) => {
-  const news = await newsModel.create(data);
+  const news = await News.create(data);
   return news;
 };
 
 const update = async (id, data) => {
-  const response = await newsModel.update(
+  const response = await News.update(
     {
       name: data.name,
       content: data.content,
@@ -40,7 +40,7 @@ const update = async (id, data) => {
 };
 
 const remove = async (id) => {
-  const response = newsModel.destroy({ where: { id } });
+  const response = News.destroy({ where: { id } });
   return response;
 };
 

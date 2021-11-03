@@ -13,9 +13,6 @@ const create = async (data) => {
       categoryId: data.categoryId,
       type: data.type,
     };
-    if (type !== 'news') {
-      newsBody.image = 'news';
-    }
     const newsCreated = await newsRepository.create(newsBody);
     return newsCreated;
   } catch (error) {
