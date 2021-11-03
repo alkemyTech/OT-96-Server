@@ -1,6 +1,6 @@
 const newsService = require("../services/news");
 
-const update = async (req, res) => {
+const update = async (req, res, next) => {
   try {
     const response = await newsService.update(req.body, req.params.id);
     if (response[0] !== 1) {
@@ -10,7 +10,7 @@ const update = async (req, res) => {
     }
     return res.status(200).json({ ok: true });
   } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
+    next(error);
   }
 };
 module.exports = { update };
