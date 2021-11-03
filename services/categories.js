@@ -1,4 +1,4 @@
-const categoriesRepository = require('../repositories/categories');
+const categoriesRepository = require("../repositories/categories");
 
 //example:
 /**

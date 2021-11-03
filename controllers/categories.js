@@ -1,4 +1,4 @@
-const categoriesService = require('../services/categories');
+const categoriesService = require("../services/categories");
 
 //example:
 /**
