@@ -1,21 +1,23 @@
 const newsService = require('../services/news');
 
+const getAll = async (req, res, next) => {};
 
-const getAll = async (req, res, next) => {
-
-};
-
-const getById = async (req, res, next) => {
-
-};
+const getById = async (req, res, next) => {};
 
 const create = async (req, res, next) => {
-
+  try {
+    const response = await newsService.create(req.body);
+    res.status(200).json({
+      success: true,
+      msg: `news: ${response.name} has been created`,
+      news: response,
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
-const update = async (req, res, next) => {
-
-};
+const update = async (req, res, next) => {};
 
 const remove = async (req, res, next) => {
     try {
@@ -28,12 +30,9 @@ const remove = async (req, res, next) => {
 };
 
 module.exports = {
-    getAll,
-    getById,
-    create,
-    update,
-    remove,
-}
-
-
-
+  getAll,
+  getById,
+  create,
+  update,
+  remove,
+};

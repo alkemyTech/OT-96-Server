@@ -17,43 +17,38 @@ const getById = async ( id ) => {
           model: Category, as: "category"
         }],
     });
-
-    return response;
+  
+  return response;
 };
 
+const create = async (data) => {
+  const news = await News.create(data);
+  return news;
+};
 
-const create = async ( data ) => {
-    const response = await News.create({
-        name: data.name,
-        content: data.content,
-        image: data.image,
-        categoryId: data.categoryId
-    })
+const update = async (id, data) => {
+  const response = await News.update(
+    {
+      name: data.name,
+      content: data.content,
+      image: data.image,
+      categoryId: data.categoryId,
+    },
+    { where: { id } }
+  );
 
-    return response;
-}
+  return response;
+};
 
-const update = async ( id, data ) => {
-    const response = await News.update({
-        name: data.name,
-        content: data.content,
-        image: data.image,
-        categoryId: data.categoryId
-      },
-      { where: { id } });
-    
-    return response;
-}
-
-const remove = async ( id ) => {
-    const response = News.destroy({ where: { id } });
-    return response;
-}
+const remove = async (id) => {
+  const response = News.destroy({ where: { id } });
+  return response;
+};
 
 module.exports = {
-    getAll,
-    getById,
-    create,
-    update,
-    remove
-}
+  getAll,
+  getById,
+  create,
+  update,
+  remove,
+};
