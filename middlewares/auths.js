@@ -1,34 +1,39 @@
 const securityService = require('../services/security');
 const usersService = require('../services/users');
+const rolesService = require('../services/rolesServices');
 
 
-async function isAdmin(req, res, next) {
+
+const isAdmin = async (req, res, next) => {
   const token = req.headers['authorization'];
 
   if (!token) {
     res.status(403).json({ message: 'No token provided' });
     return;
   }
-
-  const userId = securityService.verifyToken(token).id;
-  if (!userId) {
-    res.status(401).json({ message: 'Unauthorized' });
-  }
-
-  const user = usersService.getById(userId);
+  const user = securityService.verifyToken(token);
   if (!user) {
+    res.status(401).json({ message: 'Unauthorized' });
+    return;
+  }
+  const userFound = await usersService.getById(user.id);
+  if (!userFound) {
     res.status(404).json({ message: 'no user found' });
     return;
   }
-
-  if (user.roleId !== 1) {
+  const role = await rolesService.getByName('Admin')
+  if(!role) {
+    res.status(404).json({ message: 'no role found' });
+    return;
+  }
+  if (userFound.roleId !== role.id) {
     req.status(403).json({ message: 'Require Admin role' });
     return;
   }
   next();
 }
 
-async function isOwnership(req, res, next) {
+const isOwnership = async (req, res, next) => {
   try {
     const { id } = req.params;
     const token = req.headers['authorization'];
@@ -37,27 +42,27 @@ async function isOwnership(req, res, next) {
       res.status(403).json({ message: 'No token provided' });
       return;
     }
-
-    const userId = securityService.verifyToken(token).id;
-    if (!userId) {
+    const user = securityService.verifyToken(token);
+    if (!user) {
       res.status(401).json({ message: 'Unauthorized' });
       return;
     }
-
-    const user = await usersService.getById(userId);
-    if (!user) {
+    const userFound = await usersService.getById(user.id);
+    if (!userFound) {
       res.status(404).json({ message: 'no user found' });
       return;
     }
-
-    if (user.roleId === 1) {
+    const role = await rolesService.getByName('Admin')
+    if (!role) {
+      res.status(404).json({ message: 'no role found' });
+      return;
+    }
+    if (userFound.roleId === role.id) {
       next();
     }
-
-    if (id === user.id) {
+    if (id === userFound.id) {
       next();
     }
-
     res.status(403).json({ message: 'Forbidden' });
   } catch (error) {
     next(error);
