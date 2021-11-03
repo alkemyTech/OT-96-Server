@@ -37,9 +37,17 @@ const remove = async (id) => {
   return response;
 };
 
+const getByName = async (name) => {
+  const response = await Category.findOne({
+    where: { name },
+  });
+  return response;
+};
+
 module.exports = {
   getAll,
   getById,
+  getByName,
   create,
   update,
   remove,
