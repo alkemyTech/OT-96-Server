@@ -1,12 +1,9 @@
 const categoriesService = require('../services/categories');
 
-//example:
-/**
 const getAll = async (req, res, next) => {
     try {
-        const response = await categoriesService.getAll();
-
-        res.send(response);
+        const categories = await categoriesService.getAll();
+        res.status(200).json(categories);
     } catch (error) {
         next(error);
     }
@@ -15,4 +12,3 @@ const getAll = async (req, res, next) => {
 module.exports = {
     getAll
 }
- */

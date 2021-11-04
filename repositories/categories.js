@@ -1,33 +1,32 @@
-const { Category } = require('../models/category');
+const db = require('../models');
 
 // Get all categories
 const getAll = async () => {
-    const response = await Category.findAll({
+    const categories = await db.Category.findAll({
         attributes: {
-            exclude: ['description', 'deletedAt', 'createdAt', 'updatedAt'],
+            exclude: ['description', 'image', 'deletedAt', 'createdAt', 'updatedAt'],
         }
     });
-
-    return response;
+    return categories;
 }
 
 // Get one category by id
 const getById = async (id) => {
-    const response = await Category.findByPk(id);
+    const response = await db.Category.findByPk(id);
 
     return response;
 }
 
 // Insert new category
 const create = async (data) => {
-    const response = await Category.create(data);
+    const response = await db.Category.create(data);
 
     return response;
 }
 
 // Update category
 const update = async (id, data) => {
-    const response = await Category.update(data, {
+    const response = await db.Category.update(data, {
         where: {
             id: id
         }
@@ -38,7 +37,7 @@ const update = async (id, data) => {
 
 // Remove one category by id
 const remove = async (id) => {
-    const response = await Category.destroy({
+    const response = await db.Category.destroy({
         where: {
             id: id
         }

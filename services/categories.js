@@ -1,12 +1,15 @@
 const categoriesRepository = require('../repositories/categories');
 
-//example:
-/**
  const getAll = async () => {
-        return  await categoriesRepository.getAll();
+    const news = await categoriesRepository.getAll();
+    if (!news) {
+        const error = new Error('no news found');
+        error.status = 404;
+        throw error;
     }
+    return news;
+}
 
 module.exports = {
     getAll
-    }
- */
+};
