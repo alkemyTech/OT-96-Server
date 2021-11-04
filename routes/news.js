@@ -1,9 +1,9 @@
-var express = require('express');
-var router = express.Router();
+const { Router } = require("express");
+const newsRouter = Router();
+const newsController = require("../controllers/news");
+const { newsDataValidation } = require("../middlewares/newsDataValidation");
 
-const { newsDataValidation } = require('../middlewares/newsDataValidation');
-const newsController = require('../controllers/news');
+newsRouter.put("/:id", newsController.update);
+newsRouter.put("/", newsDataValidation, newsController.create);
 
-router.put('/', newsDataValidation, newsController.create);
-
-module.exports = router;
+module.exports = newsRouter;
