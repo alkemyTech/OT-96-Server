@@ -19,4 +19,4 @@ const validateLoginDetails = (req, res, next) => {
   })
   next()
 }
-module.exports = validateLoginDetails
+module.exports = { validateLoginDetails }
