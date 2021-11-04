@@ -5,8 +5,7 @@ const authMiddleware = require('../middlewares/auths');
 const usersValidation = require('../middlewares/userValidation');
 
 router.get('/', authMiddleware.isAdmin, usersController.getAll);
-router.put('/:id',usersValidation ,usersController.update);
+router.put('/:id', usersValidation , usersController.update);
 
 
 module.exports = router;
-
