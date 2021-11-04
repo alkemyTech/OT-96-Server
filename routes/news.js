@@ -5,6 +5,6 @@ const { newsDataValidation } = require('../middlewares/newsDataValidation');
 const { isAdmin } = require('../middlewares/auths');
 
 newsRouter.put('/:id', isAdmin, newsController.update);
-newsRouter.post('/', newsDataValidation, newsController.create);
+newsRouter.post('/', isAdmin, newsDataValidation, newsController.create);
 
 module.exports = newsRouter;
