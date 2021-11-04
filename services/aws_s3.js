@@ -2,11 +2,18 @@ const fs = require('fs');
 
 const AWS = require('aws-sdk');
 
-AWS.config.update({ region: process.env.AWS_REGION });
+// AWS account data
 const bucketName = process.env.AWS_BUCKET
+const accessKeyId = process.env.AWS_ACCESS_KEY_ID
+const sercetAccesKey = process.env.AWS_SECRET_ACCESS_KEY
+const region = process.env.AWS_REGION
 
 // Create S3 instance
-const s3 = new AWS.S3();
+const s3 = new AWS.S3({
+    region,
+    accessKeyId,
+    sercetAccesKey
+});
 
 
 /** Upload file **************/
