@@ -1,9 +1,5 @@
 const newsRepository = require('../repositories/news');
 
-const getAll = async () => {
-    
-}
-
 const getById = async (id) => {
     const news = await newsRepository.getById(id);
     if (!news) {
@@ -14,22 +10,6 @@ const getById = async (id) => {
     return news;
 }
 
-const create = async (data) => {
-
-}
-
-const update = async (id, data) => {
-
-}
-
-const remove = async (id) => {
-
-}
-
 module.exports = {
-    getAll,
     getById,
-    create,
-    update,
-    remove
-}
+};
