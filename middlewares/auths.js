@@ -1,7 +1,6 @@
 const securityService = require('../services/security');
-const usersService = require('../services/users')
+const usersService = require('../services/users');
 const rolesService = require('../services/rolesServices');
-
 
 const isAdmin = async (req, res, next) => {
   const token = req.headers['authorization'];
@@ -20,8 +19,8 @@ const isAdmin = async (req, res, next) => {
     res.status(404).json({ message: 'no user found' });
     return;
   }
-  const role = await rolesService.getByName('Admin')
-  if(!role) {
+  const role = await rolesService.getByName('Admin');
+  if (!role) {
     res.status(404).json({ message: 'no role found' });
     return;
   }
@@ -30,9 +29,9 @@ const isAdmin = async (req, res, next) => {
     return;
   }
   next();
-}
+};
 
-const isOwnership = async (req, res, next) => {
+const isOwnedMember = async (req, res, next) => {
   try {
     const { id } = req.params;
     const token = req.headers['authorization'];
@@ -51,7 +50,7 @@ const isOwnership = async (req, res, next) => {
       res.status(404).json({ message: 'no user found' });
       return;
     }
-    const role = await rolesService.getByName('Admin')
+    const role = await rolesService.getByName('Admin');
     if (!role) {
       res.status(404).json({ message: 'no role found' });
       return;
@@ -66,32 +65,30 @@ const isOwnership = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
+};
 
-// checks if a correct token was given
 async function verifyToken(req, res, next) {
   try {
     const authHeader = req.headers['authorization'];
-    // if authorization parameter exists at headers
     if (authHeader) {
-      // get token from authHeader at position 1
-      const token = authHeader.split("")[1];
+      const token = authHeader.split('')[1];
       if (!token) {
-        const error = { msg: "No token provided!", status: 401 };
+        const error = { msg: 'No token provided!', status: 401 };
         throw error;
-      };
-      // if token exists call securityService
+      }
       const decodedUser = securityService.verifyToken(token);
       if (!decodedUser) {
-        const error = { msg: "Unauthorized! Please enter a valid token provided at login", status: 403 };
+        const error = {
+          msg: 'Unauthorized! Please enter a valid token provided at login',
+          status: 403,
+        };
         throw error;
       } else {
-        // if authService returns userId
         req.userId = decodedUser.id;
         next();
       }
     } else {
-      const error = { msg: "No token provided!", status: 401 };
+      const error = { msg: 'No token provided!', status: 401 };
       throw error;
     }
   } catch (error) {
@@ -99,4 +96,4 @@ async function verifyToken(req, res, next) {
   }
 }
 
-module.exports = { isAdmin, isOwnership, verifyToken };
+module.exports = { isAdmin, isOwnedMember, verifyToken };

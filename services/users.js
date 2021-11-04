@@ -1,7 +1,7 @@
-const bcrypt = require("bcryptjs");
-const usersRepository = require("../repositories/users");
+const bcrypt = require('bcryptjs');
+const usersRepository = require('../repositories/users');
 
-const { sendWelcomeEmail } = require("../helpers/sendWelcomeEmail");
+const { sendWelcomeEmail } = require('../helpers/sendWelcomeEmail');
 
 const existEmailUser = async (email) => {
   const user = await usersRepository.getByEmail(email);
@@ -9,26 +9,29 @@ const existEmailUser = async (email) => {
 };
 
 const getAll = async () => {
-  return await usersRepository.getAll();
+  const users = await usersRepository.getAll();
+  if (users.length > 0) {
+    return users;
+  }
+  const error = new Error('No existen usuarios!');
+  error.status = 404;
+  throw error;
 };
 
 const getById = async (id) => {
   return await usersRepository.getById(id);
 };
 
-//register user
 async function create(userData) {
-  //hash password
   let existingUser = await usersRepository.getByEmail(userData.email);
   if (existingUser) {
-    const error = new Error("el mail ya existe");
+    const error = new Error('el mail ya existe');
     error.status = 404;
     throw error;
   }
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(userData.password, salt);
 
-  //create user
   const newUser = {
     firstName: userData.firstName,
     lastName: userData.lastName,

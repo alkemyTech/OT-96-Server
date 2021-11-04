@@ -1,25 +1,38 @@
 const newsService = require('../services/news');
 
+const getAll = async (req, res, next) => {};
 
-module.exports.getAll = async (req, res, next) => {
+const getById = async (req, res, next) => {};
 
+const create = async (req, res, next) => {
+  try {
+    const response = await newsService.create(req.body);
+    res.status(200).json({
+      success: true,
+      msg: `news: ${response.name} has been created`,
+      news: response,
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
-module.exports.getById = async (req, res, next) => {
+const update = async (req, res, next) => {
+  try {
+    const response = await newsService.update(req.body, req.params.id);
 
+    return res.status(200).json(response);
+  } catch (error) {
+    next(error);
+  }
 };
 
-module.exports.create = async (req, res, next) => {
+const remove = async (req, res, next) => {};
 
+module.exports = {
+  getAll,
+  getById,
+  create,
+  update,
+  remove,
 };
-
-module.exports.update = async (req, res, next) => {
-
-};
-
-module.exports.delete = async (req, res, next) => {
-
-};
-
-
-
