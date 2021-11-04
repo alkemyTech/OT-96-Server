@@ -1,11 +1,22 @@
 const categoriesRepository = require('../repositories/categories');
 
-const update = async (id, categoryBody) => {
+const create = async ({ name, image, description }) => {
+  const res = await categoriesRepository.getByName(name);
+  if (res) {
+    const error = new Error('categoria repetida');
+    error.status = 409;
+    throw error;
+  }
+  return await categoriesRepository.create({ name, image, description });
+};
+
+const update = async (id, { name, image, description }) => {
   try {
-    const categoryResponse = await categoriesRepository.update(
-      id,
-      categoryBody
-    );
+    const categoryResponse = await categoriesRepository.update(id, {
+      name,
+      image,
+      description,
+    });
     if (!categoryResponse) {
       throw new Error('Category not found');
     }
@@ -16,5 +27,6 @@ const update = async (id, categoryBody) => {
 };
 
 module.exports = {
+  create,
   update,
 };
