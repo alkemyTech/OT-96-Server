@@ -6,5 +6,6 @@ const { newsDataValidation } = require('../middlewares/newsDataValidation');
 
 newsRouter.delete('/:id',[authsMiddlewares.isAdmin], newsController.remove);
 newsRouter.put('/', newsDataValidation, newsController.create);
+newsRouter.put("/:id", newsController.update);
 
 module.exports = newsRouter;

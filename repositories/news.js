@@ -22,26 +22,25 @@ const getById = async ( id ) => {
 };
 
 const create = async (data) => {
-  const news = await News.create(data);
-  return news;
+  const response = await News.create(data);
+  return response;
 };
 
-const update = async (id, data) => {
-  const response = await News.update(
-    {
-      name: data.name,
-      content: data.content,
-      image: data.image,
-      categoryId: data.categoryId,
+const update = async (data, id) => {
+  const response = await News.update(data, {
+    where: {
+      id,
     },
-    { where: { id } }
-  );
-
+  });
   return response;
 };
 
 const remove = async (id) => {
-  const response = News.destroy({ where: { id } });
+  const response = await News.destroy({
+    where: {
+      id,
+    },
+  });
   return response;
 };
 
