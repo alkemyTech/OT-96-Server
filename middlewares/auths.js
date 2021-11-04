@@ -67,19 +67,15 @@ const isOwnedMember = async (req, res, next) => {
   }
 };
 
-// checks if a correct token was given
 async function verifyToken(req, res, next) {
   try {
     const authHeader = req.headers['authorization'];
-    // if authorization parameter exists at headers
     if (authHeader) {
-      // get token from authHeader at position 1
       const token = authHeader.split('')[1];
       if (!token) {
         const error = { msg: 'No token provided!', status: 401 };
         throw error;
       }
-      // if token exists call securityService
       const decodedUser = securityService.verifyToken(token);
       if (!decodedUser) {
         const error = {
@@ -88,7 +84,6 @@ async function verifyToken(req, res, next) {
         };
         throw error;
       } else {
-        // if authService returns userId
         req.userId = decodedUser.id;
         next();
       }

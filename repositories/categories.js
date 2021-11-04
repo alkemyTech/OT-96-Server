@@ -11,21 +11,17 @@ const getAll = async () => {
   return response;
 };
 
-// Get one category by id
 const getById = async (id) => {
   const response = await Category.findByPk(id);
 
   return response;
 };
 
-// Insert new category
 const create = async (data) => {
   const response = await Category.create(data);
 
   return response;
 };
-
-// Update category
 
 const update = async ({ id, data }) => {
   const response = await Category.update(data, {
@@ -37,7 +33,6 @@ const update = async ({ id, data }) => {
   return response;
 };
 
-// Remove one category by id
 const remove = async (id) => {
   const response = await Category.destroy({
     where: {
