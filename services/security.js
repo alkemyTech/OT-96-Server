@@ -17,12 +17,13 @@ const generateToken = (user) => {
 };
 
 const verifyToken = (token, next) => {
-  try {
     const decodedToken = jwt.verify(token, config.development.SECRET_TOKEN);
+    if(!decodedToken) {
+      const error = new Error('Invalid token');
+      error.status = 401;
+      throw error;
+    }
     return decodedToken;
-  } catch (error) {
-    return false;
-  }
 };
 
 module.exports = { generateToken, verifyToken };

@@ -5,32 +5,36 @@ const rolesService = require('../services/rolesServices');
 
 
 const isAdmin = async (req, res, next) => {
-  const token = req.headers['authorization'];
+  try {
+    const token = req.headers['authorization'];
 
-  if (!token) {
-    res.status(403).json({ message: 'No token provided' });
-    return;
+    if (!token) {
+      res.status(403).json({ message: 'No token provided' });
+      return;
+    }
+    const user = securityService.verifyToken(token);
+    if (!user) {
+      res.status(401).json({ message: 'Unauthorized' });
+      return;
+    }
+    const userFound = await usersService.getById(user.id);
+    if (!userFound) {
+      res.status(404).json({ message: 'no user found' });
+      return;
+    }
+    const role = await rolesService.getByName('Admin')
+    if(!role) {
+      res.status(404).json({ message: 'no role found' });
+      return;
+    }
+    if (userFound.roleId !== role.id) {
+      res.status(403).json({ message: 'Require Admin role' });
+      return;
+    }
+    next();
+  } catch (error) {
+    next(error);
   }
-  const user = securityService.verifyToken(token);
-  if (!user) {
-    res.status(401).json({ message: 'Unauthorized' });
-    return;
-  }
-  const userFound = await usersService.getById(user.id);
-  if (!userFound) {
-    res.status(404).json({ message: 'no user found' });
-    return;
-  }
-  const role = await rolesService.getByName('Admin')
-  if(!role) {
-    res.status(404).json({ message: 'no role found' });
-    return;
-  }
-  if (userFound.roleId !== role.id) {
-    res.status(403).json({ message: 'Require Admin role' });
-    return;
-  }
-  next();
 }
 
 const isOwnership = async (req, res, next) => {
