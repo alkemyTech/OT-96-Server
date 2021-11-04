@@ -7,17 +7,11 @@ const update = async (id, categoryBody) => {
       categoryBody
     );
     if (!categoryResponse) {
-      return {
-        status: 404,
-        message: 'Category not found',
-      };
+      throw new Error('Category not found');
     }
     return categoryResponse;
   } catch (error) {
-    return {
-      status: 500,
-      message: 'Internal server error - Services',
-    };
+    throw error;
   }
 };
 
