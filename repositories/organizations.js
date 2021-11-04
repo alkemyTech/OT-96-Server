@@ -1,7 +1,5 @@
 const Organization = require('../models').Organization;
 
-
-// Get one category by id
 const getOrganizationPublic = async (id) => {
   const response = await Organization.findByPk({
     id,
@@ -10,8 +8,6 @@ const getOrganizationPublic = async (id) => {
   return response;
 };
 
-/////CRUD//////
-//repository organization
 async function getAll() {
   const organization = await Organization.findAll();
   return organization;
