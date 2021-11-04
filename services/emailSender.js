@@ -1,10 +1,10 @@
-const sendgridMail = require("@sendgrid/mail");
+const sendgridMail = require('@sendgrid/mail');
 sendgridMail.setApiKey(process.env.SENDGRID_API_KEY);
 const emailSender = async (email, subject, text, html) => {
   try {
     const msg = {
       to: email,
-      from: "juancruzalmazan1994@gmail.com",
+      from: 'fundacionsomosmas@outlook.com.ar',
       subject: subject,
       text: text,
       html: html,
@@ -12,9 +12,9 @@ const emailSender = async (email, subject, text, html) => {
 
     const result = await sendgridMail.send(msg);
     console.log(result);
-    console.log({ msg: "Email sent successfully!" });
+    console.log({ msg: 'Email sent successfully!' });
   } catch (error) {
-    console.error({ error: error, msg: "Email sent failed" });
+    console.error({ error: error, msg: 'Email sent failed' });
   }
 };
 

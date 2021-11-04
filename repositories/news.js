@@ -1,4 +1,4 @@
-const { News, Category } = require('../models/');
+const { News, Category } = require('../models');
 
 const getAll = async () => {
     const response = await News.findAll({
@@ -21,39 +21,33 @@ const getById = async ( id ) => {
     return response;
 };
 
+const create = async (data) => {
+  const response = await News.create(data);
+  return response;
+};
 
-const create = async ( data ) => {
-    const response = await News.create({
-        name: data.name,
-        content: data.content,
-        image: data.image,
-        categoryId: data.categoryId
-    })
+const update = async (data, id) => {
+  const response = await News.update(data, {
+    where: {
+      id,
+    },
+  });
+  return response;
+};
 
-    return response;
-}
-
-const update = async ( id, data ) => {
-    const response = await News.update({
-        name: data.name,
-        content: data.content,
-        image: data.image,
-        categoryId: data.categoryId
-      },
-      { where: { id } });
-    
-    return response;
-}
-
-const remove = async ( id ) => {
-    const response = News.destroy({ where: { id } });
-    return response;
-}
+const remove = async (id) => {
+  const response = await News.destroy({
+    where: {
+      id,
+    },
+  });
+  return response;
+};
 
 module.exports = {
-    getAll,
-    getById,
-    create,
-    update,
-    remove
-}
+  getAll,
+  getById,
+  create,
+  update,
+  remove,
+};

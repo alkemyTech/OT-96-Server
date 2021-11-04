@@ -1,11 +1,9 @@
 const organizationsRepository = require('../repositories/organizations');
 
-
 async function getOrganizationPublic(id) {
   return await organizationsRepository.getOrganizationPublic(id);
 }
 
-//CRUD
 async function getAll() {
   return await organizationsRepository.getAll();
 }

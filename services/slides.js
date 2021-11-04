@@ -1,6 +1,5 @@
 const SlidesRepository = require('../repositories/slides');
 
-//CRUD
 async function getAll() {
   return await SlidesRepository.getAll();
 }
