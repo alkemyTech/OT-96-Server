@@ -1,10 +1,10 @@
-const { Category } = require("../models/category");
+const { Category } = require('../models');
 
 // Get all categories
 const getAll = async () => {
   const response = await Category.findAll({
     attributes: {
-      exclude: ["description", "deletedAt", "createdAt", "updatedAt"],
+      exclude: ['description', 'deletedAt', 'createdAt', 'updatedAt'],
     },
   });
 

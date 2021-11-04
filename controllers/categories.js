@@ -1,4 +1,4 @@
-const categoriesService = require("../services/categories");
+const categoriesService = require('../services/categories');
 
 //example:
 /*
@@ -18,7 +18,7 @@ const remove = async (req, res, next) => {
     const category = await categoriesService.getById(req.params.id);
     if (category) {
       await categoriesService.remove(req.params.id);
-      res.status(201).send("Categoría eliminada!");
+      res.status(201).send('Categoría eliminada!');
     } else {
       const error = new Error(
         `No existe la categoria con ID: ${req.params.id}!`
