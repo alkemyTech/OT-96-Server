@@ -1,5 +1,5 @@
-const categoriesService = require("../services/categories");
-
+const categoriesService = require('../services/categories');
+const awsServices = require('../services/images');
 
 const getAll = async (req, res, next) => {
   try {

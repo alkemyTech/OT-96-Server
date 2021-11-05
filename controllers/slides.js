@@ -1,4 +1,5 @@
 const SlidesService = require('../services/slides');
+const awsServices = require('../services/images');
 
 //////////CRUD//////7
 // GET ALL Slides
@@ -14,9 +15,7 @@ async function getAll(req, res, next) {
 //AND GET ONE Slide BY ID
 async function getById(req, res, next) {
   try {
-    const requestSlide = await SlidesService.getById(
-      req.params.id
-    );
+    const requestSlide = await SlidesService.getById(req.params.id);
 
     res.send(requestSlide);
   } catch (error) {
@@ -41,10 +40,7 @@ async function create(req, res, next) {
 // UPDATE Slide
 async function update(req, res, next) {
   try {
-    const updateSlide = await SlidesService.update(
-      req.params.id,
-      req.body
-    );
+    const updateSlide = await SlidesService.update(req.params.id, req.body);
     res.status(200).json({
       success: true,
       msg: `Slide ${req.params.id} is updated succesfully`,
@@ -58,12 +54,10 @@ async function update(req, res, next) {
 //Slide SOFT DELETE
 async function remove(req, res, next) {
   try {
-    const softDeleteSlide = await SlidesService.remove(
-      req.params.id
-    );
+    const softDeleteSlide = await SlidesService.remove(req.params.id);
     res.status(201).json({
       success: true,
-      msg: `your Slide ${req.body.name} has been deleted`
+      msg: `your Slide ${req.body.name} has been deleted`,
     });
   } catch (err) {
     next(err);
