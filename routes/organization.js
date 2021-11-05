@@ -1,8 +1,8 @@
 const { Router } = require('express');
 const organizationRouter = Router();
-const organizationController = require('../controllers/organization.js')
-const { isAdmin } = require('../middlewares/auths')
-const  validateOrganization  = require('../middlewares/organizationValidation')
+const organizationController = require('../controllers/organization');
+const authMiddleware = require('../middlewares/auths');
+const organizationValidation = require('../middlewares/organizationValidation');
 
 organizationRouter.get(
   '/:id/public',
@@ -10,8 +10,8 @@ organizationRouter.get(
 );
 organizationRouter.post(
   '/:id/public',
-  isAdmin,
-  validateOrganization,
+  authMiddleware.isAdmin,
+  organizationValidation.validateOrganization,
   organizationController.update
 );
 
