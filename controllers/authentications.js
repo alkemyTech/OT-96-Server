@@ -37,12 +37,12 @@ const myData = async (req, res, next) => {
   try {
     let token = req.headers['authorization'];
     const userDecoded = securityService.verifyToken(token);
-    if (!userDecoded.id) {
-      const error = new error(`User with id: ${userId} not found`);
+    const user = usersService.getById(userDecoded.id);
+    if (!user) {
+      const error = new error(`User with id: ${user.id} not found`);
       error.status = 404;
       throw error;
     }
-    const user = usersService.getById(userDecoded.id);
     res.status(200).json({
       success: true,
       msg: `My Data:`,

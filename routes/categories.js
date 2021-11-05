@@ -8,7 +8,7 @@ const {
 
 categoriesRouter.post(
   '/',
-  isAdmin,
+  authMiddleware.isAdmin,
   validateCategoryDetails,
   categoriesController.create
 );
