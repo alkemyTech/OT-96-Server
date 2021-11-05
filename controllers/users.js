@@ -26,7 +26,21 @@ async function create(req, res, next) {
   }
 }
 
-const update = async (req, res) => {};
+const update = async (req, res) => {
+  try {
+    const updateUser = await usersService.update(
+      req.params.id,
+      req.body
+    );
+    res.status(200).json({
+      success: true,
+      msg: `User ${req.params.id} is updated succesfully`,
+      User : updateUser,
+    });
+  } catch (err) {
+    next(error);
+  }
+};
 
 const remove = async (req, res) => {
   try {
