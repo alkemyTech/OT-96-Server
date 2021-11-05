@@ -1,13 +1,15 @@
 const express = require('express');
-const activityRouter = express.Router();
+const activitiesRouter = express.Router();
 const authMiddleware = require('../middlewares/auths');
 const activitiesController = require('../controllers/activities');
-const activitiDataValidation = require('../middlewares/activityDataValidation');
+const activitiesDataValidation = require('../middlewares/activitiesDataValidation');
 
-activityRouter.post(
+activitiesRouter.post(
   '/',
-  activitiDataValidation,
+  activitiesDataValidation,
   authMiddleware.isOwnedMember,
   authMiddleware.isAdmin,
   activitiesController.create
 );
+
+module.exports = activitiesRouter;
