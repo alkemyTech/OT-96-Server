@@ -2,11 +2,6 @@ const categoriesRepository = require('../repositories/categories');
 
 const getAll = async () => {
     const news = await categoriesRepository.getAll();
-    if (!news) {
-        const error = new Error('no news found');
-        error.status = 404;
-        throw error;
-    }
     return news;
 }
 
@@ -59,11 +54,6 @@ const remove = async (id) => {
 
 const getAllNames = async () => {
   const news = await categoriesRepository.getAllNames();
-  if (!news) {
-      const error = new Error('no news found');
-      error.status = 404;
-      throw error;
-  }
   return news;
 }
 
