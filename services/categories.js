@@ -41,9 +41,6 @@ const update = async (id, { name, image, description }) => {
   }
 };
 
-const remove = async (id) => {
-  return await categoriesRepository.remove(id);
-};
 
 const remove = async (id) => {
   const category = await categoriesRepository.getById(id); 
