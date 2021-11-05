@@ -1,16 +1,15 @@
-const { News, Category } = require("../models");
+const { News, Category } = require('../models');
 
 const getAll = async () => {
-  const response = await News.findAll({
-    include: [
-      {
-        model: Category,
-      },
-    ],
-  });
-  return response;
+    const response = await News.findAll({
+        include: [
+            {
+                model: Category,
+            },
+        ],
+    });
+    return response;
 };
-
 
 const getById = async ( id ) => {
     const response = await News.findByPk(id,{
@@ -19,7 +18,7 @@ const getById = async ( id ) => {
         }],
     });
   
-  return response;
+    return response;
 };
 
 const create = async (data) => {

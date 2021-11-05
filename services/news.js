@@ -47,8 +47,14 @@ const update = async ({ name, content, image, categoryId }, id) => {
 };
 
 const remove = async (id) => {
+  const news = await newsRepository.getById(id);
+  if (!news) {
+      const error = new Error('The request news was not found');
+      error.status = 404;
+      throw error;
+  }
   return await newsRepository.remove(id);
-};
+}
 
 module.exports = {
   getAll,
