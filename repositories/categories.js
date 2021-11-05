@@ -6,20 +6,23 @@ const getAll = async () => {
       exclude: ['description', 'deletedAt', 'createdAt', 'updatedAt'],
     },
   });
+
   return response;
 };
 
 const getById = async (id) => {
-  const response = await Category.findByPk(id);
-  return response;
+  const category = await Category.findByPk(id);
+  return category;
 };
 
+// Insert new category
 const create = async (data) => {
   const response = await Category.create(data);
   return response;
 };
 
 const update = async (id, data) => {
+
   const response = await Category.update(data, {
     where: {
       id,

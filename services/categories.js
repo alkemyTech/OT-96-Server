@@ -1,4 +1,20 @@
-const categoriesRepository = require('../repositories/categories');
+const categoriesRepository = require("../repositories/categories");
+
+//example:
+const getAll = async () => {
+  return await categoriesRepository.getAll();
+};
+
+const getById = async (id) => {
+  const category = await categoriesRepository.getById(id);
+    
+  if (category) {
+    return category;
+  }
+  const error = new Error("No existe la categoria!");
+  error.status = 404;
+  throw error;
+};
 
 const create = async ({ name, image, description }) => {
   const res = await categoriesRepository.getByName(name);
@@ -27,6 +43,8 @@ const update = async (id, { name, image, description }) => {
 };
 
 module.exports = {
+  getAll,
+  getById,
   create,
   update,
-};
+}
