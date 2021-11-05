@@ -28,4 +28,4 @@ const validateOrganization = (req, res, next) => {
     });
   next();
 };
-module.exports = validateOrganization;
+module.exports = { validateOrganization };
