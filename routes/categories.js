@@ -1,5 +1,5 @@
 const express = require('express');
-const categoriesRouter  = express.Router();
+const categoriesRouter = express.Router();
 const authMiddleware = require('../middlewares/auths');
 const categoriesController = require('../controllers/categories');
 const {
@@ -14,8 +14,17 @@ categoriesRouter.post(
   categoriesController.create
 );
 
-categoriesRouter.get('/', [authMiddlewares.isAdmin], categoriesController.getAllNames);
-categoriesRouter.get('/:id',authMiddleware.isOwnedMember, authMiddleware.isAdmin ,categoriesController.getById);
+categoriesRouter.get(
+  '/',
+  authMiddleware.isAdmin,
+  categoriesController.getAllNames
+);
+categoriesRouter.get(
+  '/:id',
+  authMiddleware.isOwnedMember,
+  authMiddleware.isAdmin,
+  categoriesController.getById
+);
 
 categoriesRouter.put(
   '/:id',
@@ -31,4 +40,4 @@ categoriesRouter.delete(
   categoriesController.remove
 );
 
-module.exports = categoriesRouter
+module.exports = categoriesRouter;

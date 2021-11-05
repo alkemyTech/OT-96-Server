@@ -1,7 +1,7 @@
-const Organization = require('../models').Organization;
+const db = require('../models');
 
 const getOrganizationPublic = async (id) => {
-  const response = await Organization.findByPk({
+  const response = await db.Organization.findByPk({
     id,
     attributes: ['name', 'image', 'phone', 'address'],
   });
@@ -9,12 +9,12 @@ const getOrganizationPublic = async (id) => {
 };
 
 async function getAll() {
-  const organization = await Organization.findAll();
+  const organization = await db.Organization.findAll();
   return organization;
 }
 
 async function getById(id) {
-  const organization = await Organization.findOne({
+  const organization = await db.Organization.findOne({
     where: {
       id: id,
     },
@@ -23,7 +23,7 @@ async function getById(id) {
 }
 
 async function create(data) {
-  const organization = await Organization.create({
+  const organization = await db.Organization.create({
     name: data.name,
     image: data.image,
     address: data.address,
@@ -50,14 +50,14 @@ async function update(id, data) {
       id: id,
     },
   };
-  const organization = await Organization.update(values, {
+  const organization = await db.Organization.update(values, {
     ...condition,
   });
   return organization;
 }
 
 async function remove(id) {
-  const organization = await Organization.destroy({
+  const organization = await db.Organization.destroy({
     where: {
       id: id,
     },
