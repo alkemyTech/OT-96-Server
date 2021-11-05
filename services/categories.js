@@ -10,6 +10,17 @@ const categoriesRepository = require('../repositories/categories');
     return news;
 }
 
+const getAllNames = async () => {
+    const news = await categoriesRepository.getAllNames();
+    if (!news) {
+        const error = new Error('no news found');
+        error.status = 404;
+        throw error;
+    }
+    return news;
+}
+
 module.exports = {
-    getAll
+    getAll,
+    getAllNames
 };

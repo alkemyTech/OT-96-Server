@@ -2,11 +2,7 @@ const db = require('../models');
 
 // Get all categories
 const getAll = async () => {
-    const categories = await db.Category.findAll({
-        attributes: {
-            exclude: ['description', 'image', 'deletedAt', 'createdAt', 'updatedAt'],
-        }
-    });
+    const categories = await db.Category.findAll();
     return categories;
 }
 
@@ -46,10 +42,20 @@ const remove = async (id) => {
     return response;
 }
 
+const getAllNames = async () => {
+    const categories = await db.Category.findAll({
+        attributes: {
+            exclude: ['description', 'image', 'deletedAt', 'createdAt', 'updatedAt'],
+        }
+    });
+    return categories;
+}
+
 module.exports = {
     getAll,
     getById,
     create,
     update,
-    remove
+    remove,
+    getAllNames
 }
