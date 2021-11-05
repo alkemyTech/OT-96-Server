@@ -7,20 +7,15 @@ const activitiesDataValidation = require('../middlewares/activitiesDataValidatio
 activitiesRouter.post(
   '/',
   activitiesDataValidation,
-  authMiddleware.isOwnedMember,
   authMiddleware.isAdmin,
   activitiesController.create
 );
 
-
-
 activitiesRouter.put(
   '/:id',
   activitiesDataValidation,
-  authMiddleware.isOwnedMember,
   authMiddleware.isAdmin,
   activitiesController.update
 );
-
 
 module.exports = activitiesRouter;

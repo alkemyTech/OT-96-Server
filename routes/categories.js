@@ -20,21 +20,18 @@ categoriesRouter.get(
 );
 categoriesRouter.get(
   '/:id',
-  authMiddleware.isOwnedMember,
   authMiddleware.isAdmin,
   categoriesController.getById
 );
 
 categoriesRouter.put(
   '/:id',
-  authMiddleware.isOwnedMember,
   authMiddleware.isAdmin,
   categoriesController.update
 );
 
 categoriesRouter.delete(
   '/:id',
-  authMiddleware.isOwnedMember,
   authMiddleware.isAdmin,
   categoriesController.remove
 );
