@@ -5,11 +5,10 @@ const categoriesController = require('../controllers/categories');
 const {
   validateCategoryDetails,
 } = require('../middlewares/validateCategoryDetails');
-const { isAdmin, isOwnedMember, verifyToken } = require('../middlewares/auths');
 
 categoriesRouter.post(
   '/',
-  isAdmin,
+  authMiddleware.isAdmin,
   validateCategoryDetails,
   categoriesController.create
 );
@@ -35,8 +34,8 @@ categoriesRouter.put(
 
 categoriesRouter.delete(
   '/:id',
-  verifyToken,
-  isAdmin,
+  authMiddleware.isOwnedMember,
+  authMiddleware.isAdmin,
   categoriesController.remove
 );
 
