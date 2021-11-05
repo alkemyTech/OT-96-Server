@@ -17,7 +17,15 @@ const create = async (req, res, next) => {
   }
 };
 
-const update = async (req, res, next) => {};
+const update = async (req, res, next) => {
+  try {
+    const response = await newsService.update(req.body, req.params.id);
+
+    return res.status(200).json(response);
+  } catch (error) {
+    next(error);
+  }
+};
 
 const remove = async (req, res, next) => {};
 
