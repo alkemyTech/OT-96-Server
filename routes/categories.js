@@ -34,7 +34,7 @@ categoriesRouter.put(
 
 categoriesRouter.delete(
   '/:id',
-  authMiddleware.verifyToken,
+  authMiddleware.isOwnedMember,
   authMiddleware.isAdmin,
   categoriesController.remove
 );

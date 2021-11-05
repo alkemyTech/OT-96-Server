@@ -1,6 +1,7 @@
 const authenticationsService = require('../services/authentications');
 const usersServices = require('../services/users');
 const { generateToken } = require('../services/security');
+const usersService = require('../services/users');
 
 const login = async (req, res) => {
   try {
@@ -32,4 +33,24 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { login };
+const myData = async (req, res, next) => {
+  try {
+    let token = req.headers['authorization'];
+    const userDecoded = securityService.verifyToken(token);
+    if (!userDecoded.id) {
+      const error = new error(`User with id: ${userId} not found`);
+      error.status = 404;
+      throw error;
+    }
+    const user = usersService.getById(userDecoded.id);
+    res.status(200).json({
+      success: true,
+      msg: `My Data:`,
+      User: user,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { login, myData };
