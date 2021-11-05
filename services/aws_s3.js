@@ -17,12 +17,12 @@ const s3 = new AWS.S3({
 
 /** Upload file **************/
 const uploadFile = (file) => {
-  const fileStream = fs.createReadStream(file.path);
+  const fileStream = fs.createReadStream(file.tempFilePath);
 
   const uploadParams = {
     Bucket: bucketName,
     Body: fileStream,
-    Key: file.filename,
+    Key: file.name,
   };
 
   return s3.upload(uploadParams).promise();
