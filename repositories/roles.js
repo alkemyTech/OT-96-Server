@@ -17,24 +17,4 @@ const getByName = async (name) => {
 
   return rol;
 };
-
-const create = async (data) => {
-  await db.Role.create({
-    name: data.name,
-    description: data.description,
-  });
-};
-
-const update = async (data, id) => {
-  await db.Role.update(
-    {
-      name: data.name,
-      description: data.description,
-    },
-    { where: { id: id } }
-  );
-};
-const remove = async (id) => {
-  await db.Role.destroy({ where: { id: id } });
-};
-module.exports = { getAll, getById, getByName, create, update, remove };
+module.exports = { getAll, getById, getByName };
