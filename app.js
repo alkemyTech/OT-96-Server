@@ -5,13 +5,14 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 require('dotenv').config();
+
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const authRouter = require('./routes/authentications');
-const organizationRouter = require('./routes/organization.js');
+const organizationRouter = require('./routes/organization');
 const categoriesRouter = require('./routes/categories');
-const newsRouter = require('./routes/news.js');
-
+const newsRouter = require('./routes/news');
+const activitiesRouter = require('./routes/activities');
 
 const app = express();
 app.use(cors());
@@ -26,13 +27,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/organization', organizationRouter);
 app.use('/auth', authRouter);
 app.use('/categories', categoriesRouter);
 app.use('/news', newsRouter);
+app.use('/categories', categoriesRouter);
+app.use('/activities', activitiesRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
