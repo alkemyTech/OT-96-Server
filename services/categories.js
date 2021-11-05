@@ -1,4 +1,4 @@
-const categoriesRepository = require("../repositories/categories");
+const categoriesRepository = require('../repositories/categories');
 
 const getAll = async () => {
   return await categoriesRepository.getAll();
@@ -6,11 +6,11 @@ const getAll = async () => {
 
 const getById = async (id) => {
   const category = await categoriesRepository.getById(id);
-    
+
   if (category) {
     return category;
   }
-  const error = new Error("No existe la categoria!");
+  const error = new Error('No existe la categoria!');
   error.status = 404;
   throw error;
 };
@@ -42,19 +42,13 @@ const update = async (id, { name, image, description }) => {
 };
 
 const remove = async (id) => {
-  return await categoriesRepository.remove(id);
-};
-
-const remove = async (id) => {
-  const category = await categoriesRepository.getById(id); 
+  const category = await categoriesRepository.getById(id);
   if (!category) {
-    const error = new Error(
-      `No existe la categoria con ID: ${id}!`
-    );
+    const error = new Error(`No existe la categoria con ID: ${id}!`);
     error.status = 404;
     throw error;
-  } 
-  return await categoriesRepository.remove(id);   
+  }
+  return await categoriesRepository.remove(id);
 };
 
 module.exports = {
