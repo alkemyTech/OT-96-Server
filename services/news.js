@@ -1,4 +1,4 @@
-const newsRepository = require("../repositories/news");
+const newsRepository = require('../repositories/news');
 
 const getAll = async () => {
   return await newsRepository.getAll();
@@ -21,7 +21,7 @@ const create = async ({ name, content, image, categoryId }) => {
       content,
       image,
       categoryId,
-      type: "news",
+      type: 'news',
     });
     return newsCreated;
   } catch (error) {
@@ -32,11 +32,18 @@ const create = async ({ name, content, image, categoryId }) => {
 const update = async ({ name, content, image, categoryId }, id) => {
   const existNews = await newsRepository.getById(id);
   if (!existNews) {
-    const error = new Error("la noticia con el " + id + " no existe");
+    const error = new Error('la noticia con el ' + id + ' no existe');
     error.status = 409;
     throw error;
   }
-  return await newsRepository.update({ name, content, image, categoryId }, id);
+  const data = { name, content, image, categoryId };
+  const [response] = await newsRepository.update(data, id);
+  if (!response) {
+    const error = new Error('ninguno de los parametros que mandaste coinciden');
+    error.status = 409;
+    throw error;
+  }
+  return await newsRepository.getById(id);
 };
 
 const remove = async (id) => {
