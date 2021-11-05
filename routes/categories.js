@@ -14,6 +14,7 @@ categoriesRouter.post(
   categoriesController.create
 );
 
+categoriesRouter.get('/', [authMiddlewares.isAdmin], categoriesController.getAllNames);
 categoriesRouter.get('/:id',authMiddleware.isOwnedMember, authMiddleware.isAdmin ,categoriesController.getById);
 
 categoriesRouter.put(

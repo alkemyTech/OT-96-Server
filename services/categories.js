@@ -1,8 +1,9 @@
 const categoriesRepository = require('../repositories/categories');
 
 const getAll = async () => {
-  return await categoriesRepository.getAll();
-};
+    const news = await categoriesRepository.getAll();
+    return news;
+}
 
 const getById = async (id) => {
   const category = await categoriesRepository.getById(id);
@@ -51,10 +52,16 @@ const remove = async (id) => {
   return await categoriesRepository.remove(id);
 };
 
+const getAllNames = async () => {
+  const news = await categoriesRepository.getAllNames();
+  return news;
+}
+
 module.exports = {
   getAll,
   getById,
   create,
   update,
   remove,
+  getAllNames,
 };
