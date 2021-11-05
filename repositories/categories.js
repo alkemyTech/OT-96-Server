@@ -15,7 +15,13 @@ const getById = async (id) => {
   return category;
 };
 
-// Insert new category
+const getByName = async (name) => {
+  const response = await Category.findOne({
+    where: { name },
+  });
+  return response;
+};
+
 const create = async (data) => {
   const response = await Category.create(data);
   return response;
@@ -25,7 +31,7 @@ const update = async (id, data) => {
 
   const response = await Category.update(data, {
     where: {
-      id,
+      id: id,
     },
   });
   return response;
@@ -34,15 +40,8 @@ const update = async (id, data) => {
 const remove = async (id) => {
   const response = await Category.destroy({
     where: {
-      id,
-    },
-  });
-  return response;
-};
-
-const getByName = async (name) => {
-  const response = await Category.findOne({
-    where: { name },
+      id: id,
+   },
   });
   return response;
 };

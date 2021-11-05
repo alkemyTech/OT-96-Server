@@ -5,7 +5,7 @@ const categoriesController = require('../controllers/categories');
 const {
   validateCategoryDetails,
 } = require('../middlewares/validateCategoryDetails');
-const { isAdmin, isOwnedMember } = require('../middlewares/auths');
+const { isAdmin, isOwnedMember, verifyToken } = require('../middlewares/auths');
 
 categoriesRouter.post(
   '/',
@@ -23,5 +23,11 @@ categoriesRouter.put(
   categoriesController.update
 );
 
+categoriesRouter.delete(
+  '/:id',
+  verifyToken,
+  isAdmin,
+  categoriesController.remove
+);
 
 module.exports = categoriesRouter

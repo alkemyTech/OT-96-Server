@@ -1,6 +1,5 @@
 const categoriesRepository = require("../repositories/categories");
 
-//example:
 const getAll = async () => {
   return await categoriesRepository.getAll();
 };
@@ -42,9 +41,26 @@ const update = async (id, { name, image, description }) => {
   }
 };
 
+const remove = async (id) => {
+  return await categoriesRepository.remove(id);
+};
+
+const remove = async (id) => {
+  const category = await categoriesRepository.getById(id); 
+  if (!category) {
+    const error = new Error(
+      `No existe la categoria con ID: ${id}!`
+    );
+    error.status = 404;
+    throw error;
+  } 
+  return await categoriesRepository.remove(id);   
+};
+
 module.exports = {
   getAll,
   getById,
   create,
   update,
-}
+  remove,
+};
