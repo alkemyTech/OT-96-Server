@@ -1,12 +1,7 @@
 const { Activity } = require('../models/activity');
 
 const getAll = async () => {
-  const response = await Activity.findAll({
-    attributes: {
-      exclude: ['content', 'deletedAt', 'createdAt', 'updatedAt'],
-    },
-  });
-
+  const response = await Activity.findAll({});
   return response;
 };
 
@@ -16,9 +11,15 @@ const getById = async (id) => {
   return response;
 };
 
-const create = async (data) => {
-  const response = await Activity.create(data);
+const getByName = async (name) => {
+  const response = await Activity.findOne({
+    where: { name },
+  });
+  return response;
+};
 
+const create = async ({ name, content, image }) => {
+  const response = await Activity.create({ name, content, image });
   return response;
 };
 
@@ -45,6 +46,7 @@ const remove = async (id) => {
 module.exports = {
   getAll,
   getById,
+  getByName,
   create,
   update,
   remove,
