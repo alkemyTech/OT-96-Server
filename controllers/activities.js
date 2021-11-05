@@ -13,6 +13,29 @@ const create = async (req, res, next) => {
   }
 };
 
+
+
+
+
+
+const update = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const body = req.body;
+
+    const response = await activitiesService.update(id, body);
+    res.status(200).json({
+      success: true,
+      msg: `Activity ${req.body.name} was updated succesfully`,
+      Activity: response,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   create,
+  update,
+
 };

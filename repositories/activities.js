@@ -1,4 +1,4 @@
-const { Activity } = require('../models/activity');
+const { Activity } = require('../models');
 
 const getAll = async () => {
   const response = await Activity.findAll({});
@@ -23,12 +23,15 @@ const create = async ({ name, content, image }) => {
   return response;
 };
 
-const update = async (id, data) => {
-  const response = await Activity.update(data, {
-    where: {
-      id: id,
-    },
-  });
+const update = async (id, { name, content, image }) => {
+  const response = await Activity.update(
+    { name, content, image },
+    {
+      where: {
+        id: id,
+      },
+    }
+  );
 
   return response;
 };

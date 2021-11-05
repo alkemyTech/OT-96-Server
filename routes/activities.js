@@ -12,4 +12,15 @@ activitiesRouter.post(
   activitiesController.create
 );
 
+
+
+activitiesRouter.put(
+  '/:id',
+  activitiesDataValidation,
+  authMiddleware.isOwnedMember,
+  authMiddleware.isAdmin,
+  activitiesController.update
+);
+
+
 module.exports = activitiesRouter;
