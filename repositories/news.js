@@ -17,7 +17,7 @@ const getById = async ( id ) => {
           model: Category, as: "category"
         }],
     });
-
+  
     return response;
 };
 
