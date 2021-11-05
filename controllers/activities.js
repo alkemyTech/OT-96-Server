@@ -13,6 +13,11 @@ const create = async (req, res, next) => {
   }
 };
 
+
+
+
+
+
 const update = async (req, res, next) => {
   try {
     const id = req.params.id;
@@ -32,4 +37,5 @@ const update = async (req, res, next) => {
 module.exports = {
   create,
   update,
+
 };

@@ -10,6 +10,10 @@ const create = async ({ name, content, image }) => {
   return await activitiesRepository.create({ name, content, image });
 };
 
+
+ 
+
+
 const update = async (id, { name, content, image }) => {
   console.log(id, { name, content, image });
 
@@ -25,4 +29,5 @@ const update = async (id, { name, content, image }) => {
 module.exports = {
   create,
   update,
+
 };

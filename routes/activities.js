@@ -12,6 +12,8 @@ activitiesRouter.post(
   activitiesController.create
 );
 
+
+
 activitiesRouter.put(
   '/:id',
   activitiesDataValidation,
@@ -19,5 +21,6 @@ activitiesRouter.put(
   authMiddleware.isAdmin,
   activitiesController.update
 );
+
 
 module.exports = activitiesRouter;
