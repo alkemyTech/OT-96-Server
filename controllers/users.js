@@ -1,4 +1,5 @@
-const usersService = require("../services/users");
+const usersService = require('../services/users');
+const awsServices = require('../services/images');
 const { generateToken } = require('../services/security');
 
 const getAll = async (req, res, next) => {
@@ -21,7 +22,6 @@ async function create(req, res, next) {
       msg: `${newUser.firstName} your user has been created`,
       user: newUser,
       token: token,
-      
     });
   } catch (err) {
     console.log(err);
@@ -31,14 +31,11 @@ async function create(req, res, next) {
 
 const update = async (req, res) => {
   try {
-    const updateUser = await usersService.update(
-      req.params.id,
-      req.body
-    );
+    const updateUser = await usersService.update(req.params.id, req.body);
     res.status(200).json({
       success: true,
       msg: `User ${req.params.id} is updated succesfully`,
-      User : updateUser,
+      User: updateUser,
     });
   } catch (err) {
     next(error);
@@ -50,7 +47,7 @@ const remove = async (req, res) => {
     const response = await usersService.remove(req.params.id);
     return res.status(200).json(response);
   } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 

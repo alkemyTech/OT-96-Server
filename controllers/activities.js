@@ -1,4 +1,5 @@
 const activitiesService = require('../services/activities');
+const awsServices = require('../services/images');
 
 const create = async (req, res, next) => {
   try {
@@ -12,11 +13,6 @@ const create = async (req, res, next) => {
     next(error);
   }
 };
-
-
-
-
-
 
 const update = async (req, res, next) => {
   try {
@@ -37,5 +33,4 @@ const update = async (req, res, next) => {
 module.exports = {
   create,
   update,
-
 };
