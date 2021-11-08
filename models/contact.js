@@ -3,43 +3,33 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
+  class Contact extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      User.belongsTo(models.Role, { as: 'role' });
+      // define association here
     }
   }
-  User.init(
+  Contact.init(
     {
-      firstName: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      lastName: {
-        type: DataTypes.STRING,
+      phone: {
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
       },
-      password: {
+      message: {
         type: DataTypes.STRING,
         allowNull: false,
-      },
-      photo: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
-      roleId: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        defaultValue: 2,
       },
       deletedAt: {
         type: DataTypes.DATE,
@@ -48,9 +38,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'User',
+      modelName: 'Contact',
       paranoid: true,
     }
   );
-  return User;
+  return Contact;
 };
