@@ -1,48 +1,52 @@
-const { User } = require('../models');
+const db = require('../models');
 
 const getAll = async () => {
-  const response = await User.findAll();
+  const response = await db.User.findAll();
   return response;
 };
 
 const getById = async (id) => {
-  const response = await User.findByPk(id);
+  const response = await db.User.findByPk(id);
   return response;
 };
 
-async function create(userData) {
-  const user = await User.create(userData);
+const create = async (userData) => {
+  const user = await db.User.create(userData);
   return user;
-}
+};
 
 const update = async (id, data) => {
-  const response = await User.update(data, {
+  const response = await db.User.update(data, {
     where: {
-      id,
-    },
+      id
+    }
   });
   return response;
 };
 
 const remove = async (id) => {
-  const respose = await User.destroy({
+  const respose = await db.User.destroy({
     where: {
-      id,
-    },
+      id
+    }
   });
   return respose;
 };
 
-
-
-
 const getByEmail = async (email) => {
-  const response = await User.findOne({
+  const response = await db.User.findOne({
     where: {
       email
     }
   });
   return response;
-}
-module.exports = { getAll, getById, create, update, remove, getByEmail};
+};
 
+module.exports = {
+  getAll,
+  getById,
+  create,
+  update,
+  remove,
+  getByEmail
+};

@@ -3,67 +3,43 @@ const db = require('../models');
 const getOrganizationPublic = async (id) => {
   const response = await db.Organization.findByPk({
     id,
-    attributes: ['name', 'image', 'phone', 'address'],
+    attributes: ['name', 'image', 'phone', 'address']
   });
   return response;
 };
 
-async function getAll() {
+const getAll = async () => {
   const organization = await db.Organization.findAll();
   return organization;
-}
+};
 
-async function getById(id) {
-  const organization = await db.Organization.findOne({
+const getById = async (id) => {
+  const organization = await db.Organization.findByPk(id);
+  return organization;
+};
+
+const create = async (data) => {
+  const organization = await db.Organization.create(data);
+  return organization;
+};
+
+const update = async (id, data) => {
+  const organization = await db.Organization.update(data, {
     where: {
-      id: id,
-    },
+      id
+    }
   });
   return organization;
-}
+};
 
-async function create(data) {
-  const organization = await db.Organization.create({
-    name: data.name,
-    image: data.image,
-    address: data.address,
-    phone: data.phone,
-    email: data.email,
-    welcomeText: data.welcomeText,
-    aboutUsText: data.aboutUsText,
-  });
-  return organization;
-}
-
-async function update(id, data) {
-  const values = {
-    name: data.name,
-    image: data.image,
-    address: data.address,
-    phone: data.phone,
-    email: data.email,
-    welcomeText: data.welcomeText,
-    aboutUsText: data.aboutUsText,
-  };
-  const condition = {
-    where: {
-      id: id,
-    },
-  };
-  const organization = await db.Organization.update(values, {
-    ...condition,
-  });
-  return organization;
-}
-
-async function remove(id) {
+const remove = async (id) => {
   const organization = await db.Organization.destroy({
     where: {
-      id: id,
-    },
+      id
+    }
   });
   return organization;
-}
+};
 
 module.exports = {
   getAll,
@@ -71,5 +47,5 @@ module.exports = {
   create,
   update,
   remove,
-  getOrganizationPublic,
+  getOrganizationPublic
 };
