@@ -1,5 +1,7 @@
 'use strict';
+
 const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Contact extends Model {
     /**
@@ -13,11 +15,26 @@ module.exports = (sequelize, DataTypes) => {
   }
   Contact.init(
     {
-      name: { type: DataTypes.STRING, allowNull: false },
-      phone: { type: DataTypes.INTEGER, allowNull: false },
-      email: { type: DataTypes.STRING, allowNull: false },
-      message: { type: DataTypes.STRING, allowNull: false },
-      deletedAt: { type: DataTypes.DATE, allowNull: true },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      phone: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      message: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      deletedAt: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
     },
     {
       sequelize,
