@@ -1,38 +1,42 @@
-const testimonialsModel = require('../models/testimonial');
+const db = require('../models');
 
-async function getAll() {
-  const response = await testimonialsModel.findAll();
+const getAll = async () => {
+  const response = await db.testimonialsModel.findAll();
   return response;
-}
+};
 
-async function getById(id) {
-  const response = await testimonialsModel.findOne({
-    where: { id: id },
+const getById = async (id) => {
+  const response = await db.testimonialsModel.findByPk(id);
+  return response;
+};
+
+const create = async (data) => {
+  const response = await db.testimonialsModel.create(data);
+  return response;
+};
+
+const update = async (id, data) => {
+  const response = await db.testimonialsModel.update(data, {
+    where: {
+      id
+    }
   });
   return response;
-}
+};
 
-async function create(data) {
-  const response = await testimonialsModel.create({
-    name: data.name,
-    image: data.image,
-    content: data.address,
+const remove = async (id) => {
+  const response = await db.testimonialsModel.destroy({
+    where: {
+      id
+    }
   });
   return response;
-}
+};
 
-async function update(id, data) {
-  const response = await testimonialsModel.update(data, {
-    where: { id: id },
-  });
-  return response;
-}
-
-async function remove(id) {
-  const response = await testimonialsModel.destroy({
-    where: { id: id },
-  });
-  return response;
-}
-
-module.exports = { getAll, getById, create, update, remove };
+module.exports = {
+  getAll,
+  getById,
+  create,
+  update,
+  remove
+};

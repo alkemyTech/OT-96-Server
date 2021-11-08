@@ -1,48 +1,44 @@
-const { Activity } = require('../models');
+const db = require('../models');
 
 const getAll = async () => {
-  const response = await Activity.findAll({});
+  const response = await db.Activity.findAll();
   return response;
 };
 
 const getById = async (id) => {
-  const response = await Activity.findByPk(id);
-
+  const response = await db.Activity.findByPk(id);
   return response;
 };
 
 const getByName = async (name) => {
-  const response = await Activity.findOne({
-    where: { name },
+  const response = await db.Activity.findOne({
+    where: {
+      name
+    }
   });
   return response;
 };
 
-const create = async ({ name, content, image }) => {
-  const response = await Activity.create({ name, content, image });
+const create = async (data) => {
+  const response = await db.Activity.create(data);
   return response;
 };
 
-const update = async (id, { name, content, image }) => {
-  const response = await Activity.update(
-    { name, content, image },
-    {
-      where: {
-        id: id,
-      },
+const update = async (id, data) => {
+  const response = await db.Activity.update(data, {
+    where: {
+      id
     }
-  );
-
+  });
   return response;
 };
 
 const remove = async (id) => {
-  const response = await Activity.destroy({
+  const response = await db.Activity.destroy({
     where: {
-      id: id,
-    },
+      id
+    }
   });
-
   return response;
 };
 
@@ -52,5 +48,5 @@ module.exports = {
   getByName,
   create,
   update,
-  remove,
+  remove
 };
