@@ -18,7 +18,7 @@ const create = async (req, res, next) => {
     res.status(200).json({
       success: true,
       msg: `news: ${response.name} has been created`,
-      news: response,
+      news: response
     });
   } catch (error) {
     next(error);
@@ -50,5 +50,5 @@ module.exports = {
   getById,
   create,
   update,
-  remove,
+  remove
 };

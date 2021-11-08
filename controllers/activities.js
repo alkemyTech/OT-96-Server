@@ -6,7 +6,7 @@ const create = async (req, res, next) => {
     res.status(200).json({
       success: true,
       msg: `Activity ${req.body.name} is created succesfully`,
-      Activity: response,
+      Activity: response
     });
   } catch (error) {
     next(error);
@@ -22,7 +22,7 @@ const update = async (req, res, next) => {
     res.status(200).json({
       success: true,
       msg: `Activity ${req.body.name} was updated succesfully`,
-      Activity: response,
+      Activity: response
     });
   } catch (error) {
     next(error);
@@ -31,5 +31,5 @@ const update = async (req, res, next) => {
 
 module.exports = {
   create,
-  update,
+  update
 };

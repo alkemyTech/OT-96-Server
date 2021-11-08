@@ -24,7 +24,7 @@ const login = async (req, res) => {
       const token = security.generateToken(existingUser.dataValues);
       res.status(200).json({
         accessToken: token,
-        user,
+        user
       });
     } else {
       res
@@ -49,7 +49,7 @@ const myData = async (req, res, next) => {
     res.status(200).json({
       success: true,
       msg: `My Data:`,
-      User: user,
+      User: user
     });
   } catch (error) {
     next(error);
