@@ -8,45 +8,47 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      User.belongsTo(models.Role, {as: 'role'});
+      User.belongsTo(models.Role, { as: 'role' });
     }
-  };
-  User.init({
-    firstName: {
-      type: DataTypes.STRING,
-      allowNull: false
+  }
+  User.init(
+    {
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      photo: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      roleId: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        defaultValue: 2,
+      },
+      deletedAt: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
     },
-    lastName: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
-    },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    photo: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    roleId: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      defaultValue: 2
-    },
-    deletedAt: {
-      type: DataTypes.DATE,
-      allowNull: true
+    {
+      sequelize,
+      modelName: 'User',
+      paranoid: true,
     }
-  }, {
-    sequelize,
-    modelName: 'User',
-    timestamps:true,
-    paranoid:true
-  });
+  );
   return User;
 };
