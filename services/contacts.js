@@ -4,7 +4,12 @@ const contactsRepository = require('../repositories/contacts');
 /* const getAll = async (req, res, next) => {
     try {
         const response = await contactsRepository.getAll();
-        return response;
+        if(response.length > 0){
+            return response;
+        }
+        const error = new Error(`No hay contactos!.`);
+        error.status = 404;
+        throw error;
     } catch (error) {
         next(error);
     }
@@ -12,10 +17,6 @@ const contactsRepository = require('../repositories/contacts');
 
 
 module.exports = {
-    // getAll,
-    // getById,
-    // create,
-    // update,
-    // remove
+    // getAll
 }
  */

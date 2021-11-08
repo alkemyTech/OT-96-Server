@@ -1,23 +1,43 @@
 const testimonialsRepository = require('../repositories/testimonials');
 
-async function getAll() {
+const getAll = async () => {
   return await testimonialsRepository.getAll();
-}
+};
 
-async function getById(id) {
+const getById = async (id) => {
   return await testimonialsRepository.getById(id);
-}
+};
 
-async function create(testimonial) {
+const create = async (testimonial) => {
   return await testimonialsRepository.create(testimonial);
-}
+};
 
-async function update(id, testimonial) {
-  return await testimonialsRepository.update(id, testimonial);
-}
+const update = async (id, testimonial) => {
+  try {
+    const response = await testimonialsRepository.getById(id);
+    if (response) {
+      return await testimonialsRepository.update(id, testimonial);
+    }
+    const error = new Error('El testimonio no existe');
+    error.status = 409;
+    throw error;
+  } catch (error) {
+    next(error);
+  }
+};
 
-async function remove(id) {
-  return await testimonialsRepository.remove(id);
-}
+const remove = async (id) => {
+  try {
+    const response = await testimonialsRepository.getById(id);
+    if (response) {
+      return await testimonialsRepository.remove(id);
+    }
+    const error = new Error('El testimonio no existe');
+    error.status = 409;
+    throw error;
+  } catch (error) {
+    next(error);
+  }
+};
 
 module.exports = { getAll, getById, create, update, remove };

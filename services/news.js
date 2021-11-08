@@ -1,17 +1,31 @@
 const newsRepository = require('../repositories/news');
 
 const getAll = async () => {
-  return await newsRepository.getAll();
+  try {
+    const news = await newsRepository.getAll();
+    if (news.length > 0) {
+      return news;
+    }
+    const error = new Error('No existen noticias!.');
+    error.status = 404;
+    throw error;
+  } catch (error) {
+    next(error);
+  }
 };
 
 const getById = async (id) => {
+  try {
     const news = await newsRepository.getById(id);
-    if (!news) {
-        const error = new Error ('The request news was not found');
-        error.status = 404;
-        throw error;
+    if (news) {
+      return news;
     }
-    return news;
+    const error = new Error('La noticia no existe!.');
+    error.status = 404;
+    throw error;
+  } catch (error) {
+    next(error);
+  }
 };
 
 const create = async ({ name, content, image, categoryId }) => {
@@ -21,45 +35,60 @@ const create = async ({ name, content, image, categoryId }) => {
       content,
       image,
       categoryId,
-      type: 'news',
+      type: 'news'
     });
-    return newsCreated;
-  } catch (error) {
+    if (newsCreated) {
+      return newsCreated;
+    }
+    const error = new Error('La noticia no existe');
+    error.status = 404;
     throw error;
+  } catch (error) {
+    next(error);
   }
 };
 
 const update = async ({ name, content, image, categoryId }, id) => {
-  const existNews = await newsRepository.getById(id);
-  if (!existNews) {
-    const error = new Error('la noticia con el ' + id + ' no existe');
-    error.status = 409;
-    throw error;
+  try {
+    const existNews = await newsRepository.getById(id);
+    if (!existNews) {
+      const data = { name, content, image, categoryId };
+
+      const response = await newsRepository.update(data, id);
+
+      if (response) {
+        return await newsRepository.getById(id);
+      } else {
+        const error = new Error(
+          'ninguno de los parametros que mandaste coinciden'
+        );
+        error.status = 409;
+        throw error;
+      }
+    } else {
+      const error = new Error('la noticia con el ' + id + ' no existe');
+      error.status = 409;
+      throw error;
+    }
+  } catch (error) {
+    next(error);
   }
-  const data = { name, content, image, categoryId };
-  const [response] = await newsRepository.update(data, id);
-  if (!response) {
-    const error = new Error('ninguno de los parametros que mandaste coinciden');
-    error.status = 409;
-    throw error;
-  }
-  return await newsRepository.getById(id);
 };
 
 const remove = async (id) => {
   const news = await newsRepository.getById(id);
-  if (!news) {
-      const error = new Error('The request news was not found');
-      error.status = 404;
-      throw error;
+  if (news) {
+    return await newsRepository.remove(id);
   }
-  return await newsRepository.remove(id);
-}
+  const error = new Error('No se ha encontrado la noticia');
+  error.status = 404;
+  throw error;
+};
 
 module.exports = {
   getAll,
   getById,
   create,
   update,
-  remove,
+  remove
 };

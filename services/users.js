@@ -22,7 +22,7 @@ const getById = async (id) => {
   return await usersRepository.getById(id);
 };
 
-async function create(userData) {
+const create = async (userData) => {
   let existingUser = await usersRepository.getByEmail(userData.email);
   if (existingUser) {
     const error = new Error('el mail ya existe');
@@ -38,7 +38,7 @@ async function create(userData) {
     password: hashedPassword,
     email: userData.email,
     photo: userData.photo,
-    roleId: userData.roleID,
+    roleId: userData.roleID
   };
 
   const usersCreated = await usersRepository.create(newUser);
@@ -48,14 +48,34 @@ async function create(userData) {
   await sendWelcomeEmail(userData.email, organizationId);
 
   return usersCreated;
-}
+};
 
 const update = async (id, data) => {
-  return await usersRepository.update(id, data);
+  try {
+    const user = usersRepository.getById(id);
+    if (user) {
+      return await usersRepository.update(id, data);
+    }
+    const error = new Error('El usuario no existe!.');
+    error.status = 404;
+    throw error;
+  } catch (error) {
+    next(error);
+  }
 };
 
 const remove = async (id) => {
-  return await usersRepository.remove(id);
+  try {
+    const user = await usersRepository.getById(id);
+    if (user) {
+      await usersRepository.remove(id);
+    }
+    const error = new Error('El usuario no existe!.');
+    error.status = 404;
+    throw error;
+  } catch (error) {
+    next(error);
+  }
 };
 
 module.exports = {
@@ -64,5 +84,5 @@ module.exports = {
   create,
   update,
   remove,
-  existEmailUser,
+  existEmailUser
 };

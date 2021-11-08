@@ -7,11 +7,11 @@ const emailSender = async (email, subject, text, html) => {
       from: 'fundacionsomosmas@outlook.com.ar',
       subject: subject,
       text: text,
-      html: html,
+      html: html
     };
 
     const result = await sendgridMail.send(msg);
-    console.log(result);
+
     console.log({ msg: 'Email sent successfully!' });
   } catch (error) {
     console.error({ error: error, msg: 'Email sent failed' });
