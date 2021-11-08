@@ -1,19 +1,15 @@
 const SlidesService = require('../services/slides');
-const awsServices = require('../services/images');
 
-//////////CRUD//////7
-// GET ALL Slides
-async function getAll(req, res, next) {
+const getAll = async (req, res, next) => {
   try {
     const SlideList = await SlidesService.getAll();
     res.send(SlideList);
   } catch (error) {
     next(error);
   }
-}
+};
 
-//AND GET ONE Slide BY ID
-async function getById(req, res, next) {
+const getById = async (req, res, next) => {
   try {
     const requestSlide = await SlidesService.getById(req.params.id);
 
@@ -21,10 +17,9 @@ async function getById(req, res, next) {
   } catch (error) {
     next(error);
   }
-}
+};
 
-// CREATE Slide
-async function create(req, res, next) {
+const create = async (req, res, next) => {
   try {
     const newSlide = await SlidesService.create(req.body);
     res.status(200).json({
@@ -32,13 +27,12 @@ async function create(req, res, next) {
       msg: `your Slide ${newSlide.title} has been created`,
       Slide: newSlide,
     });
-  } catch (err) {
-    next(err);
+  } catch (error) {
+    next(error);
   }
-}
+};
 
-// UPDATE Slide
-async function update(req, res, next) {
+const update = async (req, res, next) => {
   try {
     const updateSlide = await SlidesService.update(req.params.id, req.body);
     res.status(200).json({
@@ -46,22 +40,21 @@ async function update(req, res, next) {
       msg: `Slide ${req.params.id} is updated succesfully`,
       Slide: updateSlide,
     });
-  } catch (err) {
+  } catch (error) {
     next(error);
   }
-}
+};
 
-//Slide SOFT DELETE
-async function remove(req, res, next) {
+const remove = async (req, res, next) => {
   try {
     const softDeleteSlide = await SlidesService.remove(req.params.id);
     res.status(201).json({
       success: true,
       msg: `your Slide ${req.body.name} has been deleted`,
     });
-  } catch (err) {
-    next(err);
+  } catch (error) {
+    next(error);
   }
-}
+};
 
 module.exports = { getAll, getById, create, update, remove };

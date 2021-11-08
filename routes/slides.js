@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const slideRouter = Router();
-const slideController = require('../controllers/slide.js');
+const slideController = require('../controllers/slides');
 const authMiddleware = require('../middlewares/auths');
 
 slideRouter.get('/', authMiddleware.isAdmin, slideController.getAll);

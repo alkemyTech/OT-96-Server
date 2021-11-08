@@ -1,5 +1,4 @@
 const activitiesService = require('../services/activities');
-const awsServices = require('../services/images');
 
 const create = async (req, res, next) => {
   try {
