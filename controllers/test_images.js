@@ -20,12 +20,15 @@ const upload = async (req, res, next) => {
 };
 
 const download = async (req, res, next) => {
-  const key = req.params.key;
+  try {
+    const key = req.params.key;
 
-  const readStream = imageDownloadService.download(key);
-  console.log(readStream);
+    const readStream = imageDownloadService.download(key);
 
-  readStream.pipe(res);
+    readStream.pipe(res);
+  } catch (error) {
+    next(error);
+  }
 };
 
 module.exports = {
