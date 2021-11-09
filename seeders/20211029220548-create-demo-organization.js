@@ -7,7 +7,6 @@ module.exports = {
       [
         {
           name: 'Somos Más',
-
           image: 'image',
           address: 'contenido',
           phone: 1160112988,
