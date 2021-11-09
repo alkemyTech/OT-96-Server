@@ -1,32 +1,39 @@
 const newsRepository = require('../repositories/news');
 
 const getAll = async () => {
-  return await newsRepository.getAll();
+  const news = await newsRepository.getAll();
+  if (news.length == 0) {
+    const error = new Error('No existen noticias!.');
+    error.status = 404;
+    throw error;
+  }
+  return news;
 };
 
 const getById = async (id) => {
-    const news = await newsRepository.getById(id);
-    if (!news) {
-        const error = new Error ('The request news was not found');
-        error.status = 404;
-        throw error;
-    }
-    return news;
+  const news = await newsRepository.getById(id);
+  if (!news) {
+    const error = new Error('La noticia no existe!.');
+    error.status = 404;
+    throw error;
+  }
+  return news;
 };
 
 const create = async ({ name, content, image, categoryId }) => {
-  try {
-    const newsCreated = await newsRepository.create({
-      name,
-      content,
-      image,
-      categoryId,
-      type: 'news',
-    });
-    return newsCreated;
-  } catch (error) {
+  const newsCreated = await newsRepository.create({
+    name,
+    content,
+    image,
+    categoryId,
+    type: 'news'
+  });
+  if (!newsCreated) {
+    const error = new Error('La noticia no existe');
+    error.status = 404;
     throw error;
   }
+  return newsCreated;
 };
 
 const update = async ({ name, content, image, categoryId }, id) => {
@@ -37,7 +44,9 @@ const update = async ({ name, content, image, categoryId }, id) => {
     throw error;
   }
   const data = { name, content, image, categoryId };
-  const [response] = await newsRepository.update(data, id);
+
+  const response = await newsRepository.update(data, id);
+
   if (!response) {
     const error = new Error('ninguno de los parametros que mandaste coinciden');
     error.status = 409;
@@ -49,17 +58,17 @@ const update = async ({ name, content, image, categoryId }, id) => {
 const remove = async (id) => {
   const news = await newsRepository.getById(id);
   if (!news) {
-      const error = new Error('The request news was not found');
-      error.status = 404;
-      throw error;
+    const error = new Error('No se ha encontrado la noticia');
+    error.status = 404;
+    throw error;
   }
   return await newsRepository.remove(id);
-}
+};
 
 module.exports = {
   getAll,
   getById,
   create,
   update,
-  remove,
+  remove
 };

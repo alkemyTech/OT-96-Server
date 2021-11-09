@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 const usersRepository = require('../repositories/users');
 
-const { sendWelcomeEmail } = require('../helpers/sendWelcomeEmail');
+const sendWelcomeEmail = require('../helpers/sendWelcomeEmail');
 
 const existEmailUser = async (email) => {
   const user = await usersRepository.getByEmail(email);
@@ -22,7 +22,7 @@ const getById = async (id) => {
   return await usersRepository.getById(id);
 };
 
-async function create(userData) {
+const create = async (userData) => {
   let existingUser = await usersRepository.getByEmail(userData.email);
   if (existingUser) {
     const error = new Error('el mail ya existe');
@@ -38,24 +38,36 @@ async function create(userData) {
     password: hashedPassword,
     email: userData.email,
     photo: userData.photo,
-    roleId: userData.roleID,
+    roleId: userData.roleID
   };
 
   const usersCreated = await usersRepository.create(newUser);
 
   // if user create is ok, send welcome email
   const organizationId = 1; // <- harcoded, maybe check this on future
-  await sendWelcomeEmail(userData.email, organizationId);
+  await sendWelcomeEmail.send(userData.email, organizationId);
 
   return usersCreated;
-}
+};
 
 const update = async (id, data) => {
+  const user = usersRepository.getById(id);
+  if (!user) {
+    const error = new Error('El usuario no existe!.');
+    error.status = 404;
+    throw error;
+  }
   return await usersRepository.update(id, data);
 };
 
 const remove = async (id) => {
-  return await usersRepository.remove(id);
+  const user = await usersRepository.getById(id);
+  if (user) {
+    const error = new Error('El usuario no existe!.');
+    error.status = 404;
+    throw error;
+  }
+  await usersRepository.remove(id);
 };
 
 module.exports = {
@@ -64,5 +76,5 @@ module.exports = {
   create,
   update,
   remove,
-  existEmailUser,
+  existEmailUser
 };

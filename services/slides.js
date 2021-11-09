@@ -1,28 +1,52 @@
-const SlidesRepository = require('../repositories/slides');
+const slidesRepository = require('../repositories/slides');
 
-async function getAll() {
-  return await SlidesRepository.getAll();
-}
-async function getById(id) {
-  return await SlidesRepository.getById(id);
-}
+const getAll = async () => {
+  const slides = await slidesRepository.getAll();
+  if (slides.length == 0) {
+    const error = new Error('No hay slides');
+    error.status = 404;
+    throw error;
+  }
+  return slides;
+};
+const getById = async (id) => {
+  const slide = await slidesRepository.getById(id);
+  if (!slide) {
+    const error = new Error('El slide no existe');
+    error.status = 404;
+    throw error;
+  }
+  return slide;
+};
 
-async function create(organization) {
-  return await SlidesRepository.create(organization);
-}
+const create = async (organization) => {
+  return await slidesRepository.create(organization);
+};
 
-async function update(id, organization) {
-  return await SlidesRepository.update(id, organization);
-}
+const update = async (id, organization) => {
+  const slide = await slidesRepository.getById(id);
+  if (!slide) {
+    const error = new Error('El slide no existe');
+    error.status = 404;
+    throw error;
+  }
+  return await slidesRepository.update(id, organization);
+};
 
-async function remove(id) {
-  return await SlidesRepository.remove(id);
-}
+const remove = async (id) => {
+  const slide = await slidesRepository.getById(id);
+  if (!slide) {
+    const error = new Error('El slide no existe');
+    error.status = 404;
+    throw error;
+  }
+  return await slidesRepository.remove(id);
+};
 
 module.exports = {
   getAll,
   getById,
   create,
   update,
-  remove,
+  remove
 };

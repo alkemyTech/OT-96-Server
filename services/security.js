@@ -7,11 +7,11 @@ const generateToken = (user) => {
     id: user.id,
     firstName: user.firstName,
     lastName: user.lastName,
-    roleId: user.roleId,
+    roleId: user.roleId
   };
 
   const token = jwt.sign(userForToken, config.development.SECRET_TOKEN, {
-    expiresIn: '10h',
+    expiresIn: '10h'
   });
   return token;
 };

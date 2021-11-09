@@ -15,5 +15,5 @@ const create = async (file) => {
 };
 
 module.exports = {
-  create,
+  create
 };
