@@ -3,12 +3,12 @@ const categoriesRouter = express.Router();
 const authMiddleware = require('../middlewares/auths');
 const categoriesController = require('../controllers/categories');
 
-const validateCategory = require('../middlewares/categories');
+const categoriesMiddleware = require('../middlewares/categories');
 
 categoriesRouter.post(
   '/',
   authMiddleware.isAdmin,
-  validateCategory,
+  categoriesMiddleware.validateCategory,
   categoriesController.create
 );
 
