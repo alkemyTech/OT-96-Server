@@ -1,8 +1,7 @@
 const db = require('../models');
 
 const getOrganizationPublic = async (id) => {
-  const response = await db.Organization.findByPk({
-    id,
+  const response = await db.Organization.findByPk(id, {
     attributes: ['name', 'image', 'phone', 'address']
   });
   return response;

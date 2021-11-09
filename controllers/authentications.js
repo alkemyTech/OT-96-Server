@@ -1,11 +1,11 @@
 const authenticationsService = require('../services/authentications');
-const usersServices = require('../services/users');
+const usersService = require('../services/users');
 const security = require('../services/security');
 
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const existingUser = await usersServices.existEmailUser(email);
+    const existingUser = await usersService.existEmailUser(email);
     if (!existingUser)
       return res
         .status(400)
@@ -40,7 +40,7 @@ const myData = async (req, res, next) => {
   try {
     let token = req.headers['authorization'];
     const userDecoded = security.verifyToken(token);
-    const user = usersService.getById(userDecoded.id);
+    const user = await usersService.getById(userDecoded.id);
     if (!user) {
       const error = new error(`User with id: ${user.id} not found`);
       error.status = 404;
