@@ -1,6 +1,14 @@
 const { check, validationResult } = require('express-validator');
 
-const validateNews = [
+const errorHandler = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
+  next();
+};
+
+const validateNew = [
   check('name')
     .notEmpty()
     .withMessage('You need to enter a name!')
@@ -34,13 +42,7 @@ const validateNews = [
     .isNumeric()
     .withMessage('Invalid Category')
     .bail(),
-  (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(422).json({ errors: errors.array() });
-    }
-    next();
-  }
+  errorHandler
 ];
 
-module.exports = { validateNews };
+module.exports = { validateNew };
