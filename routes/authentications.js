@@ -16,7 +16,7 @@ authRouter.post('/register', usersValidation, usersController.create);
 
 authRouter.get(
   '/me',
-  authMiddleware.verifyToken,
+  authMiddleware.isLoggedUser,
   authenticationsController.myData
 );
 
