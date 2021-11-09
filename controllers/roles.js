@@ -29,19 +29,4 @@ const getById = async (req, res, next) => {
   }
 };
 
-<<<<<<< HEAD
-
-
 module.exports = { getAll, getById};
-
-/* module.exports = {
-  
-  
-
-  
- 
-  
-}; */
-=======
-module.exports = { getAll, getById };
->>>>>>> e396123f29b39c352f71dc2c2beb2d6be096c0d0
