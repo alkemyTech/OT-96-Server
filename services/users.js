@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 const usersRepository = require('../repositories/users');
 
-const sendWelcomeEmail = require('../helpers/sendWelcomeEmail');
+const sendWelcomeEmail = require('../services/sendWelcomeEmail');
 
 const existEmailUser = async (email) => {
   const user = await usersRepository.getByEmail(email);

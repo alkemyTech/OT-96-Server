@@ -2,11 +2,11 @@
 const fs = require('fs');
 const ejs = require('ejs');
 const path = require('path');
-const emailSender = require('../services/emailSender');
-const organizationsService = require('../services/organizations');
+const emailSender = require('./emailSender');
+const organizationsService = require('./organizations');
 
 // Send a welcome mail to an email given
-const sendWelcomeEmail = async (email, organizationId) => {
+const send = async (email, organizationId) => {
   const organization = await organizationsService.getById(organizationId);
 
   const templatePath = path.join(
@@ -23,11 +23,11 @@ const sendWelcomeEmail = async (email, organizationId) => {
   const contents = templateEjs({
     phone: organization.phone,
     emailOrganization: organization.email,
-    title: 'Welcome',
-    textEmail: 'Welcome'
+    title: organization.welcomeText,
+    textEmail: organization.aboutUsText
   });
 
   emailSender.send(email, contents);
 };
 
-module.exports = { sendWelcomeEmail };
+module.exports = { send };
