@@ -27,6 +27,7 @@ const verifyToken = async (req, res, next) => {
 
 const isOwnUser = async (req, res, next) => {
   try {
+    isLoggedUser(req, res, next);
     const { id } = req.params;
     const userFound = await usersService.getById(req.userId);
     if (!userFound) {
@@ -56,6 +57,7 @@ const isOwnUser = async (req, res, next) => {
 
 const isAdmin = async (req, res, next) => {
   try {
+    isLoggedUser(req, res, next);
     const userFound = await usersService.getById(req.userId);
     if (!userFound) {
       const error = new Error('no user found');
