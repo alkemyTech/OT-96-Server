@@ -1,6 +1,6 @@
 const securityService = require('../services/security');
 const usersService = require('../services/users');
-const rolesService = require('../services/rolesServices');
+const rolesService = require('../services/roles');
 
 const verifyToken = async (req, res, next) => {
   try {
@@ -13,7 +13,7 @@ const verifyToken = async (req, res, next) => {
     if (!decodedUser) {
       const error = {
         msg: 'Unauthorized! Please enter a valid token provided at login',
-        status: 403,
+        status: 403
       };
       throw error;
     } else {
