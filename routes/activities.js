@@ -2,18 +2,18 @@ const express = require('express');
 const activitiesRouter = express.Router();
 const authMiddleware = require('../middlewares/auths');
 const activitiesController = require('../controllers/activities');
-const activitiesDataValidation = require('../middlewares/activitiesDataValidation');
+const activitiesMiddleware = require('../middlewares/activities');
 
 activitiesRouter.post(
   '/',
-  activitiesDataValidation,
+  activitiesMiddleware.validateActivity,
   authMiddleware.isAdmin,
   activitiesController.create
 );
 
 activitiesRouter.put(
   '/:id',
-  activitiesDataValidation,
+  activitiesMiddleware.validateActivity,
   authMiddleware.isAdmin,
   activitiesController.update
 );
