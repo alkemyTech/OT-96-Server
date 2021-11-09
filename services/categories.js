@@ -1,91 +1,70 @@
 const categoriesRepository = require('../repositories/categories');
 
 const getAll = async () => {
-  try {
-    const categories = await categoriesRepository.getAll();
-    if (categories.length > 0) {
-      return categories;
-    }
+  const categories = await categoriesRepository.getAll();
+  if (categories.length == 0) {
     const error = new Error('No hay categorías!');
     error.status = 404;
     throw error;
-  } catch (error) {
-    next(error);
   }
+
+  return categories;
 };
 
 const getById = async (id) => {
-  try {
-    const category = await categoriesRepository.getById(id);
+  const category = await categoriesRepository.getById(id);
 
-    if (category) {
-      return category;
-    }
+  if (!category) {
     const error = new Error('No existe la categoria!');
     error.status = 404;
-    throw error;
-  } catch (error) {
-    next(error);
+    throw erro;
   }
+
+  return category;
 };
 
 const create = async ({ name, image, description }) => {
-  try {
-    const category = await categoriesRepository.getByName(name);
-    if (!category) {
-      return await categoriesRepository.create({ name, image, description });
-    }
+  const category = await categoriesRepository.getByName(name);
+  if (category) {
     const error = new Error('categoria repetida');
     error.status = 409;
-    throw error;
-  } catch (error) {
-    next(error);
+    throw erro;
   }
+
+  return await categoriesRepository.create({ name, image, description });
 };
 
 const update = async (id, { name, image, description }) => {
-  try {
-    const category = await categoriesRepository.update(id, {
-      name,
-      image,
-      description
-    });
-    if (!category) {
-      return category;
-    }
+  const category = await categoriesRepository.update(id, {
+    name,
+    image,
+    description
+  });
+  if (category) {
     const error = new Error('categoria no encontrada.');
     error.status = 409;
     throw error;
-  } catch (error) {
-    next(error);
   }
+  return category;
 };
 const remove = async (id) => {
-  try {
-    const category = await categoriesRepository.getById(id);
-    if (category) {
-      return await categoriesRepository.remove(id);
-    }
+  const category = await categoriesRepository.getById(id);
+  if (!category) {
     const error = new Error(`No existe la categoria con ID: ${id}!`);
     error.status = 404;
     throw error;
-  } catch (error) {
-    next(error);
   }
+  await categoriesRepository.remove(id);
 };
 
 const getAllNames = async () => {
-  try {
-    const category = await categoriesRepository.getAllNames();
-    if (category.length > 0) {
-      return category;
-    }
+  const category = await categoriesRepository.getAllNames();
+  if (category.length == 0) {
     const error = new Error('No existen categorías.');
     error.status = 404;
     throw error;
-  } catch (error) {
-    next(error);
   }
+  return category;
 };
 
 module.exports = {

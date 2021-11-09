@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 const usersRepository = require('../repositories/users');
 
-const { sendWelcomeEmail } = require('../helpers/sendWelcomeEmail');
+const sendWelcomeEmail = require('../helpers/sendWelcomeEmail');
 
 const existEmailUser = async (email) => {
   const user = await usersRepository.getByEmail(email);
@@ -45,37 +45,29 @@ const create = async (userData) => {
 
   // if user create is ok, send welcome email
   const organizationId = 1; // <- harcoded, maybe check this on future
-  await sendWelcomeEmail(userData.email, organizationId);
+  await sendWelcomeEmail.send(userData.email, organizationId);
 
   return usersCreated;
 };
 
 const update = async (id, data) => {
-  try {
-    const user = usersRepository.getById(id);
-    if (user) {
-      return await usersRepository.update(id, data);
-    }
+  const user = usersRepository.getById(id);
+  if (!user) {
     const error = new Error('El usuario no existe!.');
     error.status = 404;
     throw error;
-  } catch (error) {
-    next(error);
   }
+  return await usersRepository.update(id, data);
 };
 
 const remove = async (id) => {
-  try {
-    const user = await usersRepository.getById(id);
-    if (user) {
-      await usersRepository.remove(id);
-    }
+  const user = await usersRepository.getById(id);
+  if (user) {
     const error = new Error('El usuario no existe!.');
     error.status = 404;
     throw error;
-  } catch (error) {
-    next(error);
   }
+  await usersRepository.remove(id);
 };
 
 module.exports = {
