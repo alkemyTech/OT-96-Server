@@ -2,7 +2,7 @@ const express = require('express');
 const organizationRouter = express.Router();
 const organizationController = require('../controllers/organization');
 const authMiddleware = require('../middlewares/auths');
-const organizationValidation = require('../middlewares/organizationValidation');
+const validateOrganization = require('../middlewares/organizations');
 
 organizationRouter.get(
   '/:id/public',
@@ -11,7 +11,7 @@ organizationRouter.get(
 organizationRouter.post(
   '/:id/public',
   authMiddleware.isAdmin,
-  organizationValidation,
+  validateOrganization,
   organizationController.update
 );
 
