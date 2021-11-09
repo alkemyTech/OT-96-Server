@@ -29,4 +29,4 @@ const getById = async (req, res, next) => {
   }
 };
 
-module.exports = { getAll, getById };
+module.exports = { getAll, getById};

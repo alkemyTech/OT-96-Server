@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "dev": "nodemon ./bin/www",
+    "db": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all && nodemon"
   },
   "dependencies": {
     "@sendgrid/mail": "^7.5.0",
