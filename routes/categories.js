@@ -3,9 +3,7 @@ const categoriesRouter = express.Router();
 const authMiddleware = require('../middlewares/auths');
 const categoriesController = require('../controllers/categories');
 
-const {
-  validateCategoryDetails,
-} = require('../middlewares/validateCategoryDetails');
+const validateCategoryDetails = require('../middlewares/validateCategoryDetails');
 
 categoriesRouter.post(
   '/',

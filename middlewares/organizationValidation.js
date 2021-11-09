@@ -1,31 +1,38 @@
-const validateOrganization = (req, res, next) => {
-  const { name, image, email, welcomeText } = req.body;
+const { check, validationResult } = require('express-validator');
 
-  if (typeof name !== 'string')
-    return res.status(400).json({
-      ok: false,
-      message: 'El nombre de la organizacion es incorrecto',
-    });
+module.exports = [
+  check('name')
+    .notEmpty()
+    .withMessage('You need to enter a name!')
+    .bail()
+    .isAlphanumeric()
+    .withMessage('Invalid Name')
+    .bail(),
 
-  var valid = /^(ftp|http|https):\/\/[^ "]+$/.test(image);
-  if (!valid)
-    return res.status(400).json({
-      ok: false,
-      message: 'El nombre de la organizacion es incorrecto',
-    });
+  check('image').notEmpty().withMessage('You need to enter a image!').bail(),
 
-  if (typeof welcomeText !== 'string')
-    return res
-      .status(400)
-      .json({ ok: false, message: 'EL texto de la organizacon es incorrecto' });
+  check('welcomeText')
+    .notEmpty()
+    .withMessage('You need to enter a welcomeText!')
+    .bail()
+    .isAlphanumeric()
+    .withMessage('welcomeText can only contain alphnumeric caracters')
+    .bail(),
 
-  const dominio = email.split('@')[1];
-  const tipo = dominio.slice(dominio.length - 4);
-  if (tipo !== '.com' && tipo !== '.net')
-    return res.status(400).json({
-      ok: false,
-      message: 'email no finaliza con .com o .net',
-    });
-  next();
-};
-module.exports = { validateOrganization };
+  check('email')
+    .notEmpty()
+    .withMessage('You need to enter an email!')
+    .bail()
+    .normalizeEmail()
+    .isEmail()
+    .withMessage('Invalid email. Ej:name@mail.com')
+    .bail(),
+
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+    next();
+  }
+];

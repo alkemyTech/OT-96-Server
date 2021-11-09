@@ -11,7 +11,7 @@ organizationRouter.get(
 organizationRouter.post(
   '/:id/public',
   authMiddleware.isAdmin,
-  organizationValidation.validateOrganization,
+  organizationValidation,
   organizationController.update
 );
 

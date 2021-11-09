@@ -1,17 +1,19 @@
-const validateCategoryDetails = (req, res, next) => {
-  const { name } = req.body;
+const { check, validationResult } = require('express-validator');
 
-  if (!name)
-    return res.status(400).json({
-      ok: false,
-      message: "tiene que existir el parametro name",
-    });
+module.exports = [
+  check('name')
+    .notEmpty()
+    .withMessage('You need to enter a name!')
+    .bail()
+    .isAlphanumeric()
+    .withMessage('Invalid Name')
+    .bail(),
 
-  if (typeof name !== "string")
-    return res.status(400).json({
-      ok: false,
-      message: "name tienen que ser string",
-    });
-  next();
-};
-module.exports = { validateCategoryDetails };
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+    next();
+  }
+];
