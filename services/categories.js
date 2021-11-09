@@ -28,7 +28,7 @@ const create = async ({ name, image, description }) => {
   if (category) {
     const error = new Error('categoria repetida');
     error.status = 409;
-    throw erro;
+    throw error;
   }
 
   return await categoriesRepository.create({ name, image, description });
