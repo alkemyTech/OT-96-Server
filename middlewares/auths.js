@@ -2,19 +2,20 @@ const securityService = require('../services/security');
 const usersService = require('../services/users');
 const rolesService = require('../services/roles');
 
-const verifyToken = async (req, res, next) => {
+const isLoggedUser = async (req, res, next) => {
   try {
     const token = req.headers['authorization'];
     if (!token) {
-      const error = { msg: 'No token provided!', status: 401 };
+      const error = new Error('No token provided!');
+      error.status = 401;
       throw error;
     }
     const decodedUser = securityService.verifyToken(token);
     if (!decodedUser) {
-      const error = {
-        msg: 'Unauthorized! Please enter a valid token provided at login',
-        status: 403
-      };
+      const error = new Error(
+        'Unauthorized! Please enter a valid token provided at login'
+      );
+      error.status = 403;
       throw error;
     } else {
       req.userId = decodedUser.id;
@@ -81,4 +82,4 @@ const isAdmin = async (req, res, next) => {
   }
 };
 
-module.exports = { isAdmin, isOwnUser, verifyToken };
+module.exports = { isAdmin, isOwnUser, isLoggedUser };
