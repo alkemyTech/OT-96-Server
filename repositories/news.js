@@ -1,45 +1,47 @@
-const { News, Category } = require('../models');
+const db = require('../models');
 
 const getAll = async () => {
-    const response = await News.findAll({
-        include: [
-            {
-                model: Category,
-            },
-        ],
-    });
-    return response;
+  const response = await db.News.findAll({
+    include: [
+      {
+        model: db.Category
+      }
+    ]
+  });
+  return response;
 };
 
-const getById = async ( id ) => {
-    const response = await News.findByPk(id,{
-        include: [{ 
-          model: Category, as: "category"
-        }],
-    });
-  
-    return response;
+const getById = async (id) => {
+  const response = await db.News.findByPk(id, {
+    include: [
+      {
+        model: db.Category,
+        as: 'category'
+      }
+    ]
+  });
+  return response;
 };
 
 const create = async (data) => {
-  const response = await News.create(data);
+  const response = await db.News.create(data);
   return response;
 };
 
 const update = async (data, id) => {
-  const response = await News.update(data, {
+  const response = await db.News.update(data, {
     where: {
-      id,
-    },
+      id
+    }
   });
   return response;
 };
 
 const remove = async (id) => {
-  const response = await News.destroy({
+  const response = await db.News.destroy({
     where: {
-      id,
-    },
+      id
+    }
   });
   return response;
 };
@@ -49,5 +51,5 @@ module.exports = {
   getById,
   create,
   update,
-  remove,
+  remove
 };

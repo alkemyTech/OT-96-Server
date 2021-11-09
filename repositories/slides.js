@@ -1,60 +1,42 @@
-const { Slide } = require('../models/slide');
+const db = require('../models');
 
-async function getAll() {
-  const Slide = await Slide.findAll();
+const getAll = async () => {
+  const Slide = await db.Slide.findAll();
   return Slide;
-}
+};
 
-async function getById(id) {
-  const Slide = await Slide.findOne({
+const getById = async (id) => {
+  const Slide = await db.Slide.findByPk(id);
+  return Slide;
+};
+
+const create = async (data) => {
+  const Slide = await db.Slide.create(data);
+  return Slide;
+};
+
+const update = async (id, data) => {
+  const Slide = await db.Slide.update(data, {
     where: {
-      id: id,
-    },
+      id
+    }
   });
   return Slide;
-}
+};
 
-async function create(data) {
-  const Slide = await Slide.create({
-    name: data.name,
-    image: data.image,
-    address: data.address,
-    phone: data.phone,
-    email: data.email,
-    welcomeText: data.welcomeText,
-    aboutUsText: data.aboutUsText,
-  });
-  return Slide;
-}
-
-async function update(id, data) {
-  const values = {
-    name: data.name,
-    image: data.image,
-    address: data.address,
-    phone: data.phone,
-    email: data.email,
-    welcomeText: data.welcomeText,
-    aboutUsText: data.aboutUsText,
-  };
-  const condition = {
+const remove = async (id) => {
+  const Slide = await db.Slide.destroy({
     where: {
-      id: id,
-    },
-  };
-  const Slide = await Slide.update(values, {
-    ...condition,
+      id
+    }
   });
   return Slide;
-}
+};
 
-async function remove(id) {
-  const Slide = await Slide.destroy({
-    where: {
-      id: id,
-    },
-  });
-  return Slide;
-}
-
-module.exports = { getAll, getById, create, update, remove };
+module.exports = {
+  getAll,
+  getById,
+  create,
+  update,
+  remove
+};

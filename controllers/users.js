@@ -1,6 +1,5 @@
 const usersService = require('../services/users');
-const awsServices = require('../services/images');
-const { generateToken } = require('../services/security');
+const security = require('../services/security');
 
 const getAll = async (req, res, next) => {
   try {
@@ -11,25 +10,22 @@ const getAll = async (req, res, next) => {
   }
 };
 
-const getById = async (req, res) => {};
-
-async function create(req, res, next) {
+const create = async (req, res, next) => {
   try {
     const newUser = await usersService.create(req.body);
-    const token = generateToken(newUser);
+    const token = security.generateToken(newUser);
     res.status(200).json({
       success: true,
       msg: `${newUser.firstName} your user has been created`,
       user: newUser,
       token: token,
     });
-  } catch (err) {
-    console.log(err);
-    next(err);
+  } catch (error) {
+    next(error);
   }
-}
+};
 
-const update = async (req, res) => {
+const update = async (req, res, next) => {
   try {
     const updateUser = await usersService.update(req.params.id, req.body);
     res.status(200).json({
@@ -37,23 +33,22 @@ const update = async (req, res) => {
       msg: `User ${req.params.id} is updated succesfully`,
       User: updateUser,
     });
-  } catch (err) {
+  } catch (error) {
     next(error);
   }
 };
 
-const remove = async (req, res) => {
+const remove = async (req, res, next) => {
   try {
     const response = await usersService.remove(req.params.id);
     return res.status(200).json(response);
   } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
+    next(error);
   }
 };
 
 module.exports = {
   getAll,
-  getById,
   create,
   update,
   remove,

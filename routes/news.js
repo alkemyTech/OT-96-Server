@@ -1,5 +1,5 @@
-const { Router } = require('express');
-const newsRouter = Router();
+const express = require('express');
+const newsRouter = express.Router();
 const newsController = require('../controllers/news');
 const authMiddleware = require('../middlewares/auths');
 const newsDataValidation = require('../middlewares/newsDataValidation');

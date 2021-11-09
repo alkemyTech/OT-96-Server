@@ -1,17 +1,15 @@
 const newsService = require('../services/news');
-const awsServices = require('../services/images');
 
 const getAll = async (req, res, next) => {};
 
 const getById = async (req, res, next) => {
-    try {
-        const { id } = req.params;
-        const news = await newsService.getById(id);
-        res.status(200).json(news);
-    } catch (error) {
-        next(error);
-    }
-
+  try {
+    const { id } = req.params;
+    const news = await newsService.getById(id);
+    res.status(200).json(news);
+  } catch (error) {
+    next(error);
+  }
 };
 
 const create = async (req, res, next) => {
@@ -20,10 +18,10 @@ const create = async (req, res, next) => {
     res.status(200).json({
       success: true,
       msg: `news: ${response.name} has been created`,
-      news: response,
+      news: response
     });
-  } catch (err) {
-    next(err);
+  } catch (error) {
+    next(error);
   }
 };
 
@@ -52,5 +50,5 @@ module.exports = {
   getById,
   create,
   update,
-  remove,
+  remove
 };

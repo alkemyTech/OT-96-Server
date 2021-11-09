@@ -1,14 +1,7 @@
-const { Member }= require("../models/members");
-
-
-
-
+const db = require('../models');
 
 module.exports = {
-    // create,
-    // update,
-    // remove
-}
-
-
-module.exports={}
+  // create,
+  // update,
+  // remove,
+};
