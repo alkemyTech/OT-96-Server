@@ -5,7 +5,7 @@ const security = require('../services/security');
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const existingUser = await usersServices.existEmailUser(email);
+    const existingUser = await usersService.existEmailUser(email);
     if (!existingUser)
       return res
         .status(400)
@@ -32,6 +32,7 @@ const login = async (req, res) => {
         .json({ success: false, message: 'invalid password or user' });
     }
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
