@@ -1,56 +1,52 @@
-const { Activity } = require('../models/activity');
+const db = require('../models');
 
-// Get all activities
 const getAll = async () => {
-    const response = await Activity.findAll({
-        attributes: {
-            exclude: ['content', 'deletedAt', 'createdAt', 'updatedAt'],
-        }
-    });
+  const response = await db.Activity.findAll();
+  return response;
+};
 
-    return response;
-}
-
-// Get one activity by id
 const getById = async (id) => {
-    const response = await Activity.findByPk(id);
+  const response = await db.Activity.findByPk(id);
+  return response;
+};
 
-    return response;
-}
+const getByName = async (name) => {
+  const response = await db.Activity.findOne({
+    where: {
+      name
+    }
+  });
+  return response;
+};
 
-// Insert new activity
 const create = async (data) => {
-    const response = await Activity.create(data);
+  const response = await db.Activity.create(data);
+  return response;
+};
 
-    return response;
-}
-
-// Update activity
 const update = async (id, data) => {
-    const response = await Activity.update(data, {
-        where: {
-            id: id
-        }
-    });
+  const response = await db.Activity.update(data, {
+    where: {
+      id
+    }
+  });
+  return response;
+};
 
-    return response;
-}
-
-// Remove one activity by id
 const remove = async (id) => {
-    const response = await Activity.destroy({
-        where: {
-            id: id
-        }
-    });
-
-    return response;
-}
+  const response = await db.Activity.destroy({
+    where: {
+      id
+    }
+  });
+  return response;
+};
 
 module.exports = {
-    getAll,
-    getById,
-    create,
-    update,
-    remove
-}
+  getAll,
+  getById,
+  getByName,
+  create,
+  update,
+  remove
+};

@@ -1,7 +1,5 @@
 const { check, body, validationResult } = require('express-validator');
-const usersRepository = require('../repositories/users');
 
-//validate User Email, LastName, FirstName and Pass
 module.exports = [
   check('email')
     .notEmpty()

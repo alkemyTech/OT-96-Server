@@ -1,12 +1,16 @@
-const { Router } = require('express');
-const slideRouter = Router();
-const slideController = require('../controllers/slide.js')
-const { isAdmin } = require('../middlewares/auths')
+const express = require('express');
+const slidesRouter = express.Router();
+const slideController = require('../controllers/slides');
+const authMiddleware = require('../middlewares/auths');
 
-slideRouter.get('/', isAdmin ,slideController.getAll);
-slideRouter.get('/:id', isAdmin,slideController.getById);
-slideRouter.post('/',isAdmin, slideController.create);
-slideRouter.put('/:id',isAdmin, slideController.update);
-slideRouter.delete('/:id', isAdmin,slideController.remove);
+slidesRouter.get('/', authMiddleware.isAdmin, slideController.getAll);
 
-module.exports = slideRouter;
+slidesRouter.get('/:id', authMiddleware.isAdmin, slideController.getById);
+
+slidesRouter.post('/', authMiddleware.isAdmin, slideController.create);
+
+slidesRouter.put('/:id', authMiddleware.isAdmin, slideController.update);
+
+slidesRouter.delete('/:id', authMiddleware.isAdmin, slideController.remove);
+
+module.exports = slidesRouter;

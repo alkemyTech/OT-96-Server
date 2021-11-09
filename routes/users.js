@@ -1,8 +1,11 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const usersRouter = express.Router();
 const usersController = require('../controllers/users');
 const authMiddleware = require('../middlewares/auths');
-/* GET users listing. */
-router.get('/',authMiddleware.isAdmin ,usersController.getAll);
+const usersValidation = require('../middlewares/userValidation');
 
-module.exports = router;
+usersRouter.get('/', authMiddleware.isAdmin, usersController.getAll);
+
+usersRouter.put('/:id', usersValidation, usersController.update);
+
+module.exports = usersRouter;

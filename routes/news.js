@@ -1,9 +1,20 @@
-var express = require('express');
-var router = express.Router();
-
-const { newsDataValidation } = require('../middlewares/newsDataValidation');
+const express = require('express');
+const newsRouter = express.Router();
 const newsController = require('../controllers/news');
+const authMiddleware = require('../middlewares/auths');
+const newsDataValidation = require('../middlewares/newsDataValidation');
 
-router.put('/', newsDataValidation, newsController.create);
+newsRouter.get('/:id', authMiddleware.isAdmin, newsController.getById);
 
-module.exports = router;
+newsRouter.post(
+  '/',
+  authMiddleware.isAdmin,
+  newsDataValidation,
+  newsController.create
+);
+
+newsRouter.put('/:id', authMiddleware.isAdmin, newsController.update);
+
+newsRouter.delete('/:id', authMiddleware.isAdmin, newsController.remove);
+
+module.exports = newsRouter;

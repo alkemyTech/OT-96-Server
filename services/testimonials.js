@@ -1,23 +1,47 @@
 const testimonialsRepository = require('../repositories/testimonials');
 
-async function getAll() {
-  return await testimonialsRepository.getAll();
-}
+const getAll = async () => {
+  const testimonials = await testimonialsRepository.getAll();
+  if (testimonials.length == 0) {
+    const error = new Error('No hay testimonios');
+    error.status = 404;
+    throw error;
+  }
+  return testimonials;
+};
 
-async function getById(id) {
-  return await testimonialsRepository.getById(id);
-}
+const getById = async (id) => {
+  const testimonial = await testimonialsRepository.getById(id);
+  if (!testimonial) {
+    const error = new Error('No existe el slide');
+    error.status = 404;
+    throw error;
+  }
+  return testimonial;
+};
 
-async function create(testimonial) {
+const create = async (testimonial) => {
   return await testimonialsRepository.create(testimonial);
-}
+};
 
-async function update(id, testimonial) {
+const update = async (id, testimonial) => {
+  const response = await testimonialsRepository.getById(id);
+  if (response) {
+    const error = new Error('El testimonio no existe');
+    error.status = 409;
+    throw error;
+  }
   return await testimonialsRepository.update(id, testimonial);
-}
+};
 
-async function remove(id) {
+const remove = async (id) => {
+  const response = await testimonialsRepository.getById(id);
+  if (!response) {
+    const error = new Error('El testimonio no existe');
+    error.status = 409;
+    throw error;
+  }
   return await testimonialsRepository.remove(id);
-}
+};
 
 module.exports = { getAll, getById, create, update, remove };

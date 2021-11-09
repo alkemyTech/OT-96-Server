@@ -1,56 +1,62 @@
-const { Category } = require('../models/category');
+const db = require('../models');
 
-// Get all categories
 const getAll = async () => {
-    const response = await Category.findAll({
-        attributes: {
-            exclude: ['description', 'deletedAt', 'createdAt', 'updatedAt'],
-        }
-    });
+  const categories = await db.Category.findAll();
+  return categories;
+};
 
-    return response;
-}
-
-// Get one category by id
 const getById = async (id) => {
-    const response = await Category.findByPk(id);
+  const response = await db.Category.findByPk(id);
+  return response;
+};
 
-    return response;
-}
+const getByName = async (name) => {
+  const response = await db.Category.findOne({
+    where: {
+      name
+    }
+  });
+  return response;
+};
 
-// Insert new category
 const create = async (data) => {
-    const response = await Category.create(data);
+  const response = await db.Category.create(data);
+  return response;
+};
 
-    return response;
-}
-
-// Update category
 const update = async (id, data) => {
-    const response = await Category.update(data, {
-        where: {
-            id: id
-        }
-    });
+  const response = await db.Category.update(data, {
+    where: {
+      id
+    }
+  });
+  return response;
+};
 
-    return response;
-}
-
-// Remove one category by id
 const remove = async (id) => {
-    const response = await Category.destroy({
-        where: {
-            id: id
-        }
-    });
+  const response = await db.Category.destroy({
+    where: {
+      id
+    }
+  });
+  return response;
+};
 
-    return response;
-}
+const getAllNames = async () => {
+  const categories = await db.Category.findAll({
+    attributes: {
+      exclude: ['description', 'image', 'deletedAt', 'createdAt', 'updatedAt']
+    }
+  });
+  return categories;
+};
 
 module.exports = {
-    getAll,
-    getById,
-    create,
-    update,
-    remove
-}
+  getAll,
+  getById,
+  getByName,
+  create,
+  update,
+  remove,
+  getAllNames
+};
