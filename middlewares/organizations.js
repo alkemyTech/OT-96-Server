@@ -1,6 +1,6 @@
 const { check, validationResult } = require('express-validator');
 
-module.exports = [
+const validateOrganization = [
   check('name')
     .notEmpty()
     .withMessage('You need to enter a name!')
@@ -36,3 +36,4 @@ module.exports = [
     next();
   }
 ];
+module.exports = { validateOrganization };
