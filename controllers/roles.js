@@ -1,4 +1,4 @@
-const rolesService = require("../services/rolesServices");
+const rolesService = require('../services/rolesServices');
 
 const getAll = async (req, res, next) => {
   try {
@@ -11,12 +11,11 @@ const getAll = async (req, res, next) => {
     }
     return res.status(200).json({ status: 200, length: all.length, data: all });
   } catch (error) {
-    console.log(error);
     next(error);
   }
 };
 
-const getById = async (req, res) => {
+const getById = async (req, res, next) => {
   try {
     let one = await rolesService.getById(req.params.id);
     if (one == null) {
@@ -26,20 +25,8 @@ const getById = async (req, res) => {
     }
     return res.status(200).json({ status: 200, data: one });
   } catch (error) {
-    console.log(error);
     next(error);
   }
 };
 
-
-
-module.exports = { getAll, getById};
-
-/* module.exports = {
-  
-  
-
-  
- 
-  
-}; */
+module.exports = { getAll, getById };
