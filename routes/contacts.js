@@ -1,8 +1,16 @@
 const express = require('express');
-const router = express.Router();
-const contactController = require('../controllers/contacts');
+const contactsRouter = express.Router();
+const contactsController = require('../controllers/contacts');
+const contactsMiddlewares = require('../middlewares/contacts');
 const authMiddleware = require('../middlewares/auths');
 
-router.get('/', authMiddleware.isAdmin, contactController.getAll);
+contactsRouter.get('/', authMiddleware.isAdmin, contactsController.getAll);
 
-module.exports = router;
+contactsRouter.post(
+  '/',
+  authMiddleware.isLoggedUser,
+  contactsMiddlewares.validateContacts,
+  contactsController.create
+);
+
+module.exports = contactsRouter;
