@@ -5,7 +5,6 @@ const authMiddleware = require('../middlewares/auths');
 
 membersRouter.get(
   '/', 
-  authMiddleware.isLoggedUser, 
   authMiddleware.isAdmin,
   membersControllers.getAll
 );
