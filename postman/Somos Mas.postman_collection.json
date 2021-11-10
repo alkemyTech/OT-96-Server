@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a0679ce7-b6cc-45a5-b045-8923ef78d8d7",
+		"_postman_id": "894c028e-35b4-4343-8f15-23147c316c87",
 		"name": "Somos Mas",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -11,6 +11,26 @@
 				{
 					"name": "Register",
 					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "{{url}}",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -39,15 +59,14 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/auth/register",
-							"protocol": "http",
+							"raw": "{{url}}/auth/register/",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "3000",
 							"path": [
 								"auth",
-								"register"
+								"register",
+								""
 							]
 						}
 					},
@@ -56,6 +75,26 @@
 				{
 					"name": "Login",
 					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "{{url}}",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -96,17 +135,17 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3ROYW1lIjoiTWFudWVsIiwibGFzdE5hbWUiOiJGcmFuY2lzY28iLCJyb2xlSWQiOjIsImlhdCI6MTYzNjQ3ODU5MCwiZXhwIjoxNjM2NTE0NTkwfQ.dkfYuLUMft3An1uTWg4WPFA3szgL_bWka5VDvxOAPX0",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "{{key}}",
 									"type": "string"
 								},
 								{
 									"key": "in",
 									"value": "header",
-									"type": "string"
-								},
-								{
-									"key": "key",
-									"value": "authorization",
 									"type": "string"
 								}
 							]
@@ -114,12 +153,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/auth/me",
-							"protocol": "http",
+							"raw": "{{url}}/auth/me",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "3000",
 							"path": [
 								"auth",
 								"me"
@@ -128,6 +165,41 @@
 					},
 					"response": []
 				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "value",
+						"value": "{{token}}",
+						"type": "string"
+					},
+					{
+						"key": "key",
+						"value": "{{key}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
 			]
 		},
 		{
@@ -135,29 +207,36 @@
 			"item": [
 				{
 					"name": "AllUsers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "apikey",
 							"apikey": [
 								{
 									"key": "value",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3ROYW1lIjoiTWFudWVsIiwibGFzdE5hbWUiOiJGcmFuY2lzY28iLCJyb2xlSWQiOjIsImlhdCI6MTYzNjQ3OTM4OCwiZXhwIjoxNjM2NTE1Mzg4fQ.DMOj6eZxPDBDwCBFrTTJFtB5khn3fukN0fEVoBfrbxI",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "{{key}}",
 									"type": "string"
 								},
 								{
 									"key": "in",
 									"value": "header",
 									"type": "string"
-								},
-								{
-									"key": "key",
-									"value": "authorization",
-									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:3000/users",
 							"protocol": "http",
@@ -179,18 +258,18 @@
 							"type": "apikey",
 							"apikey": [
 								{
+									"key": "key",
+									"value": "{{url}}",
+									"type": "string"
+								},
+								{
 									"key": "value",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3ROYW1lIjoiTWFudWVsIiwibGFzdE5hbWUiOiJGcmFuY2lzY28iLCJyb2xlSWQiOjIsImlhdCI6MTYzNjQ3OTM4OCwiZXhwIjoxNjM2NTE1Mzg4fQ.DMOj6eZxPDBDwCBFrTTJFtB5khn3fukN0fEVoBfrbxI",
+									"value": "{{token}}",
 									"type": "string"
 								},
 								{
 									"key": "in",
 									"value": "header",
-									"type": "string"
-								},
-								{
-									"key": "key",
-									"value": "authorization",
 									"type": "string"
 								}
 							]
@@ -212,6 +291,36 @@
 					},
 					"response": []
 				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "key",
+						"value": "authorization",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
 			]
 		},
 		{
@@ -219,9 +328,36 @@
 			"item": [
 				{
 					"name": "AllCategories",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "{{key}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
 						"url": {
 							"raw": "http://localhost:3000/categories",
 							"protocol": "http",
@@ -244,17 +380,17 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3ROYW1lIjoiTWFudWVsIiwibGFzdE5hbWUiOiJGcmFuY2lzY28iLCJyb2xlSWQiOjIsImlhdCI6MTYzNjQ4MjE3NiwiZXhwIjoxNjM2NTE4MTc2fQ.4gEm6VOXA3V__27q5caQSoyIE7VcQuoMnGNhRabJYm0",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "{{key}}",
 									"type": "string"
 								},
 								{
 									"key": "in",
 									"value": "header",
-									"type": "string"
-								},
-								{
-									"key": "key",
-									"value": "authorization",
 									"type": "string"
 								}
 							]
@@ -284,17 +420,17 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3ROYW1lIjoiTWFudWVsIiwibGFzdE5hbWUiOiJGcmFuY2lzY28iLCJyb2xlSWQiOjIsImlhdCI6MTYzNjQ4MjE3NiwiZXhwIjoxNjM2NTE4MTc2fQ.4gEm6VOXA3V__27q5caQSoyIE7VcQuoMnGNhRabJYm0",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "{{key}}",
 									"type": "string"
 								},
 								{
 									"key": "in",
 									"value": "header",
-									"type": "string"
-								},
-								{
-									"key": "key",
-									"value": "authorization",
 									"type": "string"
 								}
 							]
@@ -339,6 +475,26 @@
 				{
 					"name": "DeleteCategory",
 					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "{{key}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -356,6 +512,36 @@
 					},
 					"response": []
 				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "key",
+						"value": "authorization",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
 			]
 		},
 		{
@@ -369,17 +555,17 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3ROYW1lIjoiTWFudWVsIiwibGFzdE5hbWUiOiJGcmFuY2lzY28iLCJyb2xlSWQiOjIsImlhdCI6MTYzNjQ4MjE3NiwiZXhwIjoxNjM2NTE4MTc2fQ.4gEm6VOXA3V__27q5caQSoyIE7VcQuoMnGNhRabJYm0",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "{{key}}",
 									"type": "string"
 								},
 								{
 									"key": "in",
 									"value": "header",
-									"type": "string"
-								},
-								{
-									"key": "key",
-									"value": "authorization",
 									"type": "string"
 								}
 							]
@@ -403,6 +589,26 @@
 				{
 					"name": "GetANew",
 					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "{{key}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -423,6 +629,26 @@
 				{
 					"name": "UpdateNew",
 					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "{{key}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -473,6 +699,26 @@
 				{
 					"name": "DeleteNew",
 					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "{{url}}",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -490,6 +736,36 @@
 					},
 					"response": []
 				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "key",
+						"value": "authorization",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
 			]
 		},
 		{
@@ -503,17 +779,17 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3ROYW1lIjoiTWFudWVsIiwibGFzdE5hbWUiOiJGcmFuY2lzY28iLCJyb2xlSWQiOjIsImlhdCI6MTYzNjQ3OTM4OCwiZXhwIjoxNjM2NTE1Mzg4fQ.DMOj6eZxPDBDwCBFrTTJFtB5khn3fukN0fEVoBfrbxI",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "{{key}}",
 									"type": "string"
 								},
 								{
 									"key": "in",
 									"value": "header",
-									"type": "string"
-								},
-								{
-									"key": "key",
-									"value": "authorization",
 									"type": "string"
 								}
 							]
@@ -544,17 +820,17 @@
 							"apikey": [
 								{
 									"key": "value",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3ROYW1lIjoiTWFudWVsIiwibGFzdE5hbWUiOiJGcmFuY2lzY28iLCJyb2xlSWQiOjIsImlhdCI6MTYzNjQ4MDg4NCwiZXhwIjoxNjM2NTE2ODg0fQ.BZPk0mXleiHG1TudCmNyMFLmO08ZP5phr37L09kdXIs",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "{{key}}",
 									"type": "string"
 								},
 								{
 									"key": "in",
 									"value": "header",
-									"type": "string"
-								},
-								{
-									"key": "key",
-									"value": "authorization",
 									"type": "string"
 								}
 							]
@@ -612,6 +888,36 @@
 					},
 					"response": []
 				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "key",
+						"value": "authorization",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
 			]
 		},
 		{
@@ -620,6 +926,26 @@
 				{
 					"name": "GetAllSlides",
 					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "{{key}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -639,6 +965,26 @@
 				{
 					"name": "GetASlide",
 					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "{{key}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -659,6 +1005,26 @@
 				{
 					"name": "CreateSlide",
 					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "{{key}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -703,6 +1069,26 @@
 				{
 					"name": "UpdateSlide",
 					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "{{key}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -748,6 +1134,26 @@
 				{
 					"name": "DeleteSlide",
 					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "{{key}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -764,6 +1170,36 @@
 						}
 					},
 					"response": []
+				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "key",
+						"value": "authorization",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		}
