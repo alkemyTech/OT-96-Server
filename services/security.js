@@ -17,8 +17,7 @@ const generateToken = (user) => {
 };
 
 const verifyToken = (token) => {
-  const accessToken = token.split(' ')[1];
-  const decodedToken = jwt.verify(accessToken, config.development.SECRET_TOKEN);
+  const decodedToken = jwt.verify(token, config.development.SECRET_TOKEN);
   if (!decodedToken) {
     const error = new Error('Invalid token');
     error.status = 401;
