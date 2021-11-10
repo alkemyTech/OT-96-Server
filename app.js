@@ -15,6 +15,7 @@ const newsRouter = require('./routes/news');
 const activitiesRouter = require('./routes/activities');
 const slidesRouter = require('./routes/slides');
 const membersRouter = require('./routes/members');
+const contactsRouter = require('./routes/contacts');
 
 const app = express();
 app.use(cors());
@@ -38,6 +39,7 @@ app.use('/news', newsRouter);
 app.use('/activities', activitiesRouter);
 app.use('/slides', slidesRouter);
 app.use('/members', membersRouter);
+app.use('/contacts', contactsRouter);
 
 /** test routes */
 // const test_imagesRouter = require('./routes/test_images');
