@@ -6,7 +6,7 @@ const send = async (email, html) => {
     const msg = {
       to: email,
       from: "fundacionsomosmas@outlook.com.ar",
-      subject: "Welcome Email",
+      subject: "Email de bienvenida",
       html: html,
     };
 

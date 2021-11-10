@@ -1,53 +1,59 @@
 const securityService = require('../services/security');
 const usersService = require('../services/users');
-const rolesService = require('../services/rolesServices');
+const rolesService = require('../services/roles');
 
-const verifyToken = async (req, res, next) => {
+const tokenId = (req) => {
+  const token = req.headers['authorization'];
+  if (!token) {
+    const error = new Error('No token provided!');
+    error.status = 401;
+    throw error;
+  }
+  const decodedUser = securityService.verifyToken(token);
+  if (!decodedUser) {
+    const error = new Error(
+      'Unauthorized! Please enter a valid token provided at login'
+    );
+    error.status = 403;
+    throw error;
+  }
+  return decodedUser.id;
+};
+
+const isLoggedUser = async (req, res, next) => {
   try {
-    const token = req.headers['authorization'];
-    if (!token) {
-      const error = { msg: 'No token provided!', status: 401 };
-      throw error;
-    }
-    const decodedUser = securityService.verifyToken(token);
-    if (!decodedUser) {
-      const error = {
-        msg: 'Unauthorized! Please enter a valid token provided at login',
-        status: 403,
-      };
-      throw error;
-    } else {
-      req.userId = decodedUser.id;
-      next();
-    }
+    req.userId = tokenId(req);
+    next();
   } catch (error) {
     next(error);
   }
 };
 
-const isOwnedMember = async (req, res, next) => {
+const isOwnUser = async (req, res, next) => {
   try {
+    const reqId = tokenId(req);
     const { id } = req.params;
-    const token = req.headers['authorization'];
-
-    if (!token) {
-      res.status(403).json({ message: 'No token provided' });
-      return;
-    }
-    const user = securityService.verifyToken(token);
-    if (!user) {
-      res.status(401).json({ message: 'Unauthorized' });
-      return;
-    }
-    const userFound = await usersService.getById(user.id);
+    const userFound = await usersService.getById(reqId);
     if (!userFound) {
-      res.status(404).json({ message: 'no user found' });
-      return;
+      const error = new Error('no user found');
+      error.status = 404;
+      throw error;
     }
-    if (id === userFound.id) {
-      next();
+    const role = await rolesService.getByName('Admin');
+    if (!role) {
+      const error = new Error('no role found');
+      error.status = 404;
+      throw error;
     }
-    res.status(403).json({ message: 'Forbidden' });
+    if (userFound.roleId === reqId) {
+      return next();
+    }
+    if (+id === userFound.id) {
+      return next();
+    }
+    const error = new Error('Forbidden');
+    error.status = 403;
+    throw error;
   } catch (error) {
     next(error);
   }
@@ -55,15 +61,23 @@ const isOwnedMember = async (req, res, next) => {
 
 const isAdmin = async (req, res, next) => {
   try {
-    verifyToken(req, res, next);
+    const id = tokenId(req);
+    const userFound = await usersService.getById(id);
+    if (!userFound) {
+      const error = new Error('no user found');
+      error.status = 404;
+      throw error;
+    }
     const role = await rolesService.getByName('Admin');
     if (!role) {
-      res.status(404).json({ message: 'no role found' });
-      return;
+      const error = new Error('no role found');
+      error.status = 404;
+      throw error;
     }
     if (userFound.roleId !== role.id) {
-      res.status(403).json({ message: 'Require Admin role' });
-      return;
+      const error = new Error('Requiere admin role');
+      error.status = 403;
+      throw error;
     }
     next();
   } catch (error) {
@@ -71,4 +85,4 @@ const isAdmin = async (req, res, next) => {
   }
 };
 
-module.exports = { isAdmin, isOwnedMember, verifyToken };
+module.exports = { isAdmin, isOwnUser, isLoggedUser };

@@ -1,6 +1,14 @@
 const { check, validationResult } = require('express-validator');
 
-module.exports = [
+const errorHandler = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
+  next();
+};
+
+const validateActivity = [
   check('name')
     .notEmpty()
     .withMessage('You need to enter a name!')
@@ -19,11 +27,7 @@ module.exports = [
 
   check('image').notEmpty().withMessage('You need to enter a image!').bail(),
 
-  (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(422).json({ errors: errors.array() });
-    }
-    next();
-  },
+  errorHandler
 ];
+
+module.exports = { validateActivity };

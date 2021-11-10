@@ -13,11 +13,11 @@ const getAll = async () => {
 
 const getById = async (id) => {
   const category = await categoriesRepository.getById(id);
-
+  
   if (!category) {
     const error = new Error('No existe la categoria!');
     error.status = 404;
-    throw erro;
+    throw error;
   }
 
   return category;
@@ -28,7 +28,7 @@ const create = async ({ name, image, description }) => {
   if (category) {
     const error = new Error('categoria repetida');
     error.status = 409;
-    throw erro;
+    throw error;
   }
 
   return await categoriesRepository.create({ name, image, description });
@@ -40,7 +40,7 @@ const update = async (id, { name, image, description }) => {
     image,
     description
   });
-  if (category) {
+  if (!category) {
     const error = new Error('categoria no encontrada.');
     error.status = 409;
     throw error;

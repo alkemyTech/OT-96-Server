@@ -2,14 +2,14 @@ const express = require('express');
 const newsRouter = express.Router();
 const newsController = require('../controllers/news');
 const authMiddleware = require('../middlewares/auths');
-const newsDataValidation = require('../middlewares/newsDataValidation');
+const newsMiddleware = require('../middlewares/news');
 
 newsRouter.get('/:id', authMiddleware.isAdmin, newsController.getById);
 
 newsRouter.post(
   '/',
   authMiddleware.isAdmin,
-  newsDataValidation,
+  newsMiddleware.validateNew,
   newsController.create
 );
 
