@@ -1,7 +1,8 @@
 const db = require('../models');
 
-module.exports = {
-  // create,
-  // update,
-  // remove,
+const getAll = async () => {
+  const response = await db.Member.findAll();
+  return response;
 };
+
+module.exports = { getAll };
