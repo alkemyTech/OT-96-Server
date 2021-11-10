@@ -15,12 +15,12 @@ const s3 = new AWS.S3({
 });
 
 const uploadFile = (file) => {
-  const fileStream = fs.createReadStream(file.path);
+  // const fileStream = fs.createReadStream(file.path);
 
   const uploadParams = {
     Bucket: bucketName,
-    Body: fileStream,
-    Key: file.filename
+    Body: file,
+    Key: 'image.png'
   };
 
   return s3.upload(uploadParams).promise();

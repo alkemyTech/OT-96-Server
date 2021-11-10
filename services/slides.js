@@ -1,4 +1,5 @@
 const slidesRepository = require('../repositories/slides');
+const imageUploader = require('./imageUploader');
 
 const getAll = async () => {
   const slides = await slidesRepository.getAll();
@@ -19,8 +20,15 @@ const getById = async (id) => {
   return slide;
 };
 
-const create = async (organization) => {
-  return await slidesRepository.create(organization);
+const create = async ({ imageUrl, text, order, organizationId }) => {
+  const image = Buffer.from(imageUrl, 'base64');
+  const { url } = await imageUploader.upload(image);
+  return await slidesRepository.create({
+    imageUrl: url,
+    text,
+    order,
+    organizationId
+  });
 };
 
 const update = async (id, { imageUrl, text, order, organizationId }) => {

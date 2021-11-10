@@ -4,8 +4,8 @@ const upload = async (file) => {
   const result = await awsServices.uploadFile(file);
 
   const response = {
-    imageUrl: result.Location,
-    imageKey: result.Key
+    url: result.Location,
+    key: result.Key
   };
 
   return response;
