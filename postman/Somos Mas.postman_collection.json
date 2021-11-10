@@ -16,7 +16,7 @@
 							"apikey": [
 								{
 									"key": "key",
-									"value": "{{url}}",
+									"value": "{{key}}",
 									"type": "string"
 								},
 								{
@@ -80,7 +80,7 @@
 							"apikey": [
 								{
 									"key": "key",
-									"value": "{{url}}",
+									"value": "{{key}}",
 									"type": "string"
 								},
 								{
@@ -259,7 +259,7 @@
 							"apikey": [
 								{
 									"key": "key",
-									"value": "{{url}}",
+									"value": "{{key}}",
 									"type": "string"
 								},
 								{
@@ -704,7 +704,7 @@
 							"apikey": [
 								{
 									"key": "key",
-									"value": "{{url}}",
+									"value": "{{key}}",
 									"type": "string"
 								},
 								{
