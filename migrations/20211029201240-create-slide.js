@@ -15,13 +15,13 @@ module.exports = {
         type: Sequelize.STRING
       },
       order: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       organizationId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Organizations',
-          key: 'id',
+          key: 'id'
         },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL'
