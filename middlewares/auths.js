@@ -2,25 +2,28 @@ const securityService = require('../services/security');
 const usersService = require('../services/users');
 const rolesService = require('../services/roles');
 
+const tokenId = (req) => {
+  const token = req.headers['authorization'];
+  if (!token) {
+    const error = new Error('No token provided!');
+    error.status = 401;
+    throw error;
+  }
+  const decodedUser = securityService.verifyToken(token);
+  if (!decodedUser) {
+    const error = new Error(
+      'Unauthorized! Please enter a valid token provided at login'
+    );
+    error.status = 403;
+    throw error;
+  }
+  return decodedUser.id;
+};
+
 const isLoggedUser = async (req, res, next) => {
   try {
-    const token = req.headers['authorization'];
-    if (!token) {
-      const error = new Error('No token provided!');
-      error.status = 401;
-      throw error;
-    }
-    const decodedUser = securityService.verifyToken(token);
-    if (!decodedUser) {
-      const error = new Error(
-        'Unauthorized! Please enter a valid token provided at login'
-      );
-      error.status = 403;
-      throw error;
-    } else {
-      req.userId = decodedUser.id;
-      next();
-    }
+    req.userId = tokenId(req);
+    next();
   } catch (error) {
     next(error);
   }
@@ -28,9 +31,9 @@ const isLoggedUser = async (req, res, next) => {
 
 const isOwnUser = async (req, res, next) => {
   try {
-    isLoggedUser(req, res, next);
+    const reqId = tokenId(req);
     const { id } = req.params;
-    const userFound = await usersService.getById(req.userId);
+    const userFound = await usersService.getById(reqId);
     if (!userFound) {
       const error = new Error('no user found');
       error.status = 404;
@@ -42,7 +45,7 @@ const isOwnUser = async (req, res, next) => {
       error.status = 404;
       throw error;
     }
-    if (userFound.roleId === role.id) {
+    if (userFound.roleId === reqId) {
       return next();
     }
     if (+id === userFound.id) {
@@ -58,7 +61,8 @@ const isOwnUser = async (req, res, next) => {
 
 const isAdmin = async (req, res, next) => {
   try {
-    const userFound = await usersService.getById(req.userId);
+    const id = tokenId(req);
+    const userFound = await usersService.getById(id);
     if (!userFound) {
       const error = new Error('no user found');
       error.status = 404;
