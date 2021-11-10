@@ -14,7 +14,6 @@ categoriesRouter.post(
 
 categoriesRouter.get(
   '/',
-  authMiddleware.isLoggedUser,
   authMiddleware.isAdmin,
   categoriesController.getAllNames
 );
