@@ -38,9 +38,7 @@ const login = async (req, res) => {
 
 const myData = async (req, res, next) => {
   try {
-    let token = req.headers['authorization'];
-    const userDecoded = security.verifyToken(token);
-    const user = await usersService.getById(userDecoded.id);
+    const user = await usersService.getById(req.userId);
     if (!user) {
       const error = new error(`User with id: ${user.id} not found`);
       error.status = 404;
