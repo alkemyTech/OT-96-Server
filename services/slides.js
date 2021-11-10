@@ -21,6 +21,17 @@ const getById = async (id) => {
 };
 
 const create = async ({ imageUrl, text, order, organizationId }) => {
+  if (!order) {
+    const slides = await slidesRepository.getAll();
+    let orderId = 0;
+    slides.forEach((slide) => {
+      if (slide.dataValues.order > orderId) {
+        orderId = slide.dataValues.order;
+      }
+    });
+    order = orderId + 1;
+  }
+
   const image = Buffer.from(imageUrl, 'base64');
   const { url } = await imageUploader.upload(image);
   return await slidesRepository.create({
