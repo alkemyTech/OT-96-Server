@@ -25,18 +25,18 @@ const create = async (testimonial) => {
 };
 
 const update = async (id, { name, image, content }) => {
-  const response = await testimonialsRepository.getById(id);
-  if (!response) {
-    const error = new Error('El testimonio no existe');
+  const serchTestimonial = await testimonialsRepository.getById(id);
+  if (!serchTestimonial) {
+    const error = new Error('testimonial not found');
     error.status = 404;
     throw error;
   } else {
-    const updatedTestimonial = await testimonialsRepository.update(id, {
+    const response = await testimonialsRepository.update(id, {
       name,
       image,
       content
     });
-    return updatedTestimonial;
+    return response;
   }
 };
 
