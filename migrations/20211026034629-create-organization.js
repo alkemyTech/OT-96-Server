@@ -6,51 +6,63 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       image: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       address: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: true
       },
       phone: {
         type: Sequelize.INTEGER,
-        allowNull: true,
+        allowNull: true
       },
       email: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       welcomeText: {
         type: Sequelize.TEXT,
-        allowNull: false,
+        allowNull: false
       },
       aboutUsText: {
         type: Sequelize.TEXT,
-        allowNull: true,
+        allowNull: true
+      },
+      facebookUrl: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      linkedinUrl: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      instagramUrl: {
+        type: Sequelize.STRING,
+        allowNull: true
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: Sequelize.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: Sequelize.DATE
       },
       deletedAt: {
         allowNull: true,
-        type: Sequelize.DATE,
-      },
+        type: Sequelize.DATE
+      }
     });
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Organizations');
-  },
+  }
 };
