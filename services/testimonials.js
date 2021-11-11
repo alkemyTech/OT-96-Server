@@ -13,7 +13,7 @@ const getAll = async () => {
 const getById = async (id) => {
   const testimonial = await testimonialsRepository.getById(id);
   if (!testimonial) {
-    const error = new Error('No existe el slide');
+    const error = new Error('testimonial not found');
     error.status = 404;
     throw error;
   }
@@ -24,14 +24,20 @@ const create = async (testimonial) => {
   return await testimonialsRepository.create(testimonial);
 };
 
-const update = async (id, testimonial) => {
-  const response = await testimonialsRepository.getById(id);
-  if (response) {
-    const error = new Error('El testimonio no existe');
-    error.status = 409;
+const update = async (id, { name, image, content }) => {
+  const serchTestimonial = await testimonialsRepository.getById(id);
+  if (!serchTestimonial) {
+    const error = new Error('testimonial not found');
+    error.status = 404;
     throw error;
+  } else {
+    const response = await testimonialsRepository.update(id, {
+      name,
+      image,
+      content
+    });
+    return response;
   }
-  return await testimonialsRepository.update(id, testimonial);
 };
 
 const remove = async (id) => {
