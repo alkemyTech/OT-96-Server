@@ -15,6 +15,7 @@ const newsRouter = require('./routes/news');
 const activitiesRouter = require('./routes/activities');
 const slidesRouter = require('./routes/slides');
 
+const testimonialsRouter = require("./routes/testimonials")
 const app = express();
 app.use(cors());
 
@@ -36,6 +37,8 @@ app.use('/categories', categoriesRouter);
 app.use('/news', newsRouter);
 app.use('/activities', activitiesRouter);
 app.use('/slides', slidesRouter);
+
+app.use("/testimonials", testimonialsRouter);
 
 /** test routes */
 // const test_imagesRouter = require('./routes/test_images');
