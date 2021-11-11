@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       News.belongsTo(models.Category, { as: 'category' });
+      News.hasMany(models.Comment);
     }
   }
   News.init(
@@ -20,12 +21,12 @@ module.exports = (sequelize, DataTypes) => {
       image: DataTypes.STRING,
       type: { type: DataTypes.STRING, defaultValue: 'news' },
       categoryId: DataTypes.INTEGER,
-      deletedAt: DataTypes.DATE,
+      deletedAt: DataTypes.DATE
     },
     {
       sequelize,
       modelName: 'News',
-      paranoid: true,
+      paranoid: true
     }
   );
   return News;
