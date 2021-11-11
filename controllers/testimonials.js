@@ -35,17 +35,12 @@ const create = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   try {
-    const testimonial = await testimonialsService.getById(req.params.id);
-    if (testimonial) {
-      const error = new error(`Testimonial Not Found`);
-      error.status = 404;
-      throw error;
-    }
-    const testimonialUpdate = await testimonialsService.update(
-      req.params.id,
-      req.body
-    );
-    return res.status(200).json({ data: testimonialUpdate });
+    const response = await testimonialsService.update(req.params.id, req.body);
+    res.status(200).json({
+      success: true,
+      msg: `testimonials: ${response.name} has been updated`,
+      testimonials: response
+    });
   } catch (error) {
     next(error);
   }

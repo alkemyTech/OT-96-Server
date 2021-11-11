@@ -23,14 +23,19 @@ const create = async (organization) => {
   return await slidesRepository.create(organization);
 };
 
-const update = async (id, organization) => {
+const update = async (id, { imageUrl, text, order, organizationId }) => {
   const slide = await slidesRepository.getById(id);
   if (!slide) {
     const error = new Error('El slide no existe');
     error.status = 404;
     throw error;
   }
-  return await slidesRepository.update(id, organization);
+  return await slidesRepository.update(id, {
+    imageUrl,
+    text,
+    order,
+    organizationId
+  });
 };
 
 const remove = async (id) => {

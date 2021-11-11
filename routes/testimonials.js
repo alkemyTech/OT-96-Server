@@ -8,5 +8,10 @@ testimonialsRouter.delete(
   authMiddleware.isAdmin,
   testimonialsController.remove
 );
+testimonialsRouter.put(
+  '/:id',
+  authMiddleware.isAdmin,
+  testimonialsController.update
+);
 
 module.exports = testimonialsRouter;
