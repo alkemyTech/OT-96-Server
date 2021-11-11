@@ -17,8 +17,6 @@ const slidesRouter = require('./routes/slides');
 const membersRouter = require('./routes/members');
 const contactsRouter = require('./routes/contacts');
 const testimonialsRouter = require('./routes/testimonials');
-
-const testimonialsRouter = require("./routes/testimonials")
 const app = express();
 app.use(cors());
 
