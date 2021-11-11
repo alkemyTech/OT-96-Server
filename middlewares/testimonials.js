@@ -20,9 +20,6 @@ const validateTestimonial = [
   check('content')
     .notEmpty()
     .withMessage('You need to enter a content!')
-    .bail()
-    .isAlphanumeric()
-    .withMessage('content can only contain alphnumeric caracters')
     .bail(),
 
   errorHandler
