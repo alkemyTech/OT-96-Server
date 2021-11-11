@@ -1,7 +1,7 @@
 const awsServices = require('./aws_s3');
 
-const upload = async (file) => {
-  const result = await awsServices.uploadFile(file);
+const upload = async (file, text) => {
+  const result = await awsServices.uploadFile(file, text);
 
   const response = {
     url: result.Location,

@@ -14,13 +14,13 @@ const s3 = new AWS.S3({
   sercetAccesKey
 });
 
-const uploadFile = (file) => {
+const uploadFile = (file, text) => {
   // const fileStream = fs.createReadStream(file.path);
 
   const uploadParams = {
     Bucket: bucketName,
     Body: file,
-    Key: 'image.png'
+    Key: text
   };
 
   return s3.upload(uploadParams).promise();
