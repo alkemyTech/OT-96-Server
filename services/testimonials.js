@@ -13,7 +13,7 @@ const getAll = async () => {
 const getById = async (id) => {
   const testimonial = await testimonialsRepository.getById(id);
   if (!testimonial) {
-    const error = new Error('No existe el slide');
+    const error = new Error('No existe el testimonio');
     error.status = 404;
     throw error;
   }
