@@ -5,4 +5,12 @@ const getAll = async () => {
   return response;
 };
 
-module.exports = { getAll };
+const create = async (data) => {
+  const response = await db.Member.create(data);
+  return response;
+};
+
+module.exports = {
+  getAll,
+  create
+};
