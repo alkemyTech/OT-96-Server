@@ -44,8 +44,6 @@ app.use('/members', membersRouter);
 app.use('/contacts', contactsRouter);
 app.use('/testimonials', testimonialsRouter);
 
-app.use("/testimonials", testimonialsRouter);
-
 /** test routes */
 // const test_imagesRouter = require('./routes/test_images');
 // app.use('/test', test_imagesRouter);
