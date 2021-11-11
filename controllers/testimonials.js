@@ -1,8 +1,5 @@
-const testimonialsService = require('./services/testimonials');
+const testimonialsService = require('../services/testimonials');
 
-/* for future use
-
-// list all testimonials
 const getAll = async (req, res, next) => {
   try {
     const testimonials = await testimonialsService.getAll();
@@ -10,66 +7,68 @@ const getAll = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
+};
 
-// get one testimonial by id
 const getById = async (req, res, next) => {
   try {
     const testimonial = await testimonialsService.getById(req.params.id);
     if (testimonial) {
-      return res.status(201).json({ data: testimonials });
+      return res.status(201).json({ data: testimonial });
     } else {
-      rconst error = new error(`Testimonial Not Found`);
+      const error = new error(`Testimonial Not Found`);
       error.status = 404;
       throw error;
     }
   } catch (error) {
     next(error);
   }
-}
+};
 
-// create a new testimonial using body data
 const create = async (req, res, next) => {
   try {
     const testimonial = await testimonialsService.create(req.body);
-    return res.status(200).json({ data: testimonials });
-  } catch (error) { 
+    return res.status(200).json({ data: testimonial });
+  } catch (error) {
     next(error);
   }
-}
+};
 
-// update specific testimonial by id using body data
-const update =async  (req, res, next) => {
+const update = async (req, res, next) => {
   try {
     const testimonial = await testimonialsService.getById(req.params.id);
     if (testimonial) {
-      await testimonialsService.update(req.params.id, req.body);
-      return res.status(200).json({ data: testimonials });
-    } else {
       const error = new error(`Testimonial Not Found`);
       error.status = 404;
       throw error;
     }
+    const testimonialUpdate = await testimonialsService.update(
+      req.params.id,
+      req.body
+    );
+    return res.status(200).json({ data: testimonialUpdate });
   } catch (error) {
     next(error);
   }
-}
+};
 
-// soft delete specific testimonial by id
 const remove = async (req, res, next) => {
   try {
     const testimonial = await testimonialsService.getById(req.params.id);
-    if (testimonial) {
-      await testimonialsService.remove(req.params.id);
-      return res.status(200).json({ data: testimonials });;
-    } else {
+    if (!testimonial) {
       const error = new error(`Testimonial Not Found`);
       error.status = 404;
       throw error;
     }
+    await testimonialsService.remove(testimonial.id);
+
+    res.status(200).json({
+      status: 200,
+      success: true,
+      msg: `Testimonial ${req.params.id} removed succesfully`
+    });
   } catch (error) {
     next(error);
   }
-}
+};
 
-module.exports = { getAll, getById, create, update, remove };*/
+module.exports = { getAll, getById, create, update, remove };
