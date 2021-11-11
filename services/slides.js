@@ -33,13 +33,14 @@ const create = async ({ imageUrl, text, order, organizationId }) => {
   }
 
   const image = Buffer.from(imageUrl, 'base64');
-  const { url } = await imageUploader.upload(image);
-  return await slidesRepository.create({
+  const { url, key } = await imageUploader.upload(image, text);
+  const newSlide = await slidesRepository.create({
     imageUrl: url,
     text,
     order,
     organizationId
   });
+  return { newSlide, key };
 };
 
 const update = async (id, { imageUrl, text, order, organizationId }) => {
