@@ -13,5 +13,10 @@ testimonialsRouter.put(
   authMiddleware.isAdmin,
   testimonialsController.update
 );
+testimonialsRouter.post(
+  '/',
+  authMiddleware.isAdmin,
+  testimonialsController.create
+);
 
 module.exports = testimonialsRouter;
