@@ -12,7 +12,7 @@ const getAll = async () => {
 
 const create = async (data) => {
   const { name, facebookUrl, instagramUrl, linkedinUrl, image } = data;
-  const response = await contactsRepository.create({
+  const response = await membersRepository.create({
     name,
     facebookUrl,
     instagramUrl,
