@@ -14,7 +14,7 @@ const getOrganizationPublic = async (req, res, next) => {
 const getAll = async (req, res, next) => {
   try {
     const organizationList = await organizationsService.getAll();
-    res.send(organizationList);
+    res.status(200).json(organizationList);
   } catch (error) {
     next(error);
   }
@@ -37,7 +37,7 @@ const create = async (req, res, next) => {
     res.status(200).json({
       success: true,
       msg: `your Organization ${newOrganization.title} has been created`,
-      organization: newOrganization,
+      organization: newOrganization
     });
   } catch (error) {
     next(error);
@@ -52,7 +52,7 @@ const update = async (req, res, next) => {
     res.status(200).json({
       success: true,
       msg: `organization ${req.params.id} is updated succesfully`,
-      organization: updateOrganization,
+      organization: updateOrganization
     });
   } catch (error) {
     next(error);
@@ -67,7 +67,7 @@ const remove = async (req, res, next) => {
     res.status(201).json({
       success: true,
       msg: `your organization ${req.body.name} has been deleted`,
-      organization: softDeleteOrganization,
+      organization: softDeleteOrganization
     });
   } catch (error) {
     next(error);
@@ -80,5 +80,5 @@ module.exports = {
   create,
   update,
   remove,
-  getOrganizationPublic,
+  getOrganizationPublic
 };
