@@ -1,14 +1,13 @@
 const testimonialsService = require('../services/testimonials');
 
-// list all testimonials
-/* const getAll = async (req, res, next) => {
+const getAll = async (req, res, next) => {
   try {
     const testimonials = await testimonialsService.getAll();
     return res.status(200).json({ data: testimonials });
   } catch (error) {
     next(error);
   }
-} */
+};
 
 const getById = async (req, res, next) => {
   try {
@@ -25,15 +24,14 @@ const getById = async (req, res, next) => {
   }
 };
 
-// create a new testimonial using body data
-/* const create = async (req, res, next) => {
+const create = async (req, res, next) => {
   try {
     const testimonial = await testimonialsService.create(req.body);
-    return res.status(200).json({ data: testimonials });
-  } catch (error) { 
+    return res.status(200).json({ data: testimonial });
+  } catch (error) {
     next(error);
   }
-} */
+};
 
 const update = async (req, res, next) => {
   try {
@@ -48,21 +46,24 @@ const update = async (req, res, next) => {
   }
 };
 
-// soft delete specific testimonial by id
-/* const remove = async (req, res, next) => {
+const remove = async (req, res, next) => {
   try {
     const testimonial = await testimonialsService.getById(req.params.id);
-    if (testimonial) {
-      await testimonialsService.remove(req.params.id);
-      return res.status(200).json({ data: testimonials });;
-    } else {
+    if (!testimonial) {
       const error = new error(`Testimonial Not Found`);
       error.status = 404;
       throw error;
     }
+    await testimonialsService.remove(testimonial.id);
+
+    res.status(200).json({
+      status: 200,
+      success: true,
+      msg: `Testimonial ${req.params.id} removed succesfully`
+    });
   } catch (error) {
     next(error);
   }
-} */
+};
 
-module.exports = { getById, update };
+module.exports = { getAll, getById, create, update, remove };
