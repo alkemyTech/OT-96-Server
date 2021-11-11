@@ -18,41 +18,53 @@ module.exports = (sequelize, DataTypes) => {
     {
       name: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
       },
       image: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
       },
       address: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: true
       },
       phone: {
         type: DataTypes.INTEGER,
-        allowNull: true,
+        allowNull: true
       },
       email: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
       },
       welcomeText: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: false
       },
       aboutUsText: {
         type: DataTypes.TEXT,
-        allowNull: true,
+        allowNull: true
+      },
+      facebookUrl: {
+        type: DataTypes.TEXT,
+        allowNull: true
+      },
+      linkedinUrl: {
+        type: DataTypes.TEXT,
+        allowNull: true
+      },
+      instagramUrl: {
+        type: DataTypes.TEXT,
+        allowNull: true
       },
       deletedAt: {
         type: DataTypes.DATE,
-        allowNull: true,
-      },
+        allowNull: true
+      }
     },
     {
       sequelize,
       modelName: 'Organization',
-      paranoid: true,
+      paranoid: true
     }
   );
   return Organization;
