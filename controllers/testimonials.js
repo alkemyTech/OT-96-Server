@@ -3,7 +3,7 @@ const testimonialsService = require('../services/testimonials');
 const getAll = async (req, res, next) => {
   try {
     const testimonials = await testimonialsService.getAll();
-    return res.status(200).json({ data: testimonials });
+    res.status(200).json(testimonials);
   } catch (error) {
     next(error);
   }
@@ -27,7 +27,12 @@ const getById = async (req, res, next) => {
 const create = async (req, res, next) => {
   try {
     const testimonial = await testimonialsService.create(req.body);
-    return res.status(200).json({ data: testimonial });
+    res.status(200).json({
+      success: true,
+      msg: `testimonial:${testimonial.name}  has been created`,
+      user: newUser,
+      token: token
+    });
   } catch (error) {
     next(error);
   }

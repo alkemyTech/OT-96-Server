@@ -4,7 +4,7 @@ const security = require('../services/security');
 const getAll = async (req, res, next) => {
   try {
     const users = await usersService.getAll();
-    return res.status(200).json({ data: users });
+    res.status(200).json(users);
   } catch (error) {
     next(error);
   }
@@ -18,7 +18,7 @@ const create = async (req, res, next) => {
       success: true,
       msg: `${newUser.firstName} your user has been created`,
       user: newUser,
-      token: token,
+      token: token
     });
   } catch (error) {
     next(error);
@@ -31,7 +31,7 @@ const update = async (req, res, next) => {
     res.status(200).json({
       success: true,
       msg: `User ${req.params.id} is updated succesfully`,
-      User: updateUser,
+      user: updateUser,
     });
   } catch (error) {
     next(error);
@@ -51,5 +51,5 @@ module.exports = {
   getAll,
   create,
   update,
-  remove,
+  remove
 };

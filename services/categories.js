@@ -1,4 +1,5 @@
 const categoriesRepository = require('../repositories/categories');
+const newsRepository = require('../repositories/news');
 
 const getAll = async () => {
   const categories = await categoriesRepository.getAll();
@@ -13,7 +14,7 @@ const getAll = async () => {
 
 const getById = async (id) => {
   const category = await categoriesRepository.getById(id);
-  
+
   if (!category) {
     const error = new Error('No existe la categoria!');
     error.status = 404;
@@ -45,13 +46,19 @@ const update = async (id, { name, image, description }) => {
     error.status = 409;
     throw error;
   }
-  return category;
+  return await categoriesRepository.getById(id);
 };
 const remove = async (id) => {
   const category = await categoriesRepository.getById(id);
   if (!category) {
     const error = new Error(`No existe la categoria con ID: ${id}!`);
     error.status = 404;
+    throw error;
+  }
+  const news = await newsRepository.getByCategoryId(id)
+  if(news.length > 0){
+    const error = new Error(`No puede borrarse ya que tiene news asociadas`);
+    error.status = 401;
     throw error;
   }
   await categoriesRepository.remove(id);
