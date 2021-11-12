@@ -1,4 +1,5 @@
 const slidesRepository = require('../repositories/slides');
+const organizationsRepository = require('../repositories/organizations');
 const imageUploader = require('./imageUploader');
 
 const getAll = async () => {
@@ -45,17 +46,34 @@ const create = async ({ imageUrl, text, order, organizationId }) => {
 
 const update = async (id, { imageUrl, text, order, organizationId }) => {
   const slide = await slidesRepository.getById(id);
+
   if (!slide) {
-    const error = new Error('El slide no existe');
+    const error = new Error(`The slide id ${id} doesn't exists!`);
     error.status = 404;
     throw error;
   }
-  return await slidesRepository.update(id, {
+
+  if (organizationId) {
+    const organization = await organizationsRepository.findById(organizationId);
+    if (!organization) {
+      const error = new Error(
+        `The organization id ${organizationId} doesn't exists!`
+      );
+      error.status = 404;
+      throw error;
+    }
+  }
+
+  await slidesRepository.update(id, {
     imageUrl,
     text,
     order,
     organizationId
   });
+
+  const updatedSlide = await slidesRepository.getById(id);
+
+  return updatedSlide;
 };
 
 const remove = async (id) => {
