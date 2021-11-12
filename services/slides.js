@@ -79,7 +79,7 @@ const update = async (id, { imageUrl, text, order, organizationId }) => {
 const remove = async (id) => {
   const slide = await slidesRepository.getById(id);
   if (!slide) {
-    const error = new Error('El slide no existe');
+    const error = new Error(`The slide id ${id} doesn't exists!`);
     error.status = 404;
     throw error;
   }
