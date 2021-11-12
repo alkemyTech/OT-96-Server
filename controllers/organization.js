@@ -45,14 +45,14 @@ const create = async (req, res, next) => {
 };
 const update = async (req, res, next) => {
   try {
-    const updateOrganization = await organizationsService.update(
+    const updatedOrganization = await organizationsService.update(
       req.params.id,
       req.body
     );
     res.status(200).json({
       success: true,
       msg: `organization ${req.params.id} is updated succesfully`,
-      organization: updateOrganization,
+      organization: updatedOrganization,
     });
   } catch (error) {
     next(error);

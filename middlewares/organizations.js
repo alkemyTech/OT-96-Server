@@ -12,9 +12,6 @@ const validateOrganization = [
   check('name')
     .notEmpty()
     .withMessage('You need to enter a name!')
-    .bail()
-    .isAlphanumeric()
-    .withMessage('Invalid Name')
     .bail(),
 
   check('image').notEmpty().withMessage('You need to enter a image!').bail(),

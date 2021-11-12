@@ -40,7 +40,8 @@ const update = async (id, organization) => {
     error.status = 404;
     throw error;
   }
-  return await organizationsRepository.update(id, organization);
+  await organizationsRepository.update(id, organization);
+  return await organizationsRepository.getById(id);
 };
 
 const remove = async (id) => {
