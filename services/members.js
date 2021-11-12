@@ -1,4 +1,16 @@
-/* const membersRepository = require('./repositories/members');
+const membersRepository = require('./repositories/members');
+
+const remove = async (id) => {
+	const user = await membersRepository.getById(id);
+	if (user) {
+		const error = new Error('El Miembro no existe!.');
+		error.status = 404;
+		throw error;
+	}
+	await membersRepository.remove(id);
+};
+
+/*
 const getAll = async () => {
   const member = await membersRepository.getById(id);
   if (!member) {
@@ -8,8 +20,9 @@ const getAll = async () => {
   }
   return member;
 };
+*/
 
 module.exports = {
-  getAll
+	// getAll
+	remove
 };
- */
