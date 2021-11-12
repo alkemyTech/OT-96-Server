@@ -17,7 +17,8 @@ const update = async (id, { name, content, image }) => {
     error.status = 404;
     throw error;
   }
-  return await activitiesRepository.update(id, { name, content, image });
+  await activitiesRepository.update(id, { name, content, image });
+  return await activitiesRepository.getById(id);
 };
 
 module.exports = {
