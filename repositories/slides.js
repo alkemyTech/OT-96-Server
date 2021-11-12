@@ -1,7 +1,9 @@
 const db = require('../models');
 
 const getAll = async () => {
-  const Slide = await db.Slide.findAll();
+  const Slide = await db.Slide.findAll({
+    attributes: ['imageUrl', 'order']
+  });
   return Slide;
 };
 
