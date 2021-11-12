@@ -1,26 +1,29 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Slides', {
+    await queryInterface.createTable('Comments', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      imageUrl: {
+      body: {
         type: Sequelize.STRING
       },
-      text: {
-        type: Sequelize.STRING
-      },
-      order: {
-        type: Sequelize.INTEGER
-      },
-      organizationId: {
+      userId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Organizations',
+          model: 'Users',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
+      },
+      newsID: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'News',
           key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -37,6 +40,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Slides');
+    await queryInterface.dropTable('Comments');
   }
 };

@@ -1,0 +1,1000 @@
+{
+	"info": {
+		"_postman_id": "d5792428-96dd-4d7d-8a47-28f9013a3ce4",
+		"name": "Somos Mas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "firstName",
+									"value": "Manuel",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "Francisco",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "franciscomanuel@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Hola123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "franciscomanuel@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Hola123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MyData",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3ROYW1lIjoiTWFudWVsIiwibGFzdE5hbWUiOiJGcmFuY2lzY28iLCJyb2xlSWQiOjIsImlhdCI6MTYzNjQ3ODU5MCwiZXhwIjoxNjM2NTE0NTkwfQ.dkfYuLUMft3An1uTWg4WPFA3szgL_bWka5VDvxOAPX0",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/auth/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "AllUsers",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3ROYW1lIjoiTWFudWVsIiwibGFzdE5hbWUiOiJGcmFuY2lzY28iLCJyb2xlSWQiOjIsImlhdCI6MTYzNjQ3OTM4OCwiZXhwIjoxNjM2NTE1Mzg4fQ.DMOj6eZxPDBDwCBFrTTJFtB5khn3fukN0fEVoBfrbxI",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User (no endpoint)",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3ROYW1lIjoiTWFudWVsIiwibGFzdE5hbWUiOiJGcmFuY2lzY28iLCJyb2xlSWQiOjIsImlhdCI6MTYzNjQ3OTM4OCwiZXhwIjoxNjM2NTE1Mzg4fQ.DMOj6eZxPDBDwCBFrTTJFtB5khn3fukN0fEVoBfrbxI",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "AllCategories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetACategorie",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3ROYW1lIjoiTWFudWVsIiwibGFzdE5hbWUiOiJGcmFuY2lzY28iLCJyb2xlSWQiOjIsImlhdCI6MTYzNjQ4MjE3NiwiZXhwIjoxNjM2NTE4MTc2fQ.4gEm6VOXA3V__27q5caQSoyIE7VcQuoMnGNhRabJYm0",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/categories/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categories",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateCategory",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3ROYW1lIjoiTWFudWVsIiwibGFzdE5hbWUiOiJGcmFuY2lzY28iLCJyb2xlSWQiOjIsImlhdCI6MTYzNjQ4MjE3NiwiZXhwIjoxNjM2NTE4MTc2fQ.4gEm6VOXA3V__27q5caQSoyIE7VcQuoMnGNhRabJYm0",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Nuevo",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Nuevo",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"value": "Nuevo",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/categories/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categories",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteCategory",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/categories/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categories",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "News",
+			"item": [
+				{
+					"name": "GetAllNews (no endpoint)",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3ROYW1lIjoiTWFudWVsIiwibGFzdE5hbWUiOiJGcmFuY2lzY28iLCJyb2xlSWQiOjIsImlhdCI6MTYzNjQ4MjE3NiwiZXhwIjoxNjM2NTE4MTc2fQ.4gEm6VOXA3V__27q5caQSoyIE7VcQuoMnGNhRabJYm0",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/news",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"news"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetANew",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/news/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"news",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateNew",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "new",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "new",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"value": "new",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "new",
+									"type": "text"
+								},
+								{
+									"key": "categoryId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/news/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"news",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteNew",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/news/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"news",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Organization",
+			"item": [
+				{
+					"name": "GetAOrganization",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3ROYW1lIjoiTWFudWVsIiwibGFzdE5hbWUiOiJGcmFuY2lzY28iLCJyb2xlSWQiOjIsImlhdCI6MTYzNjQ3OTM4OCwiZXhwIjoxNjM2NTE1Mzg4fQ.DMOj6eZxPDBDwCBFrTTJFtB5khn3fukN0fEVoBfrbxI",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/organization/1/public",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"organization",
+								"1",
+								"public"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateOrganization",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZmlyc3ROYW1lIjoiTWFudWVsIiwibGFzdE5hbWUiOiJGcmFuY2lzY28iLCJyb2xlSWQiOjIsImlhdCI6MTYzNjQ4MDg4NCwiZXhwIjoxNjM2NTE2ODg0fQ.BZPk0mXleiHG1TudCmNyMFLmO08ZP5phr37L09kdXIs",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Somos Menos",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"value": "https://www.adslzone.net/app/uploads-adslzone.net/2019/04/borrar-fondo-imagen.jpg",
+									"type": "text"
+								},
+								{
+									"key": "phone ",
+									"value": "1122334455",
+									"type": "text"
+								},
+								{
+									"key": "address ",
+									"value": "calle falsa 123",
+									"type": "text"
+								},
+								{
+									"key": "welcomeText",
+									"value": "hola",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "hola@hotmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/organization/1/public",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"organization",
+								"1",
+								"public"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Slides",
+			"item": [
+				{
+					"name": "GetAllSlides",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/slides",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"slides"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetASlide",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/slides/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"slides",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateSlide",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "imageUrl",
+									"value": "image",
+									"type": "text"
+								},
+								{
+									"key": "text",
+									"value": "image",
+									"type": "text"
+								},
+								{
+									"key": "order",
+									"value": "image",
+									"type": "text"
+								},
+								{
+									"key": "organizationId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/slides",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"slides"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateSlide",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "imageUrl",
+									"value": "new",
+									"type": "text"
+								},
+								{
+									"key": "text",
+									"value": "new",
+									"type": "text"
+								},
+								{
+									"key": "order",
+									"value": "new",
+									"type": "text"
+								},
+								{
+									"key": "organizationId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/slides/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"slides",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteSlide",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/slides/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"slides",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "test",
+			"item": [
+				{
+					"name": "image-test",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "contacts",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3ROYW1lIjoiTWFudWVsIiwibGFzdE5hbWUiOiJGcmFuY2lzY28iLCJyb2xlSWQiOjEsImlhdCI6MTYzNjU3MTkyNCwiZXhwIjoxNjM2NjA3OTI0fQ.zQ4vrAxQK84TxO5swykojnYlzeEiBm-WKgNDzNV8cgY",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Matias",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "112244555",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "latengogrande@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "message",
+									"value": "esta mierda anda píola",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/contacts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Members",
+			"item": [
+				{
+					"name": "GetAll",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3ROYW1lIjoiTWFudWVsIiwibGFzdE5hbWUiOiJGcmFuY2lzY28iLCJyb2xlSWQiOjEsImlhdCI6MTYzNjU3MzQyNiwiZXhwIjoxNjM2NjA5NDI2fQ.AYT1hVktXXRhyuR35X1KPvmXVwSKAUfrisDpUWT0LMI",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/members",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"members"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Testimonials",
+			"item": [
+				{
+					"name": "udpate",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3ROYW1lIjoiTWFudWVsIiwibGFzdE5hbWUiOiJGcmFuY2lzY28iLCJyb2xlSWQiOjEsImlhdCI6MTYzNjU4NDE1NywiZXhwIjoxNjM2NjIwMTU3fQ.cijO0LX6VbcwCznPaDwfIZlNv873vKjBgzDTxO45k6g",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "testmonio",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "esta2323232",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/testimonials/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"testimonials",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3ROYW1lIjoiTWFudWVsIiwibGFzdE5hbWUiOiJGcmFuY2lzY28iLCJyb2xlSWQiOjIsImlhdCI6MTYzNjY2NTczOCwiZXhwIjoxNjM2NzAxNzM4fQ.LyoTUb49O4VqW-D51VkQkR2Qj5QE3cag2x1jMw7m27U",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "testmonio3",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"value": "https://significado.net/wp-content/uploads/2015/03/Testimoniar-es-declarar-algo.jpg",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "testimonial content",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/testimonials",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"testimonials"
+							]
+						},
+						"description": "## Endpoint Creación Testimonios\n\nCOMO usuario administrador\nQUIERO dar de alta nuevos testimonios\nPARA informar novedades acerca de la ONG.\n\nCriterios de aceptación:\nPOST /testimonials - Deberá validar la existencia de los campos name y content enviados, para almacenar el registro en la tabla testimonials."
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

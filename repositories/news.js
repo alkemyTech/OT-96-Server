@@ -22,6 +22,14 @@ const getById = async (id) => {
   });
   return response;
 };
+const getByCategoryId = async (categoryId) => {
+  const response = await db.News.findAll({
+    where: {
+      categoryId
+    }
+  });
+  return response;
+};
 
 const create = async (data) => {
   const response = await db.News.create(data);
@@ -51,5 +59,6 @@ module.exports = {
   getById,
   create,
   update,
-  remove
+  remove,
+  getByCategoryId
 };

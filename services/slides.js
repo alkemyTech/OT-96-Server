@@ -1,4 +1,6 @@
 const slidesRepository = require('../repositories/slides');
+const organizationsRepository = require('../repositories/organizations');
+const imageUploader = require('./imageUploader');
 
 const getAll = async () => {
   const slides = await slidesRepository.getAll();
@@ -19,18 +21,66 @@ const getById = async (id) => {
   return slide;
 };
 
-const create = async (organization) => {
-  return await slidesRepository.create(organization);
+const create = async ({ imageUrl, text, order, organizationId }) => {
+  if (!order) {
+    const slides = await slidesRepository.getAll();
+    let orderId = 0;
+    slides.forEach((slide) => {
+      if (slide.dataValues.order > orderId) {
+        orderId = slide.dataValues.order;
+      }
+    });
+    order = orderId + 1;
+  }
+
+  const image = Buffer.from(imageUrl, 'base64');
+  const { url, key } = await imageUploader.upload(image, text);
+  const newSlide = await slidesRepository.create({
+    imageUrl: url,
+    text,
+    order,
+    organizationId
+  });
+  return { newSlide, key };
 };
 
-const update = async (id, organization) => {
+const update = async (id, { imageUrl, text, order, organizationId }) => {
   const slide = await slidesRepository.getById(id);
+
   if (!slide) {
-    const error = new Error('El slide no existe');
+    const error = new Error(`The slide id ${id} doesn't exists!`);
     error.status = 404;
     throw error;
+  } else {
+    await slidesRepository.update(id, {
+      imageUrl,
+      text,
+      order,
+      organizationId
+    });
+    return await slidesRepository.getById(id);
   }
-  return await slidesRepository.update(id, organization);
+  if (organizationId) {
+    const organization = await organizationsRepository.findById(organizationId);
+    if (!organization) {
+      const error = new Error(
+        `The organization id ${organizationId} doesn't exists!`
+      );
+      error.status = 404;
+      throw error;
+    }
+  }
+
+  await slidesRepository.update(id, {
+    imageUrl,
+    text,
+    order,
+    organizationId
+  });
+
+  const updatedSlide = await slidesRepository.getById(id);
+
+  return updatedSlide;
 };
 
 const remove = async (id) => {
