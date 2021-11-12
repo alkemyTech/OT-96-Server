@@ -13,4 +13,10 @@ membersRouter.post(
   membersControllers.create
 );
 
+membersRouter.put(
+  '/:id',
+  authMiddleware.isLoggedUser,
+  membersControllers.update
+);
+
 module.exports = membersRouter;
