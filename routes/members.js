@@ -4,7 +4,7 @@ const membersController = require('../controllers/members');
 const authMiddleware = require('../middlewares/auths');
 const membersMiddleware = require('../middlewares/members');
 
-membersRouter.get('/', authMiddleware.isAdmin, membersControllers.getAll);
+membersRouter.get('/', authMiddleware.isAdmin, membersController.getAll);
 
 membersRouter.post(
   '/',
