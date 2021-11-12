@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Slide.belongsTo(models.Organization, {
-        as: 'organization',
+        as: 'organization'
       });
     }
   }
@@ -19,11 +19,11 @@ module.exports = (sequelize, DataTypes) => {
     {
       imageUrl: DataTypes.STRING,
       text: DataTypes.STRING,
-      order: DataTypes.NUMBER,
+      order: DataTypes.INTEGER
     },
     {
       sequelize,
-      modelName: 'Slide',
+      modelName: 'Slide'
     }
   );
   return Slide;

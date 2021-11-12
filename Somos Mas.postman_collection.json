@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f2226a67-cb5c-45ac-9fb5-6f820fe68579",
+		"_postman_id": "d5792428-96dd-4d7d-8a47-28f9013a3ce4",
 		"name": "Somos Mas",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -775,7 +775,9 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": null
+						"url": {
+							"raw": ""
+						}
 					},
 					"response": []
 				}
@@ -934,6 +936,61 @@
 								"1"
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3ROYW1lIjoiTWFudWVsIiwibGFzdE5hbWUiOiJGcmFuY2lzY28iLCJyb2xlSWQiOjIsImlhdCI6MTYzNjY2NTczOCwiZXhwIjoxNjM2NzAxNzM4fQ.LyoTUb49O4VqW-D51VkQkR2Qj5QE3cag2x1jMw7m27U",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "authorization",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "testmonio3",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"value": "https://significado.net/wp-content/uploads/2015/03/Testimoniar-es-declarar-algo.jpg",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "testimonial content",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/testimonials",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"testimonials"
+							]
+						},
+						"description": "## Endpoint Creación Testimonios\n\nCOMO usuario administrador\nQUIERO dar de alta nuevos testimonios\nPARA informar novedades acerca de la ONG.\n\nCriterios de aceptación:\nPOST /testimonials - Deberá validar la existencia de los campos name y content enviados, para almacenar el registro en la tabla testimonials."
 					},
 					"response": []
 				}
