@@ -2,8 +2,8 @@ const slidesService = require('../services/slides');
 
 const getAll = async (req, res, next) => {
   try {
-    const SlideList = await slidesService.getAll();
-    res.send(SlideList);
+    const slideList = await slidesService.getAll();
+    res.send(slideList);
   } catch (error) {
     next(error);
   }
@@ -25,7 +25,7 @@ const create = async (req, res, next) => {
     res.status(200).json({
       success: true,
       msg: `your Slide ${newSlide.title} has been created`,
-      Slide: newSlide
+      slide: newSlide
     });
   } catch (error) {
     next(error);
@@ -34,11 +34,13 @@ const create = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   try {
-    const updateSlide = await slidesService.update(req.params.id, req.body);
+    const id = req.params.id;
+    const data = req.body;
+    const updatedSlide = await slidesService.update(id, data);
     res.status(200).json({
       success: true,
-      msg: `Slide ${req.params.id} is updated succesfully`,
-      Slide: updateSlide
+      msg: `Slide ${id} was updated successfully`,
+      slide: updatedSlide
     });
   } catch (error) {
     next(error);
