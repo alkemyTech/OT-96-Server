@@ -30,8 +30,6 @@ const create = async (req, res, next) => {
     res.status(200).json({
       success: true,
       msg: `testimonial:${testimonial.name}  has been created`,
-      user: newUser,
-      token: token
     });
   } catch (error) {
     next(error);

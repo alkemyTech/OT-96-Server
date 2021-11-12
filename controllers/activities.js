@@ -22,7 +22,7 @@ const update = async (req, res, next) => {
     res.status(200).json({
       success: true,
       msg: `Activity ${req.body.name} was updated succesfully`,
-      Activity: response
+      activity: response
     });
   } catch (error) {
     next(error);
