@@ -34,9 +34,18 @@ const update = async (req, res, next) => {
     next(error);
   }
 };
+const remove = async (req, res, next) => {
+	try {
+		const response = await membersService.remove(req.params.id);
+		return res.status(200).json(response);
+	} catch (error) {
+		next(error);
+	}
+};
 
 module.exports = {
   getAll,
   create,
-  update
+  update,
+  remove
 };

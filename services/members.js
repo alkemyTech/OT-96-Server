@@ -38,8 +38,19 @@ const update = async (id, data) => {
   return member;
 };
 
+const remove = async (id) => {
+	const user = await membersRepository.getById(id);
+	if (user) {
+		const error = new Error('El Miembro no existe!.');
+		error.status = 404;
+		throw error;
+	}
+	await membersRepository.remove(id);
+};
+
 module.exports = {
   getAll,
   create,
-  update
+  update,
+  remove
 };

@@ -24,9 +24,19 @@ const update = async (id, data) => {
   return response;
 };
 
+const remove = async (id) => {
+	const respose = await db.Members.destroy({
+		where: {
+			id
+		}
+	});
+	return respose;
+};
+
 module.exports = {
   getAll,
   getById,
   create,
-  update
+  update,
+  remove
 };
