@@ -20,7 +20,7 @@ const validateOrganization = [
     .notEmpty()
     .withMessage('You need to enter a welcomeText!')
     .bail()
-    .isAlphanumeric()
+    .isAlpha()
     .withMessage('welcomeText can only contain alphnumeric caracters')
     .bail(),
 
