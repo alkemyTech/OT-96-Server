@@ -29,13 +29,15 @@ const update = async (id, { imageUrl, text, order, organizationId }) => {
     const error = new Error('El slide no existe');
     error.status = 404;
     throw error;
+  } else {
+    await slidesRepository.update(id, {
+      imageUrl,
+      text,
+      order,
+      organizationId
+    });
+    return await slidesRepository.getById(id);
   }
-  return await slidesRepository.update(id, {
-    imageUrl,
-    text,
-    order,
-    organizationId
-  });
 };
 
 const remove = async (id) => {
