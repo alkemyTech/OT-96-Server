@@ -2,7 +2,7 @@ const slidesService = require('../services/slides');
 
 const getAll = async (req, res, next) => {
   try {
-    const slideList = await SlidesService.getAll();
+    const slideList = await slidesService.getAll();
     res.status(200).json(slideList);
   } catch (error) {
     next(error);
@@ -49,10 +49,10 @@ const update = async (req, res, next) => {
 
 const remove = async (req, res, next) => {
   try {
-    const softDeleteSlide = await slidesService.remove(req.params.id);
+    await slidesService.remove(req.params.id);
     res.status(201).json({
       success: true,
-      msg: `your Slide ${req.body.name} has been deleted`
+      msg: `Slide deleted successfully!`
     });
   } catch (error) {
     next(error);
