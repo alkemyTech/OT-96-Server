@@ -36,17 +36,21 @@ const create = async ({ name, image, description }) => {
 };
 
 const update = async (id, { name, image, description }) => {
-  const category = await categoriesRepository.update(id, {
-    name,
-    image,
-    description
-  });
+  const category = await categoriesRepository.getById(id)
+  console.log(category)
   if (!category) {
     const error = new Error('categoria no encontrada.');
     error.status = 409;
     throw error;
   }
-  return await categoriesRepository.getById(id);
+  const data = {
+    name,
+    image,
+    description
+  }
+  await categoriesRepository.update(id, data);
+  
+  return category
 };
 const remove = async (id) => {
   const category = await categoriesRepository.getById(id);

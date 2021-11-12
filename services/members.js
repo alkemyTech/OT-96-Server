@@ -34,8 +34,8 @@ const update = async (id, data) => {
     error.status = 404;
     throw error;
   }
-  const member = await membersRepository.update(id, data);
-  return member;
+  await membersRepository.update(id, data);
+  return await membersRepository.getById(id);
 };
 
 const remove = async (id) => {
