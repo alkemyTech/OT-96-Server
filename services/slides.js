@@ -25,17 +25,23 @@ const create = async (organization) => {
 
 const update = async (id, { imageUrl, text, order, organizationId }) => {
   const slide = await slidesRepository.getById(id);
+
   if (!slide) {
     const error = new Error(`The slide id ${id} doesn't exists!`);
     error.status = 404;
     throw error;
   }
-  return await slidesRepository.update(id, {
+
+  await slidesRepository.update(id, {
     imageUrl,
     text,
     order,
     organizationId
   });
+
+  const updatedSlide = await slidesRepository.getById(id);
+
+  return updatedSlide;
 };
 
 const remove = async (id) => {
