@@ -18,7 +18,7 @@ const create = async (data) => {
 const update = async (id, data) => {
   const response = await db.Testimonial.update(data, {
     where: {
-      id: id
+      id
     }
   });
   return response;

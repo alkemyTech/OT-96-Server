@@ -36,7 +36,7 @@ const update = async (id, { name, image, content }) => {
       image,
       content
     });
-    return response;
+    return await testimonialsRepository.getById(id);
   }
 };
 

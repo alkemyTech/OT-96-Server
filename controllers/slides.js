@@ -2,8 +2,8 @@ const SlidesService = require('../services/slides');
 
 const getAll = async (req, res, next) => {
   try {
-    const SlideList = await SlidesService.getAll();
-    res.send(SlideList);
+    const slideList = await SlidesService.getAll();
+    res.status(200).json(slideList);
   } catch (error) {
     next(error);
   }
@@ -25,7 +25,7 @@ const create = async (req, res, next) => {
     res.status(200).json({
       success: true,
       msg: `your Slide ${newSlide.title} has been created`,
-      Slide: newSlide,
+      Slide: newSlide
     });
   } catch (error) {
     next(error);
@@ -38,7 +38,7 @@ const update = async (req, res, next) => {
     res.status(200).json({
       success: true,
       msg: `Slide ${req.params.id} is updated succesfully`,
-      Slide: updateSlide,
+      Slide: updateSlide
     });
   } catch (error) {
     next(error);
@@ -50,7 +50,7 @@ const remove = async (req, res, next) => {
     const softDeleteSlide = await SlidesService.remove(req.params.id);
     res.status(201).json({
       success: true,
-      msg: `your Slide ${req.body.name} has been deleted`,
+      msg: `your Slide ${req.body.name} has been deleted`
     });
   } catch (error) {
     next(error);
