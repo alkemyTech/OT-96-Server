@@ -27,7 +27,19 @@ const create = async (data) => {
   return response;
 };
 
+const update = async (id, data) => {
+  const response = await membersRepository.getById(id);
+  if (!response) {
+    const error = new Error('Member not found');
+    error.status = 404;
+    throw error;
+  }
+  const member = await membersRepository.update(id, data);
+  return member;
+};
+
 module.exports = {
   getAll,
-  create
+  create,
+  update
 };
