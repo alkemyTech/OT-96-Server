@@ -13,7 +13,7 @@ const validateNew = [
     .notEmpty()
     .withMessage('You need to enter a name!')
     .bail()
-    .isAlphanumeric()
+    .isAlpha()
     .withMessage('Invalid Name')
     .bail(),
 
@@ -21,7 +21,7 @@ const validateNew = [
     .notEmpty()
     .withMessage('You need to enter a content!')
     .bail()
-    .isAlphanumeric()
+    .isAlpha()
     .withMessage('the content fail')
     .bail(),
 

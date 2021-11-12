@@ -13,7 +13,7 @@ const validateTestimonial = [
     .notEmpty()
     .withMessage('You need to enter a name!')
     .bail()
-    .isAlphanumeric()
+    .isAlpha()
     .withMessage('Invalid Name')
     .bail(),
 
