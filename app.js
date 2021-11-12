@@ -43,8 +43,8 @@ app.use('/contacts', contactsRouter);
 app.use('/testimonials', testimonialsRouter);
 
 /** test routes */
-// const test_imagesRouter = require('./routes/test_images');
-// app.use('/test', test_imagesRouter);
+const test_imagesRouter = require('./routes/test_images');
+app.use('/test', test_imagesRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
