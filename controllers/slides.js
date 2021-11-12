@@ -2,8 +2,8 @@ const slidesService = require('../services/slides');
 
 const getAll = async (req, res, next) => {
   try {
-    const slideList = await slidesService.getAll();
-    res.send(slideList);
+    const slideList = await SlidesService.getAll();
+    res.status(200).json(slideList);
   } catch (error) {
     next(error);
   }
@@ -24,8 +24,7 @@ const create = async (req, res, next) => {
     const { newSlide, key } = await slidesService.create(req.body);
     res.status(200).json({
       success: true,
-      msg: `your Slide ${newSlide.text} has been created`,
-      key,
+      msg: `your Slide id: ${newSlide.id} has been created`,
       Slide: newSlide
     });
   } catch (error) {

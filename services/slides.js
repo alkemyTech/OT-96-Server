@@ -51,8 +51,15 @@ const update = async (id, { imageUrl, text, order, organizationId }) => {
     const error = new Error(`The slide id ${id} doesn't exists!`);
     error.status = 404;
     throw error;
+  } else {
+    await slidesRepository.update(id, {
+      imageUrl,
+      text,
+      order,
+      organizationId
+    });
+    return await slidesRepository.getById(id);
   }
-
   if (organizationId) {
     const organization = await organizationsRepository.findById(organizationId);
     if (!organization) {

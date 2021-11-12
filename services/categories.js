@@ -14,7 +14,7 @@ const getAll = async () => {
 
 const getById = async (id) => {
   const category = await categoriesRepository.getById(id);
-  
+
   if (!category) {
     const error = new Error('No existe la categoria!');
     error.status = 404;
@@ -46,7 +46,7 @@ const update = async (id, { name, image, description }) => {
     error.status = 409;
     throw error;
   }
-  return category;
+  return await categoriesRepository.getById(id);
 };
 const remove = async (id) => {
   const category = await categoriesRepository.getById(id);

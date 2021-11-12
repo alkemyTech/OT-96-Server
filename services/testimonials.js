@@ -31,12 +31,12 @@ const update = async (id, { name, image, content }) => {
     error.status = 404;
     throw error;
   } else {
-    const response = await testimonialsRepository.update(id, {
+    await testimonialsRepository.update(id, {
       name,
       image,
       content
     });
-    return response;
+    return await testimonialsRepository.getById(id);
   }
 };
 
