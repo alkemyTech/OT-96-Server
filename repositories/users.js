@@ -6,7 +6,9 @@ const getAll = async () => {
 };
 
 const getById = async (id) => {
-  const response = await db.User.findByPk(id);
+  const response = await db.User.findByPk(id,{attributes:{
+    exclude:["password"]
+  }});
   return response;
 };
 

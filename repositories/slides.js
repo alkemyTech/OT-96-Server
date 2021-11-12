@@ -1,38 +1,36 @@
 const db = require('../models');
 
 const getAll = async () => {
-  const Slide = await db.Slide.findAll({
-    attributes: ['imageUrl', 'order']
-  });
-  return Slide;
+  const response = await db.Slide.findAll();
+  return response;
 };
 
 const getById = async (id) => {
-  const Slide = await db.Slide.findByPk(id);
-  return Slide;
+  const response = await db.Slide.findByPk(id);
+  return response;
 };
 
 const create = async (data) => {
-  const Slide = await db.Slide.create(data);
-  return Slide;
+  const response = await db.Slide.create(data);
+  return response;
 };
 
 const update = async (id, data) => {
-  const Slide = await db.Slide.update(data, {
+  const response = await db.Slide.update(data, {
     where: {
       id
     }
   });
-  return Slide;
+  return response;
 };
 
 const remove = async (id) => {
-  const Slide = await db.Slide.destroy({
+  const response = await db.Slide.destroy({
     where: {
       id
     }
   });
-  return Slide;
+  return response;
 };
 
 module.exports = {

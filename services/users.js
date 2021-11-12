@@ -57,7 +57,20 @@ const update = async (id, data) => {
     error.status = 404;
     throw error;
   }
-  return await usersRepository.update(id, data);
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(data.password, salt);
+
+  const userUpdated = {
+    firstName: data.firstName,
+    lastName: data.lastName,
+    email: data.email,
+    password: hashedPassword,
+    roleId: data.roleId,
+    photo: data.photo
+  };
+  await usersRepository.update(id, userUpdated);
+
+  return await usersRepository.getById(id);
 };
 
 const remove = async (id) => {
