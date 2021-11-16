@@ -9,10 +9,7 @@ const errorHandler = (req, res, next) => {
 };
 
 const validateOrganization = [
-  check('name')
-    .notEmpty()
-    .withMessage('You need to enter a name!')
-    .bail(),
+  check('name').notEmpty().withMessage('You need to enter a name!').bail(),
 
   check('image').notEmpty().withMessage('You need to enter a image!').bail(),
 
@@ -20,7 +17,6 @@ const validateOrganization = [
     .notEmpty()
     .withMessage('You need to enter a welcomeText!')
     .bail()
-    .isAlpha()
     .withMessage('welcomeText can only contain alphnumeric caracters')
     .bail(),
 

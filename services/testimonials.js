@@ -2,11 +2,6 @@ const testimonialsRepository = require('../repositories/testimonials');
 
 const getAll = async () => {
   const testimonials = await testimonialsRepository.getAll();
-  if (testimonials.length == 0) {
-    const error = new Error('No hay testimonios');
-    error.status = 404;
-    throw error;
-  }
   return testimonials;
 };
 

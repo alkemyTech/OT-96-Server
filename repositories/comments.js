@@ -5,6 +5,12 @@ const create = async (data) => {
   return response;
 };
 
-module.exports = {
-  create
+const getAll = async () => {
+  const response = await db.Comment.findAll({
+    order: [['createdAt', 'DESC']],
+    attributes: ['body']
+  });
+  return response;
 };
+
+module.exports = { getAll, create };

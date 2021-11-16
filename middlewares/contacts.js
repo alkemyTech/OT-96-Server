@@ -13,7 +13,6 @@ const validateContacts = [
     .notEmpty()
     .withMessage('You need to enter a name!')
     .bail()
-    .isAlpha()
     .withMessage('Invalid Name')
     .bail(),
 

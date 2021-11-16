@@ -14,7 +14,12 @@ const create = async ({ userId, newsId, body }) => {
   }
   return response;
 };
+const getAll = async () => {
+  const response = await commentsRepository.getAll();
+  return response;
+};
 
 module.exports = {
+  getAll,
   create
 };
