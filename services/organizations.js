@@ -2,11 +2,6 @@ const organizationsRepository = require('../repositories/organizations');
 
 const getOrganizationPublic = async (id) => {
   const organization = await organizationsRepository.getOrganizationPublic(id);
-  if (!organization) {
-    const error = new Error(`No existe la organización`);
-    error.status = 404;
-    throw error;
-  }
   return organization;
 };
 

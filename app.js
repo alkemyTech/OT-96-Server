@@ -17,6 +17,8 @@ const slidesRouter = require('./routes/slides');
 const membersRouter = require('./routes/members');
 const contactsRouter = require('./routes/contacts');
 const testimonialsRouter = require('./routes/testimonials');
+const commentsRouter = require('./routes/comments');
+
 const app = express();
 app.use(cors());
 
@@ -41,6 +43,7 @@ app.use('/slides', slidesRouter);
 app.use('/members', membersRouter);
 app.use('/contacts', contactsRouter);
 app.use('/testimonials', testimonialsRouter);
+app.use('/comments', commentsRouter);
 
 /** test routes */
 // const test_imagesRouter = require('./routes/test_images');
