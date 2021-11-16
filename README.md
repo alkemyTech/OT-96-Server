@@ -26,3 +26,16 @@ npx sequelize-cli db:seed:all
 ``` bash
 npm start
 ```
+
+
+## Documentation Seeders Users
+Each of us has an admin user and a standard user, for example:
+if your name is Manuel and your lastname is Francisco, 
+ManuelFrancisco@admin.com or ManuelFrancisco@standard.com
+and the password is ManuelFrancisco1.
+
+Another example: 
+email: AgustinAvila@admin.com,
+password: AgustinAvila1
+
+
