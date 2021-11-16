@@ -1,16 +1,20 @@
 const commentsRepository = require('../repositories/comments');
 
-/* const getAll = async () => {
-  const response = await commentsRepository.getAll();
-  if (response.length > 0) {
-    return response;
+const create = async ({ userId, newsId, body }) => {
+  const response = await commentsRepository.create({
+    userId,
+    newsId,
+    body
+  });
+
+  if (!response) {
+    const error = new Error('there was an error in member creation');
+    error.status = 403;
+    throw error;
   }
-  const error = new Error('not found comments!');
-  error.status = 404;
-  throw error;
+  return response;
 };
 
 module.exports = {
-  getAll
+  create
 };
- */
