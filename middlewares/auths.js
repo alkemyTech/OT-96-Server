@@ -46,7 +46,7 @@ const isOwnUser = async (req, res, next) => {
       error.status = 404;
       throw error;
     }
-    if (userFound.roleId === reqId) {
+    if (userFound.roleId === role.id) {
       return next();
     }
     if (+id === userFound.id) {
