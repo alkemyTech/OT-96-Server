@@ -1,7 +1,7 @@
 const testimonialsRepository = require('../repositories/testimonials');
 
-const getAll = async () => {
-  const testimonials = await testimonialsRepository.getAll();
+const getAll = async (offset) => {
+  const testimonials = await testimonialsRepository.getAll(offset);
   return testimonials;
 };
 
