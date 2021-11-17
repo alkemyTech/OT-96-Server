@@ -4,6 +4,10 @@ const authMiddleware = require('../middlewares/auths');
 const commentsController = require('../controllers/comments');
 
 commentsRouter.get('/', authMiddleware.isAdmin, commentsController.getAll);
-commentsRouter.put('/:id', commentsController.update);
+commentsRouter.put(
+  '/:id',
+  authMiddleware.isOwnComment,
+  commentsController.update
+);
 
 module.exports = commentsRouter;
