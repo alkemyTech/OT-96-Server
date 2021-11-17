@@ -4,6 +4,9 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
+const swaggerUI = require('swagger-ui-express');
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerDefinition = require('./swaggerDefinition.json');
 require('dotenv').config();
 
 const indexRouter = require('./routes/index');
@@ -19,6 +22,14 @@ const contactsRouter = require('./routes/contacts');
 const testimonialsRouter = require('./routes/testimonials');
 const app = express();
 app.use(cors());
+
+const options = {
+  swaggerDefinition,
+  apis: [`${path.join(__dirname, './routes/*.js')}`]
+};
+const swaggerSpec = swaggerJsDoc(options);
+
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
