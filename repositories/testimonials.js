@@ -1,7 +1,7 @@
 const db = require('../models');
 
-const getAll = async () => {
-  const response = await db.Testimonial.findAll();
+const getAll = async (offset) => {
+  const response = await db.Testimonial.findAll({ offset: offset, limit: 10 });
   return response;
 };
 
