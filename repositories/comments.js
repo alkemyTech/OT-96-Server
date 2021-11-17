@@ -8,4 +8,18 @@ const getAll = async () => {
   return response;
 };
 
-module.exports = { getAll };
+const getById = async (id) => {
+  const response = await db.Comment.findByPk(id);
+  return response;
+};
+
+const update = async (data, id) => {
+  const response = await db.Comment.update(data, {
+    where: {
+      id
+    }
+  });
+  return response;
+};
+
+module.exports = { getAll, update, getById };
