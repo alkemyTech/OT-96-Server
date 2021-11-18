@@ -16,11 +16,61 @@ module.exports = {
 					updatedAt: new Date()
 				},
 				{
+					firstName: 'Usuario',
+					lastName: 'Demo',
+					email: 'test@standard.com',
+					password: '$2a$10$4hVG5w2RMM.P0ST64W2qC.jlrIaq7W09oTOwEq.UqxQ1vDZmaoaja', // password: 12345678
+					roleId: 1,
+					photo: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
+					createdAt: new Date(),
+					updatedAt: new Date()
+				},
+				{
+					firstName: 'Usuario1',
+					lastName: 'Demo1',
+					email: 'Usuario1@admin.com',
+					password: '$2a$10$4hVG5w2RMM.P0ST64W2qC.jlrIaq7W09oTOwEq.UqxQ1vDZmaoaja', // password: 12345678
+					roleId: 1,
+					photo: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
+					createdAt: new Date(),
+					updatedAt: new Date()
+				},
+				{
+					firstName: 'Usuario1',
+					lastName: 'Demo1',
+					email: 'Usuario1@standard.com',
+					password: '$2a$10$4hVG5w2RMM.P0ST64W2qC.jlrIaq7W09oTOwEq.UqxQ1vDZmaoaja', // password: 12345678
+					roleId: 2,
+					photo: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
+					createdAt: new Date(),
+					updatedAt: new Date()
+				},
+				{
+					firstName: 'Usuario2',
+					lastName: 'Demo2',
+					email: 'Usuario2@admin.com',
+					password: '$2a$10$4hVG5w2RMM.P0ST64W2qC.jlrIaq7W09oTOwEq.UqxQ1vDZmaoaja', // password: 12345678
+					roleId: 1,
+					photo: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
+					createdAt: new Date(),
+					updatedAt: new Date()
+				},
+				{
+					firstName: 'Usuario2',
+					lastName: 'Demo2',
+					email: 'Usuario2@standard.com',
+					password: '$2a$10$4hVG5w2RMM.P0ST64W2qC.jlrIaq7W09oTOwEq.UqxQ1vDZmaoaja', // password: 12345678
+					roleId: 2,
+					photo: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
+					createdAt: new Date(),
+					updatedAt: new Date()
+				},
+				{
 					firstName: 'Matias',
 					lastName: 'Preiti',
 					email: 'MatiasPreiti@standard.com',
 					password: '$2a$10$mm6dh6W58JOXjA4cNDCVM.nvPo/LMZNLDxvKBU6b4CBrYIOnbhL0K', // password: MatiasPreiti1
-					roleId: 1,
+					roleId: 2,
 					photo: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
 					createdAt: new Date(),
 					updatedAt: new Date()
@@ -40,7 +90,7 @@ module.exports = {
 					lastName: 'Achocalla',
 					email: 'IvanAchocalla@standard.com',
 					password: '$2a$10$ovls9PH5IndDgxX0ratSyuUGvAY2.n3yQU4GugRd86tH5wWdB6/ju', // password: IvanAchocalla1
-					roleId: 1,
+					roleId: 2,
 					photo: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
 					createdAt: new Date(),
 					updatedAt: new Date()
@@ -60,7 +110,7 @@ module.exports = {
 					lastName: 'Avila',
 					email: 'AgustinAvila@standard.com',
 					password: '$2a$10$0Nf0VkJuuUsiror1w.T3BenJEmN2qzCLpOVVraabU02i0HlqNsPHm', // password: AgustinAvila1
-					roleId: 1,
+					roleId: 2,
 					photo: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
 					createdAt: new Date(),
 					updatedAt: new Date()
@@ -80,7 +130,7 @@ module.exports = {
 					lastName: 'Zacre',
 					email: 'AlexisZacre@standard.com',
 					password: '$2a$10$BY6s00NCzEtlKTP0kQdDquyz9GnsPU1VPtWNNzDUZBTnGrAh61kjK', // password: AlexisZacre1
-					roleId: 1,
+					roleId: 2,
 					photo: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
 					createdAt: new Date(),
 					updatedAt: new Date()
@@ -100,7 +150,7 @@ module.exports = {
 					lastName: 'Almazan',
 					email: 'JuanAlmazan@standard.com',
 					password: '$2a$10$Kz.GH5rUTt99J9uoJQ5kP.zGPrMLz9fr6qoINCe2sKlSqrW25Gif6', // password: JuanAlmazan1
-					roleId: 1,
+					roleId: 2,
 					photo: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
 					createdAt: new Date(),
 					updatedAt: new Date()
@@ -120,7 +170,7 @@ module.exports = {
 					lastName: 'Francisco',
 					email: 'ManuelFrancisco@standard.com',
 					password: '$2a$10$vNWSVFPk8LVjGVAoaZZ4auFtzxyMCATQLaQ7hQjrJDorSlxZeazYW', // password: ManuelFrancisco1
-					roleId: 1,
+					roleId: 2,
 					photo: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
 					createdAt: new Date(),
 					updatedAt: new Date()
@@ -140,7 +190,7 @@ module.exports = {
 					lastName: 'Olivero',
 					email: 'FranciscoOlivero@standard.com',
 					password: '$2a$10$Bm6xOuNR6H0EaesHGzqb5e9xCy/Fquk7mRPmiXSDAjtsozMVcDWUu', // password: FranciscoOlivero1
-					roleId: 1,
+					roleId: 2,
 					photo: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
 					createdAt: new Date(),
 					updatedAt: new Date()
@@ -151,6 +201,26 @@ module.exports = {
 					email: 'FranciscoOlivero@admin.com',
 					password: '$2a$10$Bm6xOuNR6H0EaesHGzqb5e9xCy/Fquk7mRPmiXSDAjtsozMVcDWUu', // password: FranciscoOlivero1
 					roleId: 1,
+					photo: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
+					createdAt: new Date(),
+					updatedAt: new Date()
+				},
+				{
+					firstName: 'Federico',
+					lastName: 'Palmari',
+					email: 'FedericoPalmari@admin.com',
+					password: '$2a$10$Bm6xOuNR6H0EaesHGzqb5e9xCy/Fquk7mRPmiXSDAjtsozMVcDWUu', // password: FedericoPalmari1
+					roleId: 1,
+					photo: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
+					createdAt: new Date(),
+					updatedAt: new Date()
+				},
+				{
+					firstName: 'Federico',
+					lastName: 'Palmari',
+					email: 'FedericoPalmari@standard.com',
+					password: '$2a$10$Bm6xOuNR6H0EaesHGzqb5e9xCy/Fquk7mRPmiXSDAjtsozMVcDWUu', // password: FedericoPalmari1
+					roleId: 2,
 					photo: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
 					createdAt: new Date(),
 					updatedAt: new Date()
