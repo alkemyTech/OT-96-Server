@@ -2,8 +2,15 @@ const membersService = require('../services/members');
 
 const getAll = async (req, res, next) => {
   try {
-    const response = await membersService.getAll();
-    res.status(200).json(response);
+    const page = +req.query.page;
+    const response = await membersService.getAll(req, page);
+
+    res.status(200).json({
+      status: 200,
+      data: response.data,
+      previousPage: response.previousPage,
+      nextPage: response.nextPage
+    });
   } catch (error) {
     next(error);
   }
@@ -35,12 +42,12 @@ const update = async (req, res, next) => {
   }
 };
 const remove = async (req, res, next) => {
-	try {
-		const response = await membersService.remove(req.params.id);
-		return res.status(200).json(response);
-	} catch (error) {
-		next(error);
-	}
+  try {
+    const response = await membersService.remove(req.params.id);
+    return res.status(200).json(response);
+  } catch (error) {
+    next(error);
+  }
 };
 
 module.exports = {
