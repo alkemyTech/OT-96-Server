@@ -33,19 +33,24 @@ Each of us has an admin user and a standard user, The Usuers are:
 
 Users admins:
 email: ManuelFrancisco@admin.com     password: ManuelFrancisco1  firstName:Manuel  lastName :Francisco
+<<<<<<< HEAD
 @manuelfrancisco manuelfrancisco 20 hours ago Collaborator
 
 Faltan 3 usuarios admininstradores y 3 usuarios normales
 @pancholi1
+=======
+>>>>>>> f9e02090ccbd8fb38b90a4d87cb7a115d4ca5062
 email: AgustinAvila@admin.com    password: AgustinAvila1  firstName: Agustin  lastName :Avila
 email: MatiasPreiti@admin.com   password:MatiasPreiti1  firstName:Matias  lastName :Preiti
 email: IvanAchocalla@admin.com   password: IvanAchocalla1 firstName:Ivan  lastName :Achocalla
 email: AlexisZacre@admin.com    password: AlexisZacre1 firstName: Alexis lastName :Zacre
 email:JuanAlmazan@admin.com    password:JuanAlmazan1  firstName:Juan  lastName :Almazan
 email: FranciscoOlivero@admin.com   password: FranciscoOlivero1 firstName: Francisco  lastName :Olivero
+
 email: FedericoPalmeri@admin.com   password: FedericoPalmeri1 firstName: Federico lastName :Palmeri 
 email: Usuario1@admin.com   password: 12345678   firstName: Usuario1   lastName: Demo1 
 email: Usuario2@admin.com   password: 12345678   firstName: Usuario2   lastName: Demo2 
+
 
 
 Users standards :
@@ -53,12 +58,18 @@ email: ManuelFrancisco@standard.com     password: ManuelFrancisco1  firstName:Ma
 email: AgustinAvila@standard.com    password: AgustinAvila1  firstName: Agustin  lastName :Avila
 email: MatiasPreiti@standard.com   password:MatiasPreiti1  firstName:Matias  lastName :Preiti
 email: IvanAchocalla@standard.com   password: IvanAchocalla1 firstName:Ivan  lastName :Achocalla
+
 email: AlexisZacre@standard.com    password: AlexisZacre1 firstName: Alexis  lastName :Zacre
 email:JuanAlmazan@standard.com    password:JuanAlmazan1  firstName:Juan   lastName :Almazan
 email: FranciscoOlivero@standard.com   password: FranciscoOlivero1 firstName: Francisco  lastName :Olivero
 email: FedericoPalmeri@standard.com   password: FedericoPalmeri1 firstName: Federico   lastName :Palmeri 
 email: Usuario1@standard.com   password: 12345678   firstName: Usuario1   lastName: Demo1 
 email: Usuario2@standard.com   password: 12345678   firstName: Usuario2   lastName: Demo2 
+
+email: AlexisZacre@standard.com    password: AlexisZacre1 firstName: Alexis lastName :Zacre
+email:JuanAlmazan@standard.com    password:JuanAlmazan1  firstName:Juan  lastName :Almazan
+email: FranciscoOlivero@standard.com   password: FranciscoOlivero1 firstName: Francisco  lastName :Olivero
+
 
 
 
