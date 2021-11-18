@@ -22,7 +22,7 @@ const getAll = async () => {
 const update = async (id, { body }) => {
   const comments = await commentsRepository.getById(id);
   if (!comments) {
-    const error = new Error('comments no encontrado.');
+    const error = new Error('Comment not found');
     error.status = 409;
     throw error;
   }
