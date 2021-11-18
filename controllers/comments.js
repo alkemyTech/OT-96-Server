@@ -1,6 +1,6 @@
 const commentsServices = require('../services/comments');
 
-/* const getAll = async (req, res, next) => {
+const getAll = async (req, res, next) => {
   try {
     const response = await commentsServices.getAll();
     return res.status(200).json({ data: response });
@@ -11,4 +11,4 @@ const commentsServices = require('../services/comments');
 
 module.exports = {
   getAll
-}; */
+};

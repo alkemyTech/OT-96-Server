@@ -2,11 +2,6 @@ const newsRepository = require('../repositories/news');
 
 const getAll = async () => {
   const news = await newsRepository.getAll();
-  if (news.length == 0) {
-    const error = new Error('No existen noticias!.');
-    error.status = 404;
-    throw error;
-  }
   return news;
 };
 
