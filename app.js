@@ -25,7 +25,7 @@ app.use(cors());
 
 const options = {
   swaggerDefinition,
-  apis: [`${path.join(__dirname, './routes/*.js')}`]
+  apis: [`${path.join(__dirname, 'routes', '*.js')}`]
 };
 const swaggerSpec = swaggerJsDoc(options);
 
