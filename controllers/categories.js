@@ -60,7 +60,7 @@ const remove = async (req, res, next) => {
 
 const getAllNames = async (req, res, next) => {
   try {
-    const categories = await categoriesService.getAllNames();
+    const categories = await categoriesService.getAllNames(req.query.page);
     res.status(200).json(categories);
   } catch (error) {
     next(error);

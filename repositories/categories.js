@@ -42,11 +42,13 @@ const remove = async (id) => {
   return response;
 };
 
-const getAllNames = async () => {
-  const categories = await db.Category.findAll({
+const getAllNames = async (page, size) => {
+  const categories = await db.Category.findAndCountAll({
     attributes: {
       exclude: ['description', 'image', 'deletedAt', 'createdAt', 'updatedAt']
-    }
+    },
+    limit: size,
+    offset: page * size
   });
   return categories;
 };

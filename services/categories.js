@@ -62,13 +62,20 @@ const remove = async (id) => {
   await categoriesRepository.remove(id);
 };
 
-const getAllNames = async () => {
-  const category = await categoriesRepository.getAllNames();
-  if (category.length == 0) {
-    const error = new Error('No existen categorías.');
-    error.status = 404;
-    throw error;
+const getAllNames = async (page) => {
+  let pageNumber = 0;
+  const size = 10;
+
+  if(!Number.isNaN(page) && page > 0) {
+    pageNumber = page
   }
+  const category = await categoriesRepository.getAllNames(pageNumber, size);
+  console.log(category)
+
+  if(category.length === 0) {
+    return await categoriesRepository.getAllNames(0, size);
+  }
+
   return category;
 };
 
