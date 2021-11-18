@@ -15,6 +15,11 @@ const getById = async (id) => {
   return news;
 };
 
+const getCommentByNewsId = async (id) => {
+  const comments = await newsRepository.getCommentByNewsId(id);
+  return comments;
+};
+
 const create = async ({ name, content, image, categoryId }) => {
   const newsCreated = await newsRepository.create({
     name,
@@ -63,6 +68,7 @@ const remove = async (id) => {
 module.exports = {
   getAll,
   getById,
+  getCommentByNewsId,
   create,
   update,
   remove

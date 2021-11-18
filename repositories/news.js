@@ -31,6 +31,23 @@ const getByCategoryId = async (categoryId) => {
   return response;
 };
 
+const getCommentByNewsId = async (id) => {
+  const response = await db.News.findAll({
+    where: {
+      id: id
+    },
+    attributes: ['name', 'id'],
+    include: [
+      {
+        association: 'Comments',
+        order: [['createdAt', 'DESC']],
+        attributes: ['body']
+      }
+    ]
+  });
+  return response;
+};
+
 const create = async (data) => {
   const response = await db.News.create(data);
   return response;
@@ -60,5 +77,6 @@ module.exports = {
   create,
   update,
   remove,
-  getByCategoryId
+  getByCategoryId,
+  getCommentByNewsId
 };
