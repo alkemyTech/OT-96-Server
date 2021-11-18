@@ -8,7 +8,7 @@ organizationRouter.get(
   '/:id/public',
   organizationsController.getOrganizationPublic
 );
-organizationRouter.put(
+organizationRouter.post(
   '/:id/public',
   authMiddleware.isAdmin,
   organizationsMiddleware.validateOrganization,
