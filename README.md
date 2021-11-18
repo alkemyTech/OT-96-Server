@@ -33,13 +33,7 @@ Each of us has an admin user and a standard user, The Usuers are:
 
 Users admins:
 email: ManuelFrancisco@admin.com     password: ManuelFrancisco1  firstName:Manuel  lastName :Francisco
-<<<<<<< HEAD
-@manuelfrancisco manuelfrancisco 20 hours ago Collaborator
 
-Faltan 3 usuarios admininstradores y 3 usuarios normales
-@pancholi1
-=======
->>>>>>> f9e02090ccbd8fb38b90a4d87cb7a115d4ca5062
 email: AgustinAvila@admin.com    password: AgustinAvila1  firstName: Agustin  lastName :Avila
 email: MatiasPreiti@admin.com   password:MatiasPreiti1  firstName:Matias  lastName :Preiti
 email: IvanAchocalla@admin.com   password: IvanAchocalla1 firstName:Ivan  lastName :Achocalla
