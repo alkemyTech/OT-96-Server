@@ -1,9 +1,16 @@
 const db = require('../models');
 
-/* const getAll = async () => {
-  const response = await db.Comment.findAll();
+const create = async (data) => {
+  const response = await db.Comment.create(data);
   return response;
 };
 
-module.exports = { getAll };
- */
+const getAll = async () => {
+  const response = await db.Comment.findAll({
+    order: [['createdAt', 'DESC']],
+    attributes: ['body']
+  });
+  return response;
+};
+
+module.exports = { getAll, create };

@@ -42,7 +42,6 @@ const validateUser = [
     .notEmpty()
     .withMessage('You need to enter a last name!')
     .bail()
-    .isAlpha()
     .withMessage('LastName can only contain letters')
     .bail(),
 
@@ -50,7 +49,6 @@ const validateUser = [
     .notEmpty()
     .withMessage('You need to enter a first name!')
     .bail()
-    .isAlpha()
     .withMessage('FirstName can only contain letters')
     .bail(),
 

@@ -1,7 +1,10 @@
 const db = require('../models');
 
-const getAll = async () => {
-  const response = await db.Member.findAll();
+const getAll = async (limit, offset) => {
+  const response = await db.Member.findAll({
+    limit: limit,
+    offset: offset
+  });
   return response;
 };
 
@@ -25,12 +28,12 @@ const update = async (id, data) => {
 };
 
 const remove = async (id) => {
-	const respose = await db.Members.destroy({
-		where: {
-			id
-		}
-	});
-	return respose;
+  const respose = await db.Members.destroy({
+    where: {
+      id
+    }
+  });
+  return respose;
 };
 
 module.exports = {

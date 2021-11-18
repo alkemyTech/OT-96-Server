@@ -4,11 +4,6 @@ const imageUploader = require('./imageUploader');
 
 const getAll = async () => {
   const slides = await slidesRepository.getAll();
-  if (slides.length == 0) {
-    const error = new Error('No hay slides');
-    error.status = 404;
-    throw error;
-  }
   return slides;
 };
 const getById = async (id) => {
