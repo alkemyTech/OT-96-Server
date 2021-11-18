@@ -20,7 +20,7 @@ module.exports = {
 					lastName: 'Demo',
 					email: 'test@standard.com',
 					password: '$2a$10$4hVG5w2RMM.P0ST64W2qC.jlrIaq7W09oTOwEq.UqxQ1vDZmaoaja', // password: 12345678
-					roleId: 1,
+					roleId: 2,
 					photo: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
 					createdAt: new Date(),
 					updatedAt: new Date()
@@ -45,26 +45,7 @@ module.exports = {
 					createdAt: new Date(),
 					updatedAt: new Date()
 				},
-				{
-					firstName: 'Usuario2',
-					lastName: 'Demo2',
-					email: 'Usuario2@admin.com',
-					password: '$2a$10$4hVG5w2RMM.P0ST64W2qC.jlrIaq7W09oTOwEq.UqxQ1vDZmaoaja', // password: 12345678
-					roleId: 1,
-					photo: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-					createdAt: new Date(),
-					updatedAt: new Date()
-				},
-				{
-					firstName: 'Usuario2',
-					lastName: 'Demo2',
-					email: 'Usuario2@standard.com',
-					password: '$2a$10$4hVG5w2RMM.P0ST64W2qC.jlrIaq7W09oTOwEq.UqxQ1vDZmaoaja', // password: 12345678
-					roleId: 2,
-					photo: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-					createdAt: new Date(),
-					updatedAt: new Date()
-				},
+				
 				{
 					firstName: 'Matias',
 					lastName: 'Preiti',
