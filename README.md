@@ -43,7 +43,7 @@ email: FranciscoOlivero@admin.com   password: FranciscoOlivero1 firstName: Franc
 
 email: FedericoPalmeri@admin.com   password: FedericoPalmeri1 firstName: Federico lastName :Palmeri 
 email: Usuario1@admin.com   password: 12345678   firstName: Usuario1   lastName: Demo1 
-email: Usuario2@admin.com   password: 12345678   firstName: Usuario2   lastName: Demo2 
+
 
 
 
@@ -63,7 +63,7 @@ email: Usuario2@standard.com   password: 12345678   firstName: Usuario2   lastNa
 email: AlexisZacre@standard.com    password: AlexisZacre1 firstName: Alexis lastName :Zacre
 email:JuanAlmazan@standard.com    password:JuanAlmazan1  firstName:Juan  lastName :Almazan
 email: FranciscoOlivero@standard.com   password: FranciscoOlivero1 firstName: Francisco  lastName :Olivero
-
+email: Usuario1@standard.com   password: 12345678   firstName: Usuario1   lastName: Demo1 
 
 
 
