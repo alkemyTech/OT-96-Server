@@ -6,13 +6,13 @@ const getAll = async (req, page) => {
   console.log(offset, limit);
   const members = await membersRepository.getAll(limit, offset);
   let nextPage = page + 1;
-  let lastPage = page - 1;
+  let previousPage = page - 1;
   if (!members) {
     const error = new Error('not found members!');
     error.status = 404;
     throw error;
   }
-  if (lastPage == 0) {
+  if (previousPage == 0) {
     const response = {
       data: members,
       nextPage: `${req.protocol}://${req.get('host')}/members?page=${nextPage}`
@@ -21,7 +21,9 @@ const getAll = async (req, page) => {
   }
   const response = {
     data: members,
-    lastPage: `${req.protocol}://${req.get('host')}/members?page=${lastPage}`,
+    previousPage: `${req.protocol}://${req.get(
+      'host'
+    )}/members?page=${previousPage}`,
     nextPage: `${req.protocol}://${req.get('host')}/members?page=${nextPage}`
   };
   return response;

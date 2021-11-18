@@ -8,7 +8,7 @@ const getAll = async (req, res, next) => {
     res.status(200).json({
       status: 200,
       data: response.data,
-      lastPage: response.lastPage,
+      previousPage: response.previousPage,
       nextPage: response.nextPage
     });
   } catch (error) {
