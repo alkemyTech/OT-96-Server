@@ -3,8 +3,14 @@ const membersRouter = express.Router();
 const membersController = require('../controllers/members');
 const authMiddleware = require('../middlewares/auths');
 const membersMiddleware = require('../middlewares/members');
+const pagination = require('../middlewares/pagination');
 
-membersRouter.get('/', authMiddleware.isAdmin, membersController.getAll);
+membersRouter.get(
+  '/',
+  authMiddleware.isAdmin,
+  pagination.validate,
+  membersController.getAll
+);
 
 membersRouter.post(
   '/',
