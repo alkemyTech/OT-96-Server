@@ -8,7 +8,7 @@ const create = async ({ userId, newsId, body }) => {
   });
 
   if (!response) {
-    const error = new Error('there was an error in member creation');
+    const error = new Error('there was an error in comment creation');
     error.status = 403;
     throw error;
   }
