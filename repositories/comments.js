@@ -1,5 +1,10 @@
 const db = require('../models');
 
+const create = async (data) => {
+  const response = await db.Comment.create(data);
+  return response;
+};
+
 const getAll = async () => {
   const response = await db.Comment.findAll({
     order: [['createdAt', 'DESC']],
@@ -8,4 +13,4 @@ const getAll = async () => {
   return response;
 };
 
-module.exports = { getAll };
+module.exports = { getAll, create };
