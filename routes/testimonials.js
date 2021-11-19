@@ -25,7 +25,7 @@ testimonialsRouter.post(
 testimonialsRouter.get(
   '/',
   authMiddleware.isAdmin,
-  pagination.validate,
+  pagination.validateAndParseTestimonial,
   testimonialsController.getAll
 );
 

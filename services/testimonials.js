@@ -1,24 +1,8 @@
 const testimonialsRepository = require('../repositories/testimonials');
 const limit = 10;
 
-const getAll = async (req) => {
-  let page = Number(req.query.page);
-  const maxCount = await testimonialsRepository.getCount();
-  const lastPage = Math.ceil(maxCount / limit);
-  
-  // comprobacion page > lastPage
-  if (page > lastPage) {
-    page = 1;
-  }
-  
-  const offset = (page - 1) * limit;
-  const previousPage = page - 1;
-  const nextPage = page + 1;
-  
-  const baseUrl = `${req.protocol}://${req.get('host')}/testimonials`;
-  const previousPageUrl = baseUrl + `?page=${previousPage}`;
-  const nextPageUrl = baseUrl + `?page=${nextPage}`;
-  const lastPageUrl = baseUrl + `?page=${lastPage}`;
+const getAll = async (paginationData) => {
+  const { limit, offset, maxCount, page, previousPage, nextPage, lastPage, previousPageUrl, nextPageUrl, lastPageUrl } = paginationData;
 
   const testimonials = await testimonialsRepository.getAll(limit, offset);
 
@@ -31,7 +15,6 @@ const getAll = async (req) => {
     lastPage: lastPageUrl,
     data: testimonials
   };
-
 
   // respuestas pagina 1
   if (page == 1) {

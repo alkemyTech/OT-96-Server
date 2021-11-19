@@ -2,7 +2,7 @@ const testimonialsService = require('../services/testimonials');
 
 const getAll = async (req, res, next) => {
   try {
-    const response = await testimonialsService.getAll(req);
+    const response = await testimonialsService.getAll(req.body);
     res.status(200).json({
       status: 200,
       ...response 
