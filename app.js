@@ -60,20 +60,28 @@ app.use('/comments', commentsRouter);
 // const test_imagesRouter = require('./routes/test_images');
 // app.use('/test', test_imagesRouter);
 
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
+/*********************/
+// ERROR HANDLER
+// Error 404
+app.use((req, res, next) => {
+  const error = new Error("The requested resource doesn't exists.");
+  error.status = 404;
+  next(error);
 });
 
-// error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+// Error response & logger
+app.use((error, req, res, next) => {
+  res.status(error.status || 500).send({
+    error: {
+      status: error.status || 500,
+      message: error.message || 'Internal Server Error.'
+    }
+  });
+  console.log('****************************************');
+  console.log(error);
+  console.log('****************************************');
 });
+
+/*********************/
 
 module.exports = app;
