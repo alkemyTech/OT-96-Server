@@ -1,9 +1,17 @@
 const testimonialsRepository = require('../repositories/testimonials');
+const membersRepository = require('../repositories/members');
+
 const limit = 10;
 
-const validateAndParseTestimonial = async (req, res, next) => {
-  const maxCount = await testimonialsRepository.getCount();
+const validate = (req, res, next) => {
+  page = Number(req.query.page);
+  if(isNaN(page)){
+    req.query.page = '1';
+  }
+  next();
+}
 
+const parsePaginationData = (maxCount, req, table) => {
   let page = Number(req.query.page);
   const lastPage = Math.ceil(maxCount / limit);
   
@@ -15,23 +23,47 @@ const validateAndParseTestimonial = async (req, res, next) => {
   const previousPage = page - 1;
   const nextPage = page + 1;
   
-  const baseUrl = `${req.protocol}://${req.get('host')}/testimonials`;
+  const baseUrl = `${req.protocol}://${req.get('host')}/${table}`;
   const previousPageUrl = baseUrl + `?page=${previousPage}`;
   const nextPageUrl = baseUrl + `?page=${nextPage}`;
   const lastPageUrl = baseUrl + `?page=${lastPage}`;
   
-  req.body.limit = limit;
-  req.body.offset = offset;
-  req.body.maxCount = maxCount;
-  req.body.page = page;
-  req.body.previousPage = previousPage;
-  req.body.nextPage = nextPage;
-  req.body.lastPage = lastPage;
-  req.body.previousPageUrl = previousPageUrl;
-  req.body.nextPageUrl = nextPageUrl;
-  req.body.lastPageUrl = lastPageUrl;
+  const body = {
+    limit: limit,
+    offset: offset,
+    maxCount: maxCount,
+    page: page,
+    previousPage: previousPage,
+    nextPage: nextPage,
+    lastPage: lastPage,
+    previousPageUrl: previousPageUrl,
+    nextPageUrl: nextPageUrl,
+    lastPageUrl: lastPageUrl
+  }
+  return body;
+}
+
+
+const parseTestimonial = async (req, res, next) => {
+  const maxCount = await testimonialsRepository.getCount();
+
+  req.body = parsePaginationData(maxCount, req, 'testimonials');
 
   next();
 };
 
-module.exports = {validateAndParseTestimonial}
+const parseMembers = async (req, res, next) => {
+  const maxCount = await membersRepository.getCount();
+
+  req.body = parsePaginationData(maxCount, req, 'members');
+
+  next();
+};
+
+
+
+module.exports = {
+  validate, 
+  parseTestimonial, 
+  parseMembers
+}
