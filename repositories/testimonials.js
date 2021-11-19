@@ -1,12 +1,19 @@
 const db = require('../models');
 
-const getAll = async (offset) => {
-  const response = await db.Testimonial.findAll({ offset: offset, limit: 10 });
+const getAll = async (limit, offset) => {
+  const response = await db.Testimonial.findAll({
+      limit: limit , offset: offset
+     });
   return response;
 };
 
 const getById = async (id) => {
   const response = await db.Testimonial.findByPk(id);
+  return response;
+};
+
+const getCount = async () => {
+  const response = await db.Testimonial.count();
   return response;
 };
 
@@ -36,6 +43,7 @@ const remove = async (id) => {
 module.exports = {
   getAll,
   getById,
+  getCount,
   create,
   update,
   remove

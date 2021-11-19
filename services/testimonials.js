@@ -1,8 +1,69 @@
 const testimonialsRepository = require('../repositories/testimonials');
+const limit = 10;
 
-const getAll = async (offset) => {
-  const testimonials = await testimonialsRepository.getAll(offset);
-  return testimonials;
+const getAll = async (req) => {
+  let { page } = req.query;
+  const offset = (page - 1) * limit;
+  const nextPage = page + 1;
+  const previousPage = page - 1;
+  const count = await testimonialsRepository.getCount();
+  const lastPage = Math.ceil(count / limit);
+
+  // comprobacion previa a todo
+  if (page > lastPage) {
+    page = 1;
+  }
+
+  const testimonials = await testimonialsRepository.getAll(limit, offset);
+
+  let response = {};
+
+  // Response in case no testimonials
+  if (!testimonials) {
+    response = {
+      data: []
+    };
+  }
+
+  // page 1
+  if (page == 1) {
+    if (page == lastPage) {
+      //devuelve solo data
+      response = {
+        data: testimonials
+      };
+    }
+    if (page < lastPage) {
+      //devuelve nextPage
+      response = {
+        data: testimonials,
+        nextPage: `${req.protocol}://${req.get('host')}/testimonials?${nextPage}`
+      };
+    }
+  }
+
+  // page mayor a 1
+  if (page > 1) {
+    // page intermedia
+    if (page < lastPage) {
+      //devuelve previousPage & nextPage
+      response = {
+        data: testimonials,
+        previousPage: `${req.protocol}://${req.get('host')}/members?page=${previousPage}`,
+        nextPage: `${req.protocol}://${req.get('host')}/testimonials?page=${nextPage}`
+      };
+    }
+    // ultima page
+    if (page == lastPage) {
+      //devuelve previousPage
+      response = {
+        data: testimonials,
+        previousPage: `${req.protocol}://${req.get('host')}/members?page=${previousPage}`,
+      };
+    }
+  }
+
+  return response;
 };
 
 const getById = async (id) => {
