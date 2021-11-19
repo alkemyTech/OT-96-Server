@@ -1,8 +1,31 @@
 const newsRepository = require('../repositories/news');
+const limit = 10;
 
-const getAll = async () => {
-  const news = await newsRepository.getAll();
-  return news;
+const getAll = async (req, page) => {
+  const offset = (page - 1) * limit;
+  const news = await newsRepository.getAll(limit, offset);
+  let nextPage = page + 1;
+  let previousPage = page - 1;
+  if (!news) {
+    const error = new Error('There are no News!');
+    error.status = 404;
+    throw error;
+  }
+  if (previousPage == 0) {
+    const response = {
+      data: news,
+      nextPage: `${req.protocol}://${req.get('host')}/news?page=${nextPage}`
+    };
+    return response;
+  }
+  const response = {
+    data: news,
+    previousPage: `${req.protocol}://${req.get(
+      'host'
+    )}/news?page=${previousPage}`,
+    nextPage: `${req.protocol}://${req.get('host')}/news?page=${nextPage}`
+  };
+  return response;
 };
 
 const getById = async (id) => {
