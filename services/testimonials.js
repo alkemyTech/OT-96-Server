@@ -1,14 +1,13 @@
 const testimonialsRepository = require('../repositories/testimonials');
-const limit = 10;
 
 const getAll = async (paginationData) => {
-  const { limit, offset, maxCount, page, previousPage, nextPage, lastPage, previousPageUrl, nextPageUrl, lastPageUrl } = paginationData;
+  const { limit, offset, maxCount, page, lastPage, previousPageUrl, nextPageUrl, lastPageUrl } = paginationData;
 
   const testimonials = await testimonialsRepository.getAll(limit, offset);
 
   // respuesta por defecto (pagina intermedia)
   let response = {
-    count: limit,
+    count: testimonials.length,
     maxCount: maxCount,
     previousPage: previousPageUrl,
     nextPage: nextPageUrl,
