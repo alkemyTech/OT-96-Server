@@ -15,9 +15,9 @@ const getById = async (id) => {
   return news;
 };
 
-const getCommentByNewsId = async (id) => {
-  const comments = await newsRepository.getCommentByNewsId(id);
-  return comments;
+const getCommentsByNewsId = async (id) => {
+  const novelty = await newsRepository.getCommentsByNewsId(id);
+  return novelty.Comments;
 };
 
 const create = async ({ name, content, image, categoryId }) => {
@@ -68,7 +68,7 @@ const remove = async (id) => {
 module.exports = {
   getAll,
   getById,
-  getCommentByNewsId,
+  getCommentsByNewsId,
   create,
   update,
   remove

@@ -17,7 +17,7 @@ newsRouter.put('/:id', authMiddleware.isAdmin, newsController.update);
 newsRouter.get(
   '/:id/comments',
   authMiddleware.isLoggedUser,
-  newsController.getCommentByNewsId
+  newsController.getCommentsByNewsId
 );
 newsRouter.delete('/:id', authMiddleware.isAdmin, newsController.remove);
 

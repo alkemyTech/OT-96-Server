@@ -31,12 +31,8 @@ const getByCategoryId = async (categoryId) => {
   return response;
 };
 
-const getCommentByNewsId = async (id) => {
-  const response = await db.News.findAll({
-    where: {
-      id: id
-    },
-    attributes: ['name', 'id'],
+const getCommentsByNewsId = async (id) => {
+  const response = await db.News.findByPk(id, {
     include: [
       {
         association: 'Comments',
@@ -78,5 +74,5 @@ module.exports = {
   update,
   remove,
   getByCategoryId,
-  getCommentByNewsId
+  getCommentsByNewsId
 };
