@@ -5,6 +5,11 @@ const commentsMiddlewares = require('../middlewares/comments');
 const commentsController = require('../controllers/comments');
 
 commentsRouter.get('/', authMiddleware.isAdmin, commentsController.getAll);
+commentsRouter.put(
+  '/:id',
+  authMiddleware.isOwnComment,
+  commentsController.update
+);
 commentsRouter.post(
   '/',
   commentsMiddlewares.validateComments,
