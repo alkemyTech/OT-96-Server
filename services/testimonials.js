@@ -3,8 +3,8 @@ const limit = 10;
 
 const getAll = async (req) => {
   let page = Number(req.query.page);
-  const count = await testimonialsRepository.getCount();
-  const lastPage = Math.ceil(count / limit);
+  const maxCount = await testimonialsRepository.getCount();
+  const lastPage = Math.ceil(maxCount / limit);
   
   // comprobacion page > lastPage
   if (page > lastPage) {
@@ -18,54 +18,38 @@ const getAll = async (req) => {
   const baseUrl = `${req.protocol}://${req.get('host')}/testimonials`;
   const previousPageUrl = baseUrl + `?page=${previousPage}`;
   const nextPageUrl = baseUrl + `?page=${nextPage}`;
+  const lastPageUrl = baseUrl + `?page=${lastPage}`;
 
   const testimonials = await testimonialsRepository.getAll(limit, offset);
 
-  let response = {};
+  // respuesta por defecto (pagina intermedia)
+  let response = {
+    count: limit,
+    maxCount: maxCount,
+    previousPage: previousPageUrl,
+    nextPage: nextPageUrl,
+    lastPage: lastPageUrl,
+    data: testimonials
+  };
 
-  // Response in case no testimonials
-  if (!testimonials) {
-    response = {
-      data: []
-    };
-  }
 
-  // page 1
+  // respuestas pagina 1
   if (page == 1) {
     if (page == lastPage) {
       //devuelve solo data
-      response = {
-        data: testimonials
-      };
+      response.previousPage = null;
+      response.nextPage = null;
     }
     if (page < lastPage) {
-      //devuelve nextPage
-      response = {
-        data: testimonials,
-        nextPage: nextPageUrl
-      };
+      //devuelve data + nextPage
+      response.previousPage = null;
     }
   }
 
-  // page mayor a 1
-  if (page > 1) {
-    // page intermedia
-    if (page < lastPage) {
-      //devuelve previousPage & nextPage
-      response = {
-        data: testimonials,
-        previousPage: previousPageUrl,
-        nextPage: nextPageUrl
-      };
-    }
-    // ultima page
-    if (page == lastPage) {
-      //devuelve previousPage
-      response = {
-        data: testimonials,
-        previousPage: previousPageUrl
-      };
-    }
+  // respuesta ultima pagina
+  if (page > 1 && page == lastPage) {
+    //devuelve data + previousPage
+    response.nextPage = null;
   }
 
   return response;
