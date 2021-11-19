@@ -2,17 +2,18 @@ const testimonialsRepository = require('../repositories/testimonials');
 const limit = 10;
 
 const getAll = async (req) => {
-  let { page } = req.query;
-  const offset = (page - 1) * limit;
-  const nextPage = page + 1;
-  const previousPage = page - 1;
+  let page = Number(req.query.page);
   const count = await testimonialsRepository.getCount();
   const lastPage = Math.ceil(count / limit);
 
-  // comprobacion previa a todo
+  // comprobacion page > lastPage
   if (page > lastPage) {
     page = 1;
   }
+
+  const offset = (page - 1) * limit;
+  const nextPage = page + 1;
+  const previousPage = page - 1;
 
   const testimonials = await testimonialsRepository.getAll(limit, offset);
 
