@@ -5,15 +5,19 @@ const getAll = async (req) => {
   let page = Number(req.query.page);
   const count = await testimonialsRepository.getCount();
   const lastPage = Math.ceil(count / limit);
-
+  
   // comprobacion page > lastPage
   if (page > lastPage) {
     page = 1;
   }
-
+  
   const offset = (page - 1) * limit;
-  const nextPage = page + 1;
   const previousPage = page - 1;
+  const nextPage = page + 1;
+  
+  const baseUrl = `${req.protocol}://${req.get('host')}/testimonials`;
+  const previousPageUrl = baseUrl + `?page=${previousPage}`;
+  const nextPageUrl = baseUrl + `?page=${nextPage}`;
 
   const testimonials = await testimonialsRepository.getAll(limit, offset);
 
@@ -38,7 +42,7 @@ const getAll = async (req) => {
       //devuelve nextPage
       response = {
         data: testimonials,
-        nextPage: `${req.protocol}://${req.get('host')}/testimonials?${nextPage}`
+        nextPage: nextPageUrl
       };
     }
   }
@@ -50,8 +54,8 @@ const getAll = async (req) => {
       //devuelve previousPage & nextPage
       response = {
         data: testimonials,
-        previousPage: `${req.protocol}://${req.get('host')}/members?page=${previousPage}`,
-        nextPage: `${req.protocol}://${req.get('host')}/testimonials?page=${nextPage}`
+        previousPage: previousPageUrl,
+        nextPage: nextPageUrl
       };
     }
     // ultima page
@@ -59,7 +63,7 @@ const getAll = async (req) => {
       //devuelve previousPage
       response = {
         data: testimonials,
-        previousPage: `${req.protocol}://${req.get('host')}/members?page=${previousPage}`,
+        previousPage: previousPageUrl
       };
     }
   }
