@@ -1,5 +1,7 @@
 const categoriesRepository = require('../repositories/categories');
 const newsRepository = require('../repositories/news');
+const paginateRequest = require('../services/paginateRequest');
+const limit = 10;
 
 const getAll = async () => {
   const categories = await categoriesRepository.getAll();
@@ -62,31 +64,34 @@ const remove = async (id) => {
   await categoriesRepository.remove(id);
 };
 
-const getAllNames = async (paginationData) => {
-  const { limit, offset, maxCount, page, lastPage, previousPageUrl, nextPageUrl, lastPageUrl } = paginationData;
+const getAllNames = async (req) => {
+  const maxCount = await categoriesRepository.getCount();
+  const paginationData = paginateRequest.pagination(
+    limit,
+    maxCount,
+    req,
+    'categories'
+  );
+  const categories = await categoriesRepository.getAllNames(
+    limit,
+    paginationData.offset
+  );
 
-  const categories = await categoriesRepository.getAllNames(limit, offset);
-
+  // respuesta por defecto (pagina intermedia)
   let response = {
-    count: categories.length,
-    maxCount: maxCount,
-    previousPage: previousPageUrl,
-    nextPage: nextPageUrl,
-    lastPage: lastPageUrl,
+    maxCount: paginationData.maxCount,
+    previousPage: paginationData.previousPageUrl,
+    nextPage: paginationData.nextPageUrl,
     data: categories
   };
 
+  // respuestas pagina 1
   if (page == 1) {
-    if (page == lastPage) {
-      response.previousPage = null;
-      response.nextPage = null;
-    }
-    if (page < lastPage) {
-      response.previousPage = null;
-    }
+    response.previousPage = null;
   }
 
-  if (page > 1 && page == lastPage) {
+  if (page == paginationData.lastPage) {
+    //devuelve solo data
     response.nextPage = null;
   }
 
