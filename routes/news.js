@@ -48,6 +48,7 @@ const newsMiddleware = require('../middlewares/news');
  *    "/news/{id}": {
  *       "get": {
  *             "summary": "Get a news by id",
+ *             "tags": [ "News" ],
  *             "parameters": [
  *                 {
  *                 "name": "id",
@@ -58,19 +59,10 @@ const newsMiddleware = require('../middlewares/news');
  *                 "example": 1
  *                 }
  *             ],
- *             "tags": [ "News" ],
+ *             "security":[{"token":[]}],
  *             "responses": {
  *                 "200": {
- *                    "description": "successful operation",
- *                    "content": {
- *                        "application/json": {
- *                            "schema": {
- *                                "type": "object",
- *                                "$ref": "#/components/schemas/News"
- *                             }
- *                        }
- *                     }
- *
+ *                    "description": "successful operation"
  *                 },
  *                 "404": {
  *                   "description": "News not found"
@@ -99,23 +91,14 @@ newsRouter.get('/:id', authMiddleware.isAdmin, newsController.getById);
  *                   "required": true,
  *                   "schema": {
  *                     "$ref": "#/components/schemas/News"
- *                   }
- *                },
- *                {
- *                  "name": "Acces token",
- *                  "in": "header",
- *                  "description": "The access token of the user",
- *                  "required": true,
- *                  "type": "string"
+ *                    }
  *                }
  *             ],
  *             "tags": [ "News" ],
+ *            "security":[{"token":[]}],
  *             "responses": {
  *                 "200": {
- *                    "description": "News has been created",
- *                    "schema": {
- *                      "$ref": "#/components/schemas/News"
- *                    }
+ *                    "description": "News has been created"
  *                 },
  *                 "500": {
  *                   "description": "Internal server error"
@@ -135,13 +118,13 @@ newsRouter.post(
 /**
  * @swagger
  *{
- *    "/news:id": {
+ *    "/news/{id}": {
  *       "put": {
  *             "summary": "Update a news by id",
  *             "parameters": [
  *               {
  *                 "name": "id",
- *                 "in": "params",
+ *                 "in": "path",
  *                 "description": "The id of the news",
  *                 "required": true,
  *                 "type": "integer"
@@ -154,22 +137,13 @@ newsRouter.post(
  *                 "schema": {
  *                     "$ref": "#/components/schemas/News"
  *                  }
- *               },
- *               {
- *                   "name": "Acces token",
- *                   "in": "header",
- *                   "description": "The access token of the user",
- *                   "required": true,
- *                   "type": "string"
  *               }
  *             ],
  *             "tags": [ "News" ],
+ *             "security":[{"token":[]}],
  *             "responses": {
  *                 "200": {
- *                    "description": "News has been Update",
- *                    "schema": {
- *                      "$ref": "#/components/schemas/News"
- *                    }
+ *                    "description": "News has been Update"
  *                 },
  *                 "404": {
  *                   "description": "News not found"
@@ -187,32 +161,24 @@ newsRouter.put('/:id', authMiddleware.isAdmin, newsController.update);
 /**
  * @swagger
  *{
- *    "/news/{id}": {
- *       "delete": {
- *             "summary": "Delete a news by id",
+ *    "/news/{id}/comments": {
+ *       "get": {
+ *             "summary": "Get a comment by novelty",
  *             "parameters": [
- *               {
+ *                 {
  *                 "name": "id",
  *                 "in": "path",
  *                 "description": "The id of the news",
- *                 "required": true,
- *                 "type": "integer"
- *              },
- *              {
- *                "name": "access token",
- *                "in": "header",
- *                "description": "The access token of the user",
- *                "required": true,
- *                "type": "token"
- *             }
+ *                 "required": false,
+ *                 "type": "integer",
+ *                 "example": 1
+ *                 }
  *             ],
- *             "tags": [ "News" ],
+ *             "tags": [ "commentByNewsId" ],
+ *             "security":[{"token":[]}],
  *             "responses": {
  *                 "200": {
- *                    "description": "News has been Delete",
- *                    "schema": {
- *                      "$ref": "#/components/schemas/News"
- *                    }
+ *                    "description": "successful operation"
  *                 },
  *                 "404": {
  *                   "description": "News not found"
@@ -231,6 +197,38 @@ newsRouter.get(
   newsController.getCommentsByNewsId
 );
 
+/**
+ * @swagger
+ *{
+ *    "/news/{id}": {
+ *       "delete": {
+ *             "summary": "Delete a news by id",
+ *             "parameters": [
+ *               {
+ *                 "name": "id",
+ *                 "in": "path",
+ *                 "description": "The id of the news",
+ *                 "required": true,
+ *                 "type": "integer"
+ *              }
+ *             ],
+ *             "tags": [ "News" ],
+ *             "security":[{"token":[]}],
+ *             "responses": {
+ *                 "200": {
+ *                    "description": "News has been Delete"
+ *                 },
+ *                 "404": {
+ *                   "description": "News not found"
+ *                 },
+ *                 "500": {
+ *                   "description": "Internal server error"
+ *                 }
+ *              }
+ *          }
+ *      }
+ *   }
+ */
 newsRouter.delete('/:id', authMiddleware.isAdmin, newsController.remove);
 
 module.exports = newsRouter;
