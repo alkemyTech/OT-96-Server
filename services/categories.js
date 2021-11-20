@@ -62,21 +62,35 @@ const remove = async (id) => {
   await categoriesRepository.remove(id);
 };
 
-const getAllNames = async (page) => {
-  let pageNumber = 0;
-  const size = 10;
+const getAllNames = async (paginationData) => {
+  const { limit, offset, maxCount, page, lastPage, previousPageUrl, nextPageUrl, lastPageUrl } = paginationData;
 
-  if(!Number.isNaN(page) && page > 0) {
-    pageNumber = page
+  const categories = await categoriesRepository.getAllNames(limit, offset);
+
+  let response = {
+    count: categories.length,
+    maxCount: maxCount,
+    previousPage: previousPageUrl,
+    nextPage: nextPageUrl,
+    lastPage: lastPageUrl,
+    data: categories
+  };
+
+  if (page == 1) {
+    if (page == lastPage) {
+      response.previousPage = null;
+      response.nextPage = null;
+    }
+    if (page < lastPage) {
+      response.previousPage = null;
+    }
   }
-  const category = await categoriesRepository.getAllNames(pageNumber, size);
-  console.log(category)
 
-  if(category.length === 0) {
-    return await categoriesRepository.getAllNames(0, size);
+  if (page > 1 && page == lastPage) {
+    response.nextPage = null;
   }
 
-  return category;
+  return response;
 };
 
 module.exports = {
