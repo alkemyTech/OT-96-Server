@@ -29,8 +29,21 @@ const remove = async (id) => {
 	return await commentsRepository.remove(id);
 };
 
+const update = async (id, { body }) => {
+	const comments = await commentsRepository.getById(id);
+	if (!comments) {
+		const error = new Error('Comment not found');
+		error.status = 409;
+		throw error;
+	}
+	await commentsRepository.update({ body }, id);
+
+	return await commentsRepository.getById(id);
+};
+
 module.exports = {
 	getAll,
 	create,
-	remove
+	remove,
+	update
 };

@@ -14,7 +14,11 @@ newsRouter.post(
 );
 
 newsRouter.put('/:id', authMiddleware.isAdmin, newsController.update);
-
+newsRouter.get(
+  '/:id/comments',
+  authMiddleware.isLoggedUser,
+  newsController.getCommentsByNewsId
+);
 newsRouter.delete('/:id', authMiddleware.isAdmin, newsController.remove);
-  
+
 module.exports = newsRouter;

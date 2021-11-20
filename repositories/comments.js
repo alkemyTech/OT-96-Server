@@ -21,4 +21,18 @@ const remove = async (id) => {
 	return response;
 };
 
-module.exports = { getAll, create, remove };
+const getById = async (id) => {
+	const response = await db.Comment.findByPk(id);
+	return response;
+};
+
+const update = async (data, id) => {
+	const response = await db.Comment.update(data, {
+		where: {
+			id
+		}
+	});
+	return response;
+};
+
+module.exports = { getAll, update, getById, create, remove };
