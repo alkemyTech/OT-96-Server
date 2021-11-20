@@ -1,36 +1,35 @@
 const testimonialsRepository = require('../repositories/testimonials');
+const paginateRequest = require('../services/paginateRequest');
+const limit = 10;
 
-const getAll = async (paginationData) => {
-  const { limit, offset, maxCount, page, lastPage, previousPageUrl, nextPageUrl, lastPageUrl } = paginationData;
-
-  const testimonials = await testimonialsRepository.getAll(limit, offset);
+const getAll = async (req) => {
+  const maxCount = await testimonialsRepository.getCount();
+  const paginationData = paginateRequest.pagination(
+    limit,
+    maxCount,
+    req,
+    'testimonials'
+  );
+  const testimonials = await testimonialsRepository.getAll(
+    limit,
+    paginationData.offset
+  );
 
   // respuesta por defecto (pagina intermedia)
   let response = {
-    count: testimonials.length,
-    maxCount: maxCount,
-    previousPage: previousPageUrl,
-    nextPage: nextPageUrl,
-    lastPage: lastPageUrl,
+    maxCount: paginationData.maxCount,
+    previousPage: paginationData.previousPageUrl,
+    nextPage: paginationData.nextPageUrl,
     data: testimonials
   };
 
   // respuestas pagina 1
   if (page == 1) {
-    if (page == lastPage) {
-      //devuelve solo data
-      response.previousPage = null;
-      response.nextPage = null;
-    }
-    if (page < lastPage) {
-      //devuelve data + nextPage
-      response.previousPage = null;
-    }
+    response.previousPage = null;
   }
 
-  // respuesta ultima pagina
-  if (page > 1 && page == lastPage) {
-    //devuelve data + previousPage
+  if (page == paginationData.lastPage) {
+    //devuelve solo data
     response.nextPage = null;
   }
 
