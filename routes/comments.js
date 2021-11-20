@@ -5,10 +5,7 @@ const commentsMiddlewares = require('../middlewares/comments');
 const commentsController = require('../controllers/comments');
 
 commentsRouter.get('/', authMiddleware.isAdmin, commentsController.getAll);
-commentsRouter.post(
-  '/',
-  commentsMiddlewares.validateComments,
-  commentsController.create
-);
+commentsRouter.post('/', commentsMiddlewares.validateComments, commentsController.create);
+commentsRouter.delete('/:id', authMiddleware.isOwnComment, commentsController.remove);
 
 module.exports = commentsRouter;
