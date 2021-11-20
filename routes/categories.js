@@ -17,7 +17,6 @@ categoriesRouter.get(
   '/',
   authMiddleware.isAdmin,
   paginationMiddleware.validate,
-  paginationMiddleware.parseCategories,
   categoriesController.getAllNames
 );
 categoriesRouter.get(
