@@ -12,6 +12,16 @@ const getById = async (req, res, next) => {
   }
 };
 
+const getCommentsByNewsId = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const comments = await newsService.getCommentsByNewsId(id);
+    res.status(200).json(comments);
+  } catch (error) {
+    next(error);
+  }
+};
+
 const create = async (req, res, next) => {
   try {
     const response = await newsService.create(req.body);
@@ -48,6 +58,7 @@ const remove = async (req, res, next) => {
 module.exports = {
   getAll,
   getById,
+  getCommentsByNewsId,
   create,
   update,
   remove

@@ -49,13 +49,6 @@ const newsMiddleware = require('../middlewares/news');
  *       "get": {
  *             "summary": "Get a news by id",
  *             "parameters": [
- *               {
- *                  "name": "authorization",
- *                  "in": "header",
- *                  "description": "The access token of the user",
- *                  "required": false,
- *                  "type": "string"
- *                },
  *                 {
  *                 "name": "id",
  *                 "in": "path",
@@ -232,6 +225,12 @@ newsRouter.put('/:id', authMiddleware.isAdmin, newsController.update);
  *      }
  *   }
  */
+newsRouter.get(
+  '/:id/comments',
+  authMiddleware.isLoggedUser,
+  newsController.getCommentsByNewsId
+);
+
 newsRouter.delete('/:id', authMiddleware.isAdmin, newsController.remove);
 
 module.exports = newsRouter;
