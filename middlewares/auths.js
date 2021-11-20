@@ -80,7 +80,7 @@ const isOwnComment = async (req, res, next) => {
       return next();
     }
     const comment = await commentsRepository.getById(id);
-    if (comment.userId === userFound.id) {
+    if (comment.UserId === userFound.id) {
       return next();
     }
     const error = new Error('it isnt your comment or you are not an admin');
