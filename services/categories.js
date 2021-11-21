@@ -1,5 +1,7 @@
 const categoriesRepository = require('../repositories/categories');
 const newsRepository = require('../repositories/news');
+const paginateRequest = require('../services/paginateRequest');
+const limit = 10;
 
 const getAll = async () => {
   const categories = await categoriesRepository.getAll();
@@ -62,14 +64,38 @@ const remove = async (id) => {
   await categoriesRepository.remove(id);
 };
 
-const getAllNames = async () => {
-  const category = await categoriesRepository.getAllNames();
-  if (category.length == 0) {
-    const error = new Error('No existen categorías.');
-    error.status = 404;
-    throw error;
+const getAllNames = async (req) => {
+  const maxCount = await categoriesRepository.getCount();
+  const paginationData = paginateRequest.pagination(
+    limit,
+    maxCount,
+    req,
+    'categories'
+  );
+  const categories = await categoriesRepository.getAllNames(
+    limit,
+    paginationData.offset
+  );
+
+  // respuesta por defecto (pagina intermedia)
+  let response = {
+    maxCount: paginationData.maxCount,
+    previousPage: paginationData.previousPageUrl,
+    nextPage: paginationData.nextPageUrl,
+    data: categories
+  };
+
+  // respuestas pagina 1
+  if (page == 1) {
+    response.previousPage = null;
   }
-  return category;
+
+  if (page == paginationData.lastPage) {
+    //devuelve solo data
+    response.nextPage = null;
+  }
+
+  return response;
 };
 
 module.exports = {

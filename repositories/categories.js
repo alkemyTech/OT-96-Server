@@ -42,14 +42,21 @@ const remove = async (id) => {
   return response;
 };
 
-const getAllNames = async () => {
+const getAllNames = async (limit, offset) => {
   const categories = await db.Category.findAll({
     attributes: {
       exclude: ['description', 'image', 'deletedAt', 'createdAt', 'updatedAt']
-    }
+    },
+    limit: limit,
+    offset: offset
   });
   return categories;
 };
+
+const getCount = async () => {
+  const response = await db.Category.count();
+  return response;
+}
 
 module.exports = {
   getAll,
@@ -58,5 +65,6 @@ module.exports = {
   create,
   update,
   remove,
-  getAllNames
+  getAllNames,
+  getCount
 };
