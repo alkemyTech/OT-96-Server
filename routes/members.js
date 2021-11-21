@@ -59,6 +59,14 @@ const pagination = require('../middlewares/pagination');
  *  "/members": {
  *    "get": {
  *      "summary": "Get all Members",
+ *      "parameters": [
+ *               {
+ *                 "name": "page",
+ *                 "in": "query",
+ *                 "description": "Page number",
+ *                 "type": "integer"
+ *               }
+ *             ],
  *      "tags": [ "Members" ],
  *      "security":[{"token":[]}],
  *      "responses": {

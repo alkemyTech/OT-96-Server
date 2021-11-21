@@ -77,6 +77,14 @@ categoriesRouter.post(
  * "/categories": {
  *    "get": {
  *      "summary": "list of all categories",
+ *      "parameters": [
+ *               {
+ *                 "name": "page",
+ *                 "in": "query",
+ *                 "description": "Page number",
+ *                 "type": "integer"
+ *               }
+ *             ],
  *      "tags": ["Categories"],
  *      "responses": {
  *        "200":{"description":"succesful"},

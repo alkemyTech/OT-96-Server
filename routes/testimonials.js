@@ -169,10 +169,18 @@ testimonialsRouter.post(
  *  "/testimonials": {
  *    "get": {
  *      "summary": "Get all Testimonials",
+ *      "parameters": [
+ *               {
+ *                 "name": "page",
+ *                 "in": "query",
+ *                 "description": "Page number",
+ *                 "type": "integer"
+ *               }
+ *             ],
  *      "tags": [ "Testimonials" ],
  *      "security":[{"token":[]}],
  *      "responses": {
- *        "200": { "description": "All Testimonials listed" }
+ *        "200": {"description": "All Testimonials listed"}
  *      }
  *    }
  *  }
