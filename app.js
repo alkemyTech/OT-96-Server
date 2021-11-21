@@ -26,8 +26,8 @@ const app = express();
 app.use(cors());
 
 const options = {
-  swaggerDefinition,
-  apis: [`${path.join(__dirname, 'routes', '*.js')}`]
+	swaggerDefinition,
+	apis: [ `${path.join(__dirname, 'routes', '*.js')}` ]
 };
 const swaggerSpec = swaggerJsDoc(options);
 
@@ -81,7 +81,6 @@ app.use((error, req, res, next) => {
   console.log(error);
   console.log('****************************************');
 });
-
 /*********************/
 
 module.exports = app;
