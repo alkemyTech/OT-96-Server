@@ -2,12 +2,19 @@ const db = require('../models');
 
 const getAll = async () => {
   const response = await db.News.findAll({
+    limit: limit,
+    offset: offset,
     include: [
       {
         model: db.Category
       }
     ]
   });
+  return response;
+};
+
+const getCount = async () => {
+  const response = await db.News.count();
   return response;
 };
 
@@ -27,6 +34,19 @@ const getByCategoryId = async (categoryId) => {
     where: {
       categoryId
     }
+  });
+  return response;
+};
+
+const getCommentsByNewsId = async (id) => {
+  const response = await db.News.findByPk(id, {
+    include: [
+      {
+        association: 'Comments',
+        order: [['createdAt', 'DESC']],
+        attributes: ['body']
+      }
+    ]
   });
   return response;
 };
@@ -56,9 +76,11 @@ const remove = async (id) => {
 
 module.exports = {
   getAll,
+  getCount,
   getById,
   create,
   update,
   remove,
-  getByCategoryId
+  getByCategoryId,
+  getCommentsByNewsId
 };

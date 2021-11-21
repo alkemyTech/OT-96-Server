@@ -1,12 +1,36 @@
 const newsService = require('../services/news');
 
-const getAll = async (req, res, next) => {};
+const getAll = async (req, res, next) => {
+  try {
+    const page = +req.query.page;
+    const response = await newsService.getAll(req, page);
+
+    res.status(200).json({
+      status: 200,
+      data: response.data,
+      previousPage: response.previousPage,
+      nextPage: response.nextPage
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 const getById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const news = await newsService.getById(id);
     res.status(200).json(news);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getCommentsByNewsId = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const comments = await newsService.getCommentsByNewsId(id);
+    res.status(200).json(comments);
   } catch (error) {
     next(error);
   }
@@ -48,6 +72,7 @@ const remove = async (req, res, next) => {
 module.exports = {
   getAll,
   getById,
+  getCommentsByNewsId,
   create,
   update,
   remove

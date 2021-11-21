@@ -15,7 +15,6 @@ module.exports = {
 					createdAt: new Date(),
 					updatedAt: new Date()
 				},
-				
 				{
 					firstName: 'Usuario',
 					lastName: 'Demo',
@@ -46,7 +45,6 @@ module.exports = {
 					createdAt: new Date(),
 					updatedAt: new Date()
 				},
-				
 				{
 					firstName: 'Matias',
 					lastName: 'Preiti',

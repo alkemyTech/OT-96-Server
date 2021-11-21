@@ -1,8 +1,33 @@
 const newsRepository = require('../repositories/news');
+const paginateRequest = require('../services/paginateRequest');
+const limit = 10;
 
-const getAll = async () => {
-  const news = await newsRepository.getAll();
-  return news;
+const getAll = async (req) => {
+  const maxCount = await newsRepository.getCount();
+  const paginationData = paginateRequest.pagination(
+    limit,
+    maxCount,
+    req,
+    'news'
+  );
+  const news = await newsRepository.getAll(limit, paginationData.offset);
+
+  let response = {
+    maxCount: paginationData.maxCount,
+    previousPage: paginationData.previousPageUrl,
+    nextPage: paginationData.nextPageUrl,
+    data: news
+  };
+
+  if (page == 1) {
+    response.previousPage = null;
+  }
+
+  if (page == paginationData.lastPage) {
+    response.nextPage = null;
+  }
+
+  return response;
 };
 
 const getById = async (id) => {
@@ -13,6 +38,11 @@ const getById = async (id) => {
     throw error;
   }
   return news;
+};
+
+const getCommentsByNewsId = async (id) => {
+  const novelty = await newsRepository.getCommentsByNewsId(id);
+  return novelty.Comments;
 };
 
 const create = async ({ name, content, image, categoryId }) => {
@@ -63,6 +93,7 @@ const remove = async (id) => {
 module.exports = {
   getAll,
   getById,
+  getCommentsByNewsId,
   create,
   update,
   remove
