@@ -89,17 +89,19 @@ testimonialsRouter.delete(
  *                 "description": "The id of the testimonial",
  *                 "required": true,
  *                 "type": "integer"
- *               },
- *               {
- *                 "name": "body",
- *                 "in": "body",
- *                 "description": "The testimonial to update",
- *                 "required": true,
- *                 "schema": {
- *                     "$ref": "#/components/schemas/Testimonial"
- *                  }
  *               }
  *             ],
+ *       "requestBody": {
+ *        "required": true,
+ *        "content": {
+ *           "application/json": {
+ *              "schema": {
+ *                "type": "object",
+ *                "$ref": "#/components/schemas/Testimonial"
+ *                }
+ *            }
+ *         }
+ *      },
  *             "tags": [ "Testimonials" ],
  *             "security":[{"token":[]}],
  *             "responses": {
@@ -129,17 +131,17 @@ testimonialsRouter.put(
  *    "/testimonials": {
  *       "post": {
  *             "summary": "Create a testimonial",
- *             "parameters": [
- *                {
- *                   "name": "body",
- *                   "in": "body",
- *                   "description": "The testimonial to create",
- *                   "required": true,
- *                   "schema": {
- *                     "$ref": "#/components/schemas/Testimonial"
- *                    }
+ *       "requestBody": {
+ *        "required": true,
+ *        "content": {
+ *           "application/json": {
+ *              "schema": {
+ *                "type": "object",
+ *                "$ref": "#/components/schemas/Testimonial"
  *                }
- *             ],
+ *            }
+ *         }
+ *      },
  *             "tags": [ "Testimonials" ],
  *            "security":[{"token":[]}],
  *             "responses": {
@@ -161,6 +163,21 @@ testimonialsRouter.post(
   testimonialsController.create
 );
 
+/**
+ * @swagger
+ *{
+ *  "/testimonials": {
+ *    "get": {
+ *      "summary": "Get all Testimonials",
+ *      "tags": [ "Testimonials" ],
+ *      "security":[{"token":[]}],
+ *      "responses": {
+ *        "200": { "description": "All Testimonials listed" }
+ *      }
+ *    }
+ *  }
+ *}
+ */
 testimonialsRouter.get(
   '/',
   authMiddleware.isAdmin,

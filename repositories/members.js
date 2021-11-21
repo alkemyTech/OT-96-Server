@@ -28,12 +28,12 @@ const update = async (id, data) => {
 };
 
 const remove = async (id) => {
-  const respose = await db.Members.destroy({
+  const response = await db.Members.destroy({
     where: {
       id
     }
   });
-  return respose;
+  return response;
 };
 
 module.exports = {

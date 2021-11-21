@@ -10,7 +10,7 @@ const pagination = require('../middlewares/pagination');
  *{
  *   "components": {
  *     "schemas": {
- *       "Members": {
+ *       "Member": {
  *         "type": "object",
  *         "properties": {
  *           "name": {
@@ -62,8 +62,7 @@ const pagination = require('../middlewares/pagination');
  *      "tags": [ "Members" ],
  *      "security":[{"token":[]}],
  *      "responses": {
- *        "200": { "description": "All Members listed" },
- *        "404": { "description": "Members not found!" }
+ *        "200": { "description": "All Members listed" }
  *      }
  *    }
  *  }
@@ -82,20 +81,22 @@ membersRouter.get(
  *  "/members": {
  *    "post": {
  *      "summary": "Create a Member",
- *      "parameters": [{
- *        "name": "body",
- *        "in": "body",
- *        "description": "New Member",
+ *       "requestBody": {
  *        "required": true,
- *        "schema": {
- *          "$ref": "#/components/schemas/Members"
- *        }
- *      }],
+ *        "content": {
+ *           "application/json": {
+ *              "schema": {
+ *                "type": "object",
+ *                "$ref": "#/components/schemas/Member"
+ *                }
+ *            }
+ *         }
+ *      },
  *      "tags": [ "Members" ],
  *      "security":[{"token":[]}],
  *      "responses": {
  *        "200": { "description": "Member has been created!" },
- *        "500": { "description": "Internal server error" }      
+ *        "500": { "description": "Internal server error" }
  *      }
  *    }
  *  }
@@ -120,16 +121,18 @@ membersRouter.post(
  *        "description": "Id of the Member to be updated",
  *        "required": true,
  *        "type": "integer"
- *      },
- *      {
- *        "name": "body",
- *        "in": "body",
- *        "description": "Member to be updated",
- *        "required": true,
- *        "schema": {
- *          "$ref": "#/components/schemas/Members"
- *        }
  *      }],
+ *       "requestBody": {
+ *        "required": true,
+ *        "content": {
+ *           "application/json": {
+ *              "schema": {
+ *                "type": "object",
+ *                "$ref": "#/components/schemas/Member"
+ *                }
+ *            }
+ *         }
+ *      },
  *      "tags": [ "Members" ],
  *      "security":[{"token":[]}],
  *      "responses": {
@@ -150,8 +153,8 @@ membersRouter.put(
 /**
  * @swagger
  *{
- *  "/members": {
- *    "get": {
+ *  "/members/{id}": {
+ *    "delete": {
  *      "summary": "Delete a Member by id",
  *      "parameters": [{
  *        "name": "id",
