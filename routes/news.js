@@ -3,6 +3,14 @@ const newsRouter = express.Router();
 const newsController = require('../controllers/news');
 const authMiddleware = require('../middlewares/auths');
 const newsMiddleware = require('../middlewares/news');
+const pagination = require('../middlewares/pagination');
+
+newsRouter.get(
+  '/',
+  authMiddleware.isAdmin,
+  pagination.validate,
+  newsController.getAll
+);
 
 /**
  *@swagger

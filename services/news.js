@@ -1,8 +1,33 @@
 const newsRepository = require('../repositories/news');
+const paginateRequest = require('../services/paginateRequest');
+const limit = 10;
 
-const getAll = async () => {
-  const news = await newsRepository.getAll();
-  return news;
+const getAll = async (req) => {
+  const maxCount = await newsRepository.getCount();
+  const paginationData = paginateRequest.pagination(
+    limit,
+    maxCount,
+    req,
+    'news'
+  );
+  const news = await newsRepository.getAll(limit, paginationData.offset);
+
+  let response = {
+    maxCount: paginationData.maxCount,
+    previousPage: paginationData.previousPageUrl,
+    nextPage: paginationData.nextPageUrl,
+    data: news
+  };
+
+  if (page == 1) {
+    response.previousPage = null;
+  }
+
+  if (page == paginationData.lastPage) {
+    response.nextPage = null;
+  }
+
+  return response;
 };
 
 const getById = async (id) => {
