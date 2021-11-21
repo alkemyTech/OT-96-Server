@@ -1,6 +1,7 @@
 const securityService = require('../services/security');
 const usersService = require('../services/users');
 const rolesService = require('../services/roles');
+const commentsRepository = require('../repositories/comments');
 
 const tokenId = (req) => {
   const token = req.headers['authorization'];
@@ -45,13 +46,44 @@ const isOwnUser = async (req, res, next) => {
       error.status = 404;
       throw error;
     }
-    if (userFound.roleId === reqId) {
+    if (userFound.roleId === role.id) {
       return next();
     }
     if (+id === userFound.id) {
       return next();
     }
     const error = new Error('Forbidden');
+    error.status = 403;
+    throw error;
+  } catch (error) {
+    next(error);
+  }
+};
+
+const isOwnComment = async (req, res, next) => {
+  try {
+    const reqId = tokenId(req);
+    const { id } = req.params;
+    const userFound = await usersService.getById(reqId);
+    if (!userFound) {
+      const error = new Error('no user found');
+      error.status = 404;
+      throw error;
+    }
+    const role = await rolesService.getByName('Admin');
+    if (!role) {
+      const error = new Error('no role found');
+      error.status = 404;
+      throw error;
+    }
+    if (userFound.roleId === role.id) {
+      return next();
+    }
+    const comment = await commentsRepository.getById(id);
+    if (comment.UserId === userFound.id) {
+      return next();
+    }
+    const error = new Error('it isnt your comment or you are not an admin');
     error.status = 403;
     throw error;
   } catch (error) {
@@ -85,4 +117,4 @@ const isAdmin = async (req, res, next) => {
   }
 };
 
-module.exports = { isAdmin, isOwnUser, isLoggedUser };
+module.exports = { isAdmin, isOwnUser, isLoggedUser, isOwnComment };

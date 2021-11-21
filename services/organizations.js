@@ -28,14 +28,14 @@ const create = async (organization) => {
   return await organizationsRepository.create(organization);
 };
 
-const update = async (id, organization) => {
+const update = async (id, { name, image, phone, address }) => {
   const response = await organizationsRepository.getById(id);
   if (!response) {
     const error = new Error('La organización no existe.');
     error.status = 404;
     throw error;
   }
-  await organizationsRepository.update(id, organization);
+  await organizationsRepository.update(id, { name, image, phone, address });
   return await organizationsRepository.getById(id);
 };
 
