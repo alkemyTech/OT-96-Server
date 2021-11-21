@@ -42,6 +42,7 @@ newsRouter.get(
  *            "name": "News 1",
  *            "content": "This is the content of the news",
  *            "type": "news",
+ *            "image": "asdasd",
  *            "categoryId": 1
  *          }
  *       }
@@ -91,17 +92,17 @@ newsRouter.get('/:id', authMiddleware.isAdmin, newsController.getById);
  *    "/news": {
  *       "post": {
  *             "summary": "Create a news",
- *             "parameters": [
- *                {
- *                   "name": "body",
- *                   "in": "body",
- *                   "description": "The news to create",
- *                   "required": true,
- *                   "schema": {
- *                     "$ref": "#/components/schemas/News"
- *                    }
+ *      "requestBody": {
+ *        "required": true,
+ *        "content": {
+ *           "application/json": {
+ *              "schema": {
+ *                "type": "object",
+ *                "$ref": "#/components/schemas/News"
  *                }
- *             ],
+ *            }
+ *         }
+ *      },
  *             "tags": [ "News" ],
  *            "security":[{"token":[]}],
  *             "responses": {
@@ -137,16 +138,18 @@ newsRouter.post(
  *                 "required": true,
  *                 "type": "integer"
  *               },
- *               {
- *                 "name": "body",
- *                 "in": "body",
- *                 "description": "The news to update",
- *                 "required": true,
- *                 "schema": {
- *                     "$ref": "#/components/schemas/News"
- *                  }
- *               }
  *             ],
+ *       "requestBody": {
+ *        "required": true,
+ *        "content": {
+ *           "application/json": {
+ *              "schema": {
+ *                "type": "object",
+ *                "$ref": "#/components/schemas/News"
+ *                }
+ *            }
+ *         }
+ *      },
  *             "tags": [ "News" ],
  *             "security":[{"token":[]}],
  *             "responses": {
@@ -182,7 +185,7 @@ newsRouter.put('/:id', authMiddleware.isAdmin, newsController.update);
  *                 "example": 1
  *                 }
  *             ],
- *             "tags": [ "commentByNewsId" ],
+ *             "tags": [ "Comments" ],
  *             "security":[{"token":[]}],
  *             "responses": {
  *                 "200": {
