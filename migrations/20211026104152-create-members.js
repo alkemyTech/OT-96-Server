@@ -28,7 +28,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      descriptcion: {
+      description: {
         type: Sequelize.STRING,
         allowNull: true
       },
@@ -45,7 +45,7 @@ module.exports = {
         type: Sequelize.DATE,
       },
 
-    }, );
+    });
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Members');
