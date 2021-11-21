@@ -7,52 +7,68 @@ const pagination = require('../middlewares/pagination');
 
 /**
  *@swagger
- *  {
- *    "components": {
- *      "schemas": {
- *        "Members": {
- *          "type": "object",
- *          "properties": {
- *            "name": {
- *              "type": "string",
- *              "description": "Name of a member"
- *             },
- *            "facebookUrl": {
- *              "type": "string",
- *              "description": "Facebook Url of a member"
- *            },
- *            "instagramUrl": {
- *              "type": "string",
- *              "description": "Instagram Url of a member"
- *            },
- *            "linkedinUrl": {
- *              "type": "string",
- *              "description": "LinkedIn Url of a member"
- *            },
- *            "image": {
- *              "type": "string",
- *              "description": "Image Url of a member"
- *            },
- *            "description": {
- *              "type": "string",
- *              "description": "Description of a member"
- *            }
- *          },
- *         "required": [ "name", "image" ],
- *          "example": {
- *            "name": "Robert",
- *            "facebookUrl": "https://es-la.facebook.com/robertdowneyjr",
- *            "instagramUrl": "https://www.instagram.com/robertdowneyjr",
- *            "linkedinUrl": "https://www.linkedin.com/in/robert-downey-jr-ab6703215/",
- *            "image": "https://es.web.img3.acsta.net/r_1280_720/pictures/20/09/22/14/31/4040599.jpg",
- *            "description": "Famous Hollywood Actor",
- *          }
- *       }
- *     }
- *   }
+ *{
+ *   "components": {
+ *     "schemas": {
+ *       "Members": {
+ *         "type": "object",
+ *         "properties": {
+ *           "name": {
+ *             "type": "string",
+ *             "description": "Name of a member"
+ *           },
+ *           "facebookUrl": {
+ *             "type": "string",
+ *             "description": "Facebook Url of a member"
+ *           },
+ *           "instagramUrl": {
+ *             "type": "string",
+ *             "description": "Instagram Url of a member"
+ *           },
+ *           "linkedinUrl": {
+ *             "type": "string",
+ *             "description": "LinkedIn Url of a member"
+ *           },
+ *           "image": {
+ *             "type": "string",
+ *             "description": "Image Url of a member"
+ *           },
+ *           "description": {
+ *             "type": "string",
+ *             "description": "Description of a member"
+ *           }
+ *         },
+ *        "required": [ "name", "image" ],
+ *         "example": {
+ *           "name": "Robert",
+ *           "facebookUrl": "https://es-la.facebook.com/robertdowneyjr",
+ *           "instagramUrl": "https://www.instagram.com/robertdowneyjr",
+ *           "linkedinUrl": "https://www.linkedin.com/in/robert-downey-jr-ab6703215/",
+ *           "image": "https://es.web.img3.acsta.net/r_1280_720/pictures/20/09/22/14/31/4040599.jpg",
+ *           "description": "Famous Hollywood Actor",
+ *         }
+ *      }
+ *    }
+ *  }
  *}
  */
 
+/**
+ * @swagger
+ *{
+ *  "/members": {
+ *    "get": {
+ *      "summary": "Get all Members",
+ *      "tags": [ "Members" ],
+ *      "security":[{"token":[]}],
+ *      "responses": {
+ *        "200": { "description": "All Members listed" },
+ *        "404": { "description": "Members not found!" }
+ *      }
+ *    }
+ *  }
+ *}
+ */
 membersRouter.get(
   '/',
   authMiddleware.isAdmin,
@@ -60,6 +76,31 @@ membersRouter.get(
   membersController.getAll
 );
 
+/**
+ * @swagger
+ *{
+ *  "/members": {
+ *    "post": {
+ *      "summary": "Create a Member",
+ *      "parameters": [{
+ *        "name": "body",
+ *        "in": "body",
+ *        "description": "New Member",
+ *        "required": true,
+ *        "schema": {
+ *          "$ref": "#/components/schemas/Members"
+ *        }
+ *      }],
+ *      "tags": [ "Members" ],
+ *      "security":[{"token":[]}],
+ *      "responses": {
+ *        "200": { "description": "Member has been created!" },
+ *        "500": { "description": "Internal server error" }      
+ *      }
+ *    }
+ *  }
+ *}
+ */
 membersRouter.post(
   '/',
   authMiddleware.isLoggedUser,
@@ -67,12 +108,69 @@ membersRouter.post(
   membersController.create
 );
 
+/**
+ * @swagger
+ *{
+ *  "/members/{id}": {
+ *    "put": {
+ *      "summary": "Update a Member by id",
+ *      "parameters": [{
+ *        "name": "id",
+ *        "in": "path",
+ *        "description": "Id of the Member to be updated",
+ *        "required": true,
+ *        "type": "integer"
+ *      },
+ *      {
+ *        "name": "body",
+ *        "in": "body",
+ *        "description": "Member to be updated",
+ *        "required": true,
+ *        "schema": {
+ *          "$ref": "#/components/schemas/Members"
+ *        }
+ *      }],
+ *      "tags": [ "Members" ],
+ *      "security":[{"token":[]}],
+ *      "responses": {
+ *        "200": { "description": "Member has been updated!" },
+ *        "404": { "description": "Member not found!" },
+ *        "500": { "description": "Internal server error" }
+ *      }
+ *    }
+ *  }
+ *}
+ */
 membersRouter.put(
   '/:id',
   authMiddleware.isLoggedUser,
   membersController.update
 );
 
+/**
+ * @swagger
+ *{
+ *  "/members": {
+ *    "get": {
+ *      "summary": "Delete a Member by id",
+ *      "parameters": [{
+ *        "name": "id",
+ *        "in": "path",
+ *        "description": "Id of the Member to be deleted",
+ *        "required": true,
+ *        "type": "integer"
+ *      }],
+ *      "tags": [ "Members" ],
+ *      "security":[{"token":[]}],
+ *      "responses": {
+ *        "200": { "description": "Member has been deleted!" },
+ *        "404": { "description": "Member not found!" },
+ *        "500": { "description": "Internal server error" }
+ *      }
+ *    }
+ *  }
+ *}
+ */
 membersRouter.delete('/:id', membersController.remove);
 
 module.exports = membersRouter;
