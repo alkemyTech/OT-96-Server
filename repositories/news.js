@@ -13,6 +13,11 @@ const getAll = async () => {
   return response;
 };
 
+const getCount = async () => {
+  const response = await db.News.count();
+  return response;
+};
+
 const getById = async (id) => {
   const response = await db.News.findByPk(id, {
     include: [
@@ -58,6 +63,7 @@ const remove = async (id) => {
 
 module.exports = {
   getAll,
+  getCount,
   getById,
   create,
   update,
