@@ -1,12 +1,12 @@
 const db = require('../models');
 
-const getAll = async () => {
+const getAll = async (limit, offset) => {
   const response = await db.News.findAll({
     limit: limit,
     offset: offset,
     include: [
       {
-        model: db.Category
+        association: 'category'
       }
     ]
   });

@@ -5,13 +5,6 @@ const authMiddleware = require('../middlewares/auths');
 const newsMiddleware = require('../middlewares/news');
 const pagination = require('../middlewares/pagination');
 
-newsRouter.get(
-  '/',
-  authMiddleware.isAdmin,
-  pagination.validate,
-  newsController.getAll
-);
-
 /**
  *@swagger
  *  {
@@ -50,6 +43,47 @@ newsRouter.get(
  *   }
  *}
  */
+
+/**
+ * @swagger
+ * "/news": {
+ *    "get": {
+ *      "summary": "list of all News",
+ *      "parameters": [
+ *               {
+ *                 "name": "page",
+ *                 "in": "query",
+ *                 "description": "Page number",
+ *                 "type": "integer"
+ *               }
+ *             ],
+ *      "tags": ["News"],
+ *      "responses": {
+ *        "200":{"description":"succesful"},
+ *        "content": {
+ *            "application/json": {
+ *              "schema": {
+ *                "type": "object",
+ *                "items": {
+ *                  "$ref": "#/components/schemas/News"
+ *                 }
+ *               }
+ *          }
+ *      },
+ *     "404":{"description":"Category not found"},
+ *     "500":{"description":"Internal Server Error"}
+ *     },
+ *     "security":[{"token":[]}]
+ *    }
+ * }
+ */
+
+newsRouter.get(
+  '/',
+  authMiddleware.isAdmin,
+  pagination.validate,
+  newsController.getAll
+);
 
 /**
  * @swagger
