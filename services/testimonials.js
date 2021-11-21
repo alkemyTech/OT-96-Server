@@ -1,8 +1,39 @@
 const testimonialsRepository = require('../repositories/testimonials');
+const paginateRequest = require('../services/paginateRequest');
+const limit = 10;
 
-const getAll = async () => {
-  const testimonials = await testimonialsRepository.getAll();
-  return testimonials;
+const getAll = async (req) => {
+  const maxCount = await testimonialsRepository.getCount();
+  const paginationData = paginateRequest.pagination(
+    limit,
+    maxCount,
+    req,
+    'testimonials'
+  );
+  const testimonials = await testimonialsRepository.getAll(
+    limit,
+    paginationData.offset
+  );
+
+  // respuesta por defecto (pagina intermedia)
+  let response = {
+    maxCount: paginationData.maxCount,
+    previousPage: paginationData.previousPageUrl,
+    nextPage: paginationData.nextPageUrl,
+    data: testimonials
+  };
+
+  // respuestas pagina 1
+  if (page == 1) {
+    response.previousPage = null;
+  }
+
+  if (page == paginationData.lastPage) {
+    //devuelve solo data
+    response.nextPage = null;
+  }
+
+  return response;
 };
 
 const getById = async (id) => {

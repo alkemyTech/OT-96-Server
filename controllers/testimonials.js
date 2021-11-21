@@ -2,8 +2,11 @@ const testimonialsService = require('../services/testimonials');
 
 const getAll = async (req, res, next) => {
   try {
-    const testimonials = await testimonialsService.getAll();
-    res.status(200).json(testimonials);
+    const response = await testimonialsService.getAll(req);
+    res.status(200).json({
+      status: 200,
+      ...response
+    });
   } catch (error) {
     next(error);
   }
@@ -29,7 +32,7 @@ const create = async (req, res, next) => {
     const testimonial = await testimonialsService.create(req.body);
     res.status(200).json({
       success: true,
-      msg: `testimonial:${testimonial.name}  has been created`,
+      msg: `testimonial:${testimonial.name}  has been created`
     });
   } catch (error) {
     next(error);

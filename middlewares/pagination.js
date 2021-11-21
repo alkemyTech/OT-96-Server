@@ -1,16 +1,18 @@
 const validate = (req, res, next) => {
-  if(!req.query.page){
-    const error = new Error("parameter page does not exist");
-    error.status = 404;
+  page = Number(req.query.page);
+  if (isNaN(page)) {
+    const error = new Error('Parameter "page" must be a number!');
+    error.status = 400;
     throw error;
   }
-  
-  if (req.query.page == 0) {
-    const error = new Error("Page 0 does not exist");
-    error.status = 404;
+  if (page < 1) {
+    const error = new Error('Parameter "page" out of range');
+    error.status = 400;
     throw error;
   }
   next();
 };
 
-module.exports = {validate}
+module.exports = {
+  validate
+};
