@@ -1,7 +1,7 @@
 const pagination = (limit, maxCount, req, entity) => {
   let page = Number(req.query.page);
   const lastPage = Math.ceil(maxCount / limit);
-
+  console.log(lastPage);
   if (page > lastPage) {
     const error = new Error('Parameter "page" out of range');
     error.status = 400;
@@ -18,7 +18,7 @@ const pagination = (limit, maxCount, req, entity) => {
 
   const paginationData = {
     page: page,
-    lastpage: lastPage,
+    lastPage: lastPage,
     offset: offset,
     maxCount: maxCount,
     previousPageUrl: previousPageUrl,
