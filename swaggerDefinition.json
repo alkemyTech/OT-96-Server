@@ -14,5 +14,14 @@
     {
       "url": "http://localhost:3000"
     }
-  ]
+  ],
+  "components": {
+    "securitySchemes": {
+      "token": {
+        "type": "apiKey",
+        "name": "authorization",
+        "in": "header"
+      }
+    }
+  }
 }
