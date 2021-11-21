@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "894c028e-35b4-4343-8f15-23147c316c87",
+		"_postman_id": "bd087eaa-e950-46ea-9d1f-0c91ad63647e",
 		"name": "Somos Mas",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -102,12 +102,12 @@
 							"urlencoded": [
 								{
 									"key": "email",
-									"value": "franciscomanuel@gmail.com",
+									"value": "test@test.com",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "Hola123",
+									"value": "12345678",
 									"type": "text"
 								}
 							]
@@ -234,8 +234,8 @@
 						"method": "GET",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": ""
+							"mode": "urlencoded",
+							"urlencoded": []
 						},
 						"url": {
 							"raw": "http://localhost:3000/users",
@@ -283,6 +283,59 @@
 								"localhost"
 							],
 							"port": "3000",
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUser",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "firstName",
+									"value": "Admin",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "Usuario",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1234567",
+									"type": "text"
+								},
+								{
+									"key": "roleId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"value": "image",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test@test.com.ar",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/users/1",
+							"host": [
+								"{{url}}"
+							],
 							"path": [
 								"users",
 								"1"
@@ -622,6 +675,17 @@
 								"news",
 								"1"
 							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateNew",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
 						}
 					},
 					"response": []
@@ -988,7 +1052,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/slides/1",
+							"raw": "http://localhost:3000/slides/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -996,7 +1060,7 @@
 							"port": "3000",
 							"path": [
 								"slides",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -1106,7 +1170,7 @@
 								},
 								{
 									"key": "order",
-									"value": "new",
+									"value": "2",
 									"type": "text"
 								},
 								{
@@ -1200,6 +1264,569 @@
 							""
 						]
 					}
+				}
+			]
+		},
+		{
+			"name": "Contacts",
+			"item": [
+				{
+					"name": "GetAllContacts",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "{{key}}",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/contacts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateContact",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "{{key}}",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Agustin",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "alexis10893123@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "message",
+									"value": "Hola",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/contacts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Activities",
+			"item": [
+				{
+					"name": "CreateActivity",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "{{key}}",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "activdad2",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "actividad contenido",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"value": "image",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/activities",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"activities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateActivity",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "{{key}}",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "actividad Actualizada",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "actividad Actualizara",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"value": "image",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/activities/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"activities",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Members",
+			"item": [
+				{
+					"name": "GetAllMembers",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "{{key}}",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/members",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateMember",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "{{key}}",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Miembro",
+									"type": "text"
+								},
+								{
+									"key": "facebookUrl",
+									"value": "http://miembro.com",
+									"type": "text"
+								},
+								{
+									"key": "instagramUrl",
+									"value": "http://miembro.com",
+									"type": "text"
+								},
+								{
+									"key": "linkedinUrl",
+									"value": "http://miembro.com",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"value": "image",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/members",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateMember",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "{{key}}",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Miembro Actualizado",
+									"type": "text"
+								},
+								{
+									"key": "facebookUrl",
+									"value": "http://miembro.com",
+									"type": "text"
+								},
+								{
+									"key": "instagramUrl",
+									"value": "http://miembro.com",
+									"type": "text"
+								},
+								{
+									"key": "linkedinUrl",
+									"value": "http://miembro.com",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"value": "image",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/members/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"members",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Testimonials",
+			"item": [
+				{
+					"name": "CreateTestimonial",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "{{key}}",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Testimonio",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"value": "image",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "testimonio content",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/testimonials",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"testimonials"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateTestimonial",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "{{key}}",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Testimonio Actualizado",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"value": "image",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "testimonio content",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/testimonials/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"testimonials",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateTestimonial Copy",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "{{key}}",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}/testimonials/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"testimonials",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
