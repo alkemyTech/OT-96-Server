@@ -1,5 +1,5 @@
 const usersService = require('../services/users');
-const security = require('../services/security');
+const securityService = require('../services/security');
 
 const getAll = async (req, res, next) => {
   try {
@@ -13,9 +13,9 @@ const getAll = async (req, res, next) => {
 const create = async (req, res, next) => {
   try {
     const newUser = await usersService.create(req.body);
-    const token = security.generateToken(newUser);
+    const token = securityService.generateToken(newUser);
     res.status(200).json({
-      success: true,
+      status: 200,
       msg: `${newUser.firstName} your user has been created`,
       user: newUser,
       token: token
@@ -31,7 +31,7 @@ const update = async (req, res, next) => {
     res.status(200).json({
       success: true,
       msg: `User ${req.params.id} is updated succesfully`,
-      user: updateUser,
+      user: updateUser
     });
   } catch (error) {
     next(error);
