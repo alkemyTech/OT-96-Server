@@ -38,16 +38,29 @@ describe('test Users Controller', () => {
     mockedUsersService.expects('getAll').resolves(expectedUsers);
 
     await usersController.getAll(req, res, spyNext);
-
     chai.assert.isArray(spyJson.args[0][0], true, 'is a array of users');
     chai.assert.isObject(spyJson.args[0][0][0], true, 'is a object of an user');
-    chai.assert.isNotEmpty(spyJson.args[0][0], 'length of array');
+    chai.assert.equal(
+      spyJson.args[0][0][0].id,
+      expectedUsers[0].id,
+      'id of a user'
+    );
+    chai.assert.equal(
+      spyJson.args[0][0][0].firstName,
+      expectedUsers[0].firstName,
+      'firstName of a user'
+    );
+    chai.assert.equal(
+      spyJson.args[0][0][0].email,
+      expectedUsers[0].email,
+      'email of a user'
+    );
     chai.assert.equal(res.status.calledOnce, true, 'res.status');
-    chai.assert.equal(spyNext.calledOnce, false, 'spyNext.calledOnce');
     chai.assert.equal(res.status.args[0], 200, 'status');
+    chai.assert.equal(spyNext.calledOnce, false, 'spyNext.calledOnce');
   });
 
-  it('getAll users success', async () => {
+  it('getAll users error', async () => {
     const expectedError = new Error('error getAllMembers');
 
     mockedUsersService.expects('getAll').rejects(expectedError);
