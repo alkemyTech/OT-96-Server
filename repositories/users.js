@@ -1,14 +1,31 @@
 const db = require('../models');
 
 const getAll = async () => {
-  const response = await db.User.findAll();
+  const response = await db.User.findAll({
+    include: [
+      {
+        association: 'Role'
+      }
+    ],
+    attributes: [
+      'id',
+      'firstName',
+      'lastName',
+      'email',
+      'password',
+      'photo',
+      'roleId'
+    ]
+  });
   return response;
 };
 
 const getById = async (id) => {
-  const response = await db.User.findByPk(id,{attributes:{
-    exclude:["password"]
-  }});
+  const response = await db.User.findByPk(id, {
+    attributes: {
+      exclude: ['password']
+    }
+  });
   return response;
 };
 
