@@ -3,7 +3,7 @@ const membersRouter = express.Router();
 const membersController = require('../controllers/members');
 const authMiddleware = require('../middlewares/auths');
 const membersMiddleware = require('../middlewares/members');
-const pagination = require('../middlewares/pagination');
+const paginationMiddleware = require('../middlewares/pagination');
 
 /**
  *@swagger
@@ -79,7 +79,7 @@ const pagination = require('../middlewares/pagination');
 membersRouter.get(
   '/',
   authMiddleware.isAdmin,
-  pagination.validate,
+  paginationMiddleware.validate,
   membersController.getAll
 );
 
