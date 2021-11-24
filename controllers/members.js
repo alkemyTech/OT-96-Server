@@ -2,14 +2,11 @@ const membersService = require('../services/members');
 
 const getAll = async (req, res, next) => {
   try {
-    const page = +req.query.page;
-    const response = await membersService.getAll(req, page);
+    const response = await membersService.getAll(req);
 
     res.status(200).json({
       status: 200,
-      data: response.data,
-      previousPage: response.previousPage,
-      nextPage: response.nextPage
+      response: response
     });
   } catch (error) {
     next(error);
@@ -44,7 +41,7 @@ const update = async (req, res, next) => {
 const remove = async (req, res, next) => {
   try {
     const response = await membersService.remove(req.params.id);
-    return res.status(200).json(response);
+    return res.status(200).json({ msg: 'the member was delete succesfully!' });
   } catch (error) {
     next(error);
   }
