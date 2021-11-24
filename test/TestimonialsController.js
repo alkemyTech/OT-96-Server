@@ -32,25 +32,23 @@ describe('test testimonialsControllers', () => {
   };
 
   beforeEach(() => {
-    beforeEach(() => {
-      mockedTestimonialsService = sinon.mock(testimonialsService);
+    mockedTestimonialsService = sinon.mock(testimonialsService);
 
-      stubStatus = sinon.stub();
-      spyJson = sinon.spy();
-      stubStatus.returns({ json: spyJson });
+    stubStatus = sinon.stub();
+    spyJson = sinon.spy();
+    stubStatus.returns({ json: spyJson });
 
-      spyNext = sinon.spy();
+    spyNext = sinon.spy();
 
-      res = { status: stubStatus };
-    });
-    afterEach(() => {
-      mockedTestimonialsService.verify();
-    });
+    res = { status: stubStatus };
+  });
+  afterEach(() => {
+    mockedTestimonialsService.verify();
   });
 
   it('get testimonial by id', async () => {
     const expectedJsonResult = {
-      status: 200,
+      status: 201,
       data: expectedTestimonial
     };
 
@@ -67,8 +65,8 @@ describe('test testimonialsControllers', () => {
     );
     chai.assert.equal(
       res.status.args[0],
-      200,
-      'asserts status parameter is 200'
+      201,
+      'asserts status parameter is 201'
     );
     chai.assert.equal(
       spyJson.calledOnce,
@@ -77,14 +75,11 @@ describe('test testimonialsControllers', () => {
     );
     chai.assert.isArray(spyJson.args[0], 'is an array');
     chai.assert.isObject(spyJson.args[0][0], 'is an object');
-    chai.assert.equal(spyJson.args[0][0].status, expectedJsonResult.status);
+    chai.assert.isObject(spyJson.args[0][0].data, 'is an object');
+    chai.assert.equal(spyJson.args[0][0].data.id, expectedJsonResult.data.id);
     chai.assert.equal(
-      spyJson.args[0][0].testimonial.id,
-      expectedJsonResult.testimonial.id
-    );
-    chai.assert.equal(
-      spyJson.args[0][0].testimonial.name,
-      expectedJsonResult.testimonial.name
+      spyJson.args[0][0].data.name,
+      expectedJsonResult.data.name
     );
   });
   it('Testimonials getById Error', async () => {
