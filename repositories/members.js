@@ -28,7 +28,7 @@ const update = async (id, data) => {
 };
 
 const remove = async (id) => {
-  const response = await db.Members.destroy({
+  const response = await db.Member.destroy({
     where: {
       id
     }
@@ -36,10 +36,16 @@ const remove = async (id) => {
   return response;
 };
 
+const getCount = async () => {
+  const response = await db.Member.count();
+  return response;
+}
+
 module.exports = {
   getAll,
   getById,
   create,
   update,
-  remove
+  remove,
+  getCount
 };
