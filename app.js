@@ -26,8 +26,8 @@ const app = express();
 app.use(cors());
 
 const options = {
-	swaggerDefinition,
-	apis: [ `${path.join(__dirname, 'routes', '*.js')}` ]
+  swaggerDefinition,
+  apis: [`${path.join(__dirname, 'routes', '*.js')}`]
 };
 const swaggerSpec = swaggerJsDoc(options);
 
@@ -57,8 +57,8 @@ app.use('/testimonials', testimonialsRouter);
 app.use('/comments', commentsRouter);
 
 /** test routes */
-// const test_imagesRouter = require('./routes/test_images');
-// app.use('/test', test_imagesRouter);
+const test_imagesRouter = require('./routes/test_images');
+app.use('/', test_imagesRouter);
 
 /*********************/
 // ERROR HANDLER

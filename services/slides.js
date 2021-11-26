@@ -16,7 +16,7 @@ const getById = async (id) => {
   return slide;
 };
 
-const create = async ({ imageUrl, text, order, organizationId }) => {
+const create = async ({ imageUrl: image, text, order, organizationId }) => {
   if (!order) {
     const slides = await slidesRepository.getAll();
     let orderId = 0;
@@ -28,10 +28,10 @@ const create = async ({ imageUrl, text, order, organizationId }) => {
     order = orderId + 1;
   }
 
-  const image = Buffer.from(imageUrl, 'base64');
-  const { url, key } = await imageUploader.upload(image, text);
+  const imageBuffer = Buffer.from(image, 'base64');
+  const { key } = await imageUploader.upload(imageBuffer);
   const newSlide = await slidesRepository.create({
-    imageUrl: url,
+    imageUrl: `http://localhost:3000/images/${key}`,
     text,
     order,
     organizationId

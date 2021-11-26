@@ -21,7 +21,7 @@ const getById = async (req, res, next) => {
 
 const create = async (req, res, next) => {
   try {
-    const { newSlide, key } = await slidesService.create(req.body);
+    const { newSlide } = await slidesService.create(req.body);
     res.status(200).json({
       success: true,
       msg: `your Slide id: ${newSlide.id} has been created`,
