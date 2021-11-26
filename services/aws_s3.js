@@ -1,5 +1,6 @@
 const fs = require('fs');
 const AWS = require('aws-sdk');
+const uuid = require('uuid');
 
 // AWS account data
 const bucketName = process.env.AWS_BUCKET;
@@ -14,13 +15,11 @@ const s3 = new AWS.S3({
   sercetAccesKey
 });
 
-const uploadFile = (file, text) => {
-  // const fileStream = fs.createReadStream(file.path);
-
+const uploadFile = (file) => {
   const uploadParams = {
     Bucket: bucketName,
     Body: file,
-    Key: text
+    Key: uuid.v4()
   };
 
   return s3.upload(uploadParams).promise();

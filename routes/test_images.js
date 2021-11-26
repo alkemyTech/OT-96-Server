@@ -14,10 +14,6 @@ imagesTestRouter.post(
   test_imagesController.upload
 );
 
-imagesTestRouter.get(
-  '/images/:key',
-  authMiddleware.isAdmin,
-  test_imagesController.download
-);
+imagesTestRouter.get('/images/:key', test_imagesController.download);
 
 module.exports = imagesTestRouter;
