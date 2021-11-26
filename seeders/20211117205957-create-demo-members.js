@@ -9,6 +9,7 @@ module.exports = {
         instagramUrl: 'http://manuel.com',
         linkedinUrl: 'http://manuel.com',
         image: `Manuelimage`,
+        description: 'description',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -18,6 +19,7 @@ module.exports = {
         instagramUrl: 'http://alexis.com',
         linkedinUrl: 'http://alexis.com',
         image: `image`,
+        description: 'description',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -27,6 +29,7 @@ module.exports = {
         instagramUrl: 'http://francisco.com',
         linkedinUrl: 'http://francisco.com',
         image: `image`,
+        description: 'description',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -36,6 +39,7 @@ module.exports = {
         instagramUrl: 'http://federico.com',
         linkedinUrl: 'http://federico.com',
         image: `image`,
+        description: 'description',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -45,6 +49,7 @@ module.exports = {
         instagramUrl: 'http://JuanCruz.com',
         linkedinUrl: 'http://JuanCruz.com',
         image: `image`,
+        description: 'description',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -54,6 +59,7 @@ module.exports = {
         instagramUrl: 'http://Agustin.com',
         linkedinUrl: 'http://Agustin.com',
         image: `image`,
+        description: 'description',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -63,6 +69,7 @@ module.exports = {
         instagramUrl: 'http://IvanGabriel.com',
         linkedinUrl: 'http://IvanGabriel.com',
         image: `image`,
+        description: 'description',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -72,6 +79,7 @@ module.exports = {
         instagramUrl: 'http://Matias.com',
         linkedinUrl: 'http://Matias.com',
         image: `image`,
+        description: 'description',
         createdAt: new Date(),
         updatedAt: new Date()
       }
