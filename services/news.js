@@ -1,6 +1,7 @@
 const newsRepository = require('../repositories/news');
 const paginateRequest = require('../services/paginateRequest');
 const limit = 10;
+const imageUploader = require('./imageUploader');
 
 const getAll = async (req) => {
   const maxCount = await newsRepository.getCount();
@@ -46,10 +47,12 @@ const getCommentsByNewsId = async (id) => {
 };
 
 const create = async ({ name, content, image, categoryId }) => {
+  const imageBuffer = Buffer.from(image, 'base64');
+  const { key } = await imageUploader.upload(imageBuffer);
   const newsCreated = await newsRepository.create({
     name,
     content,
-    image,
+    image: `http://localhost:3000/images/${key}`,
     categoryId,
     type: 'news'
   });
