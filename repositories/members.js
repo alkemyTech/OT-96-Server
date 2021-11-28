@@ -33,7 +33,7 @@ const update = async (id, data) => {
 };
 
 const remove = async (id) => {
-  const response = await db.Members.destroy({
+  const response = await db.Member.destroy({
     where: {
       id
     }

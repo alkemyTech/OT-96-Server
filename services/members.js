@@ -60,10 +60,8 @@ const update = async (id, data) => {
 
 const remove = async (id) => {
   const user = await membersRepository.getById(id);
-  console.log(user);
-  console.log(id);
-  if (user) {
-    const error = new Error('El Miembro no existe!.');
+  if (!user) {
+    const error = new Error('El Miembro no existe!');
     error.status = 404;
     throw error;
   }
