@@ -1,31 +1,32 @@
 const membersRepository = require('../repositories/members');
+const paginateRequest = require('../services/paginateRequest');
 const limit = 10;
 
-const getAll = async (req, page) => {
-  const offset = (page - 1) * limit;
-  console.log(offset, limit);
-  const members = await membersRepository.getAll(limit, offset);
-  let nextPage = page + 1;
-  let previousPage = page - 1;
-  if (!members) {
-    const error = new Error('not found members!');
-    error.status = 404;
-    throw error;
-  }
-  if (previousPage == 0) {
-    const response = {
-      data: members,
-      nextPage: `${req.protocol}://${req.get('host')}/members?page=${nextPage}`
-    };
-    return response;
-  }
-  const response = {
-    data: members,
-    previousPage: `${req.protocol}://${req.get(
-      'host'
-    )}/members?page=${previousPage}`,
-    nextPage: `${req.protocol}://${req.get('host')}/members?page=${nextPage}`
+const getAll = async (req) => {
+  const maxCount = await membersRepository.getCount();
+  const paginationData = paginateRequest.pagination(
+    limit,
+    maxCount,
+    req,
+    'members'
+  );
+  const members = await membersRepository.getAll(limit, paginationData.offset);
+
+  let response = {
+    maxCount: paginationData.maxCount,
+    previousPage: paginationData.previousPageUrl,
+    nextPage: paginationData.nextPageUrl,
+    data: members
   };
+
+  if (page == 1) {
+    response.previousPage = null;
+  }
+
+  if (page == paginationData.lastPage) {
+    response.nextPage = null;
+  }
+
   return response;
 };
 

@@ -8,6 +8,11 @@ const getAll = async (limit, offset) => {
   return response;
 };
 
+const getCount = async () => {
+  const response = await db.Member.count();
+  return response;
+};
+
 const getById = async (id) => {
   const response = await db.Member.findByPk(id);
   return response;
@@ -38,6 +43,7 @@ const remove = async (id) => {
 
 module.exports = {
   getAll,
+  getCount,
   getById,
   create,
   update,
