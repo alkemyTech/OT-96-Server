@@ -112,7 +112,7 @@ membersRouter.get(
  */
 membersRouter.post(
   '/',
-  authMiddleware.isLoggedUser,
+  authMiddleware.isAdmin,
   membersMiddleware.validateMember,
   membersController.create
 );
@@ -152,11 +152,7 @@ membersRouter.post(
  *  }
  *}
  */
-membersRouter.put(
-  '/:id',
-  authMiddleware.isLoggedUser,
-  membersController.update
-);
+membersRouter.put('/:id', authMiddleware.isAdmin, membersController.update);
 
 /**
  * @swagger
@@ -182,6 +178,6 @@ membersRouter.put(
  *  }
  *}
  */
-membersRouter.delete('/:id', membersController.remove);
+membersRouter.delete('/:id', authMiddleware.isAdmin, membersController.remove);
 
 module.exports = membersRouter;

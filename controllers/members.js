@@ -41,10 +41,12 @@ const update = async (req, res, next) => {
     next(error);
   }
 };
+
 const remove = async (req, res, next) => {
   try {
-    const response = await membersService.remove(req.params.id);
-    return res.status(200).json(response);
+    const { id } = req.params;
+    await membersService.remove(id);
+    res.status(200).json({ message: 'The member was delete succesfully!' });
   } catch (error) {
     next(error);
   }
