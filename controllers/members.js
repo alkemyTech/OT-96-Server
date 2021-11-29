@@ -22,7 +22,7 @@ const create = async (req, res, next) => {
     res.status(200).json({
       success: true,
       msg: `member: ${response.name} has been created`,
-      member: response
+      data: response
     });
   } catch (error) {
     next(error);
@@ -35,7 +35,7 @@ const update = async (req, res, next) => {
     res.status(200).json({
       success: true,
       msg: `member ${req.params.id} is updated succesfully`,
-      member: response
+      data: response
     });
   } catch (error) {
     next(error);

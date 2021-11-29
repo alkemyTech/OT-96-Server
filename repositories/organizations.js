@@ -16,36 +16,36 @@ const getOrganizationPublic = async (id) => {
 };
 
 const getAll = async () => {
-  const organization = await db.Organization.findAll();
-  return organization;
+  const response = await db.Organization.findAll();
+  return response;
 };
 
 const getById = async (id) => {
-  const organization = await db.Organization.findByPk(id);
-  return organization;
+  const response = await db.Organization.findByPk(id);
+  return response;
 };
 
 const create = async (data) => {
-  const organization = await db.Organization.create(data);
-  return organization;
+  const response = await db.Organization.create(data);
+  return response;
 };
 
 const update = async (id, data) => {
-  const organization = await db.Organization.update(data, {
+  const response = await db.Organization.update(data, {
     where: {
       id
     }
   });
-  return organization;
+  return response;
 };
 
 const remove = async (id) => {
-  const organization = await db.Organization.destroy({
+  const response = await db.Organization.destroy({
     where: {
       id
     }
   });
-  return organization;
+  return response;
 };
 
 module.exports = {

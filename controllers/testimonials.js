@@ -45,7 +45,7 @@ const update = async (req, res, next) => {
     res.status(200).json({
       success: true,
       msg: `testimonials: ${response.name} has been updated`,
-      testimonials: response
+      data: response
     });
   } catch (error) {
     next(error);

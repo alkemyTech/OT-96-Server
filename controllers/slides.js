@@ -25,7 +25,7 @@ const create = async (req, res, next) => {
     res.status(200).json({
       success: true,
       msg: `your Slide id: ${newSlide.id} has been created`,
-      Slide: newSlide
+      data: newSlide
     });
   } catch (error) {
     next(error);
@@ -40,7 +40,7 @@ const update = async (req, res, next) => {
     res.status(200).json({
       success: true,
       msg: `Slide ${id} was updated successfully`,
-      slide: updatedSlide
+      data: updatedSlide
     });
   } catch (error) {
     next(error);
