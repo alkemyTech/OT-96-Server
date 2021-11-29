@@ -47,7 +47,7 @@ const myData = async (req, res, next) => {
     res.status(200).json({
       success: true,
       msg: `My Data:`,
-      user: user
+      data: user
     });
   } catch (error) {
     next(error);
