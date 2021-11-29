@@ -15,7 +15,7 @@ const create = async (req, res, next) => {
     res.status(200).json({
       success: true,
       msg: `contact: ${response.name} has been created`,
-      contacts: response
+      data: response
     });
   } catch (error) {
     next(error);
