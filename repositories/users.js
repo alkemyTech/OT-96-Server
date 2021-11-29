@@ -6,15 +6,17 @@ const getAll = async () => {
 };
 
 const getById = async (id) => {
-  const response = await db.User.findByPk(id,{attributes:{
-    exclude:["password"]
-  }});
+  const response = await db.User.findByPk(id, {
+    attributes: {
+      exclude: ['password']
+    }
+  });
   return response;
 };
 
 const create = async (userData) => {
-  const user = await db.User.create(userData);
-  return user;
+  const response = await db.User.create(userData);
+  return response;
 };
 
 const update = async (id, data) => {

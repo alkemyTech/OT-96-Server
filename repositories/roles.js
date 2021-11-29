@@ -1,22 +1,22 @@
 const db = require('../models');
 
 const getAll = async () => {
-  const roles = await db.Role.findAll();
-  return roles;
+  const response = await db.Role.findAll();
+  return response;
 };
 
 const getById = async (id) => {
-  const rol = await db.Role.findByPk(id);
-  return rol;
+  const response = await db.Role.findByPk(id);
+  return response;
 };
 
 const getByName = async (name) => {
-  const rol = await db.Role.findOne({
+  const response = await db.Role.findOne({
     where: {
       name
     }
   });
-  return rol;
+  return response;
 };
 
 module.exports = {
