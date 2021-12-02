@@ -6,7 +6,7 @@ const create = async (req, res, next) => {
     res.status(200).json({
       success: true,
       msg: `Activity ${req.body.name} is created succesfully`,
-      Activity: response
+      activity: response
     });
   } catch (error) {
     next(error);
