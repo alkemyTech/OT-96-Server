@@ -4,7 +4,6 @@ const getAll = async (req, res, next) => {
   try {
     const page = +req.query.page;
     const response = await newsService.getAll(req, page);
-
     res.status(200).json({
       status: 200,
       data: response.data,
@@ -20,7 +19,10 @@ const getById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const news = await newsService.getById(id);
-    res.status(200).json(news);
+    res.status(200).json({
+      status: 200,
+      news: news
+    });
   } catch (error) {
     next(error);
   }
@@ -30,7 +32,7 @@ const getCommentsByNewsId = async (req, res, next) => {
   try {
     const { id } = req.params;
     const comments = await newsService.getCommentsByNewsId(id);
-    res.status(200).json(comments);
+    res.status(200).json({ status: 200, comments: comments });
   } catch (error) {
     next(error);
   }
@@ -41,6 +43,7 @@ const create = async (req, res, next) => {
     const response = await newsService.create(req.body);
     res.status(200).json({
       success: true,
+      status: 200,
       msg: `news: ${response.name} has been created`,
       news: response
     });
@@ -52,8 +55,12 @@ const create = async (req, res, next) => {
 const update = async (req, res, next) => {
   try {
     const response = await newsService.update(req.body, req.params.id);
-
-    return res.status(200).json(response);
+    res.status(200).json({
+      success: true,
+      status: 200,
+      msg: `news: ${response.name} has been update succefully`,
+      news: response
+    });
   } catch (error) {
     next(error);
   }
@@ -63,7 +70,9 @@ const remove = async (req, res, next) => {
   try {
     const { id } = req.params;
     await newsService.remove(id);
-    res.status(200).json({ message: 'the news was delete succesfully!' });
+    res
+      .status(200)
+      .json({ succes: true, message: 'the news was delete succesfully!' });
   } catch (error) {
     next(error);
   }
